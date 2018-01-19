@@ -8,7 +8,7 @@
                 </div>
                 <div class="well well-lg">
                     @foreach($profile as $data)
-                        <img src="{{asset('upload/'.$data->foto_gedung)}}">
+                        <img src="{{asset('upload/'.$data->foto_gedung)}}" style="width: 100%;">
                     @endforeach
                 </div>
                 <div class="panel-body">
