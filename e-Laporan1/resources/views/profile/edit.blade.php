@@ -146,7 +146,14 @@
                                 <div class="form-group{{ $errors->has('foto_pimpinan')}}">
                                     <label for="foto_pimpinan" class="col-md-4 control-label" id="foto_pimpinan">Foto Pimpinan</label>
                                         <div class="col-md-6">
-                                            <input type="file" name="foto_pimpinan" id="foto_pimpinan">
+                                            <input type="file" name="foto_pimpinan" id="foto_pimpinan" onchange="loadFile(event)"><br>
+                                            <img id="pimpinan" width="100" height="100" >
+                                            <script>
+                                              var loadFile = function(event) {
+                                                var pimpinan = document.getElementById('pimpinan');
+                                                pimpinan.src = URL.createObjectURL(event.target.files[0]);
+                                              };
+                                            </script>
                                         </div>
                                         @if ($errors->has('foto_pimpinan'))
                                             <span class="help-block">
@@ -157,7 +164,14 @@
                                 <div class="form-group{{ $errors->has('foto_gedung')}}">
                                     <label for="foto_gedung" class="col-md-4 control-label" id="foto_gedung">Foto Gedung</label>
                                         <div class="col-md-6">
-                                            <input type="file" name="foto_gedung" id="foto_gedung">
+                                            <input type="file" name="foto_gedung" id="foto_gedung" onchange="loadFilegedung(event)"><br>
+                                            <img id="gedung" width="100" height="100" >
+                                            <script>
+                                              var loadFilegedung = function(event) {
+                                                var gedung = document.getElementById('gedung');
+                                                gedung.src = URL.createObjectURL(event.target.files[0]);
+                                              };
+                                            </script>
                                         </div>
                                         @if ($errors->has('foto_gedung'))
                                             <span class="help-block">
