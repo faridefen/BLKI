@@ -14,7 +14,11 @@
                 <div class="panel-body">
                     <table class="table" style="width: 100%">
                         @foreach($profile as $data)
-                            
+                            <tr>
+                                <td rowspan="9">
+                                    <img src="{{asset('upload/'.$data->foto_pimpinan)}}" width="255" style=" height: 100%">
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Nama Lembaga</th>
                                 <td>{{ $data->nama_lembaga }}</td>
