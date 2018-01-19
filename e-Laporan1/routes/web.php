@@ -37,3 +37,5 @@ Route::post('admin/update/{id}','PengecekController@update');
 Route::get('profile','ProfileController@index')->name('profile');
 Route::get('/profile/tambah','ProfileController@create');
 Route::post('/profile/simpan','ProfileController@store');
+Route::get('/profile/edit/{id}','ProfileController@edit');
+Route::post('/profile/update/{id}','ProfileController@update');

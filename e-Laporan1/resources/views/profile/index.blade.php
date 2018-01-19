@@ -6,44 +6,63 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Profil UPTD
                 </div>
-
+                <div class="well well-lg">
+                    @foreach($profile as $data)
+                        <img src="{{asset('upload/'.$data->foto_gedung)}}">
+                    @endforeach
+                </div>
                 <div class="panel-body">
                     <table class="table" style="width: 100%">
-                        <tr>
-                            <th>No</th>
-                            <th>Nama Lembaga</th>
-                            <th>Eselonisasi</th>
-                            <th>Provinsi</th>
-                            <th>Kab/Kota</th>
-                            <th>Alamat Lengkap</th>
-                            <th>No Telepon</th>
-                            <th>No Fax</th>
-                            <th>Email Kantor</th>
-                        </tr>
-                        <?php $x=1; ?>
                         @foreach($profile as $data)
+                            
                             <tr>
-                                <td>{{ $x++ }}</td>
+                                <th>Nama Lembaga</th>
                                 <td>{{ $data->nama_lembaga }}</td>
-                                <td>{{ $data->eselonisasi }}</td>
-                                <td>{{ $data->provinsi }}</td>
-                                <td>{{ $data->kab_kota }}</td>
-                                <td>{{ $data->alamat }}</td>
-                                <td>{{ $data->no_telp }}</td>
-                                <td>{{ $data->no_fax }}</td>
-                                <td>{{ $data->email_kantor }}</td>
-                                
                             </tr>
+                            <tr>
+                                <th>Eselonisasi</th>
+                                <td>{{ $data->eselonisasi }}</td>
+                            </tr>
+                            <tr>
+                                <th>Provinsi</th>
+                                <td>{{ $data->provinsi }}</td>
+                            </tr>
+                            <tr>
+                                <th>Kab/Kota</th>
+                                <td>{{ $data->kab_kota }}</td>
+                            </tr>
+                            <tr>
+                                <th>Alamat Lengkap</th>
+                                <td>{{ $data->alamat }}</td>
+                            </tr>
+                            <tr>
+                                <th>No Telepon</th>
+                                <td>{{ $data->no_telp }}</td>
+                            </tr>
+                            <tr>
+                                <th>No Fax</th>
+                                <td>{{ $data->no_fax }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email Kantor</th>
+                                <td>{{ $data->email_kantor }}</td>
+                            </tr>
+                            
+                        
                         @endforeach
                     </table>
-                    {{DB::table('profils')}}
-                    @if($profile > 0)
-                        <p>Diatas Merupakan Profil Anda</p>
-                    @else
-                        <p align="right">
-                            <a href="{{ url('/profile/tambah')}}"><button class="btn btn-primary">Tambah Profile</button></a>
-                        </p>
-                    @endif    
+                   
+                        @if($profile->count() > 0)
+                             @foreach($profile as $data)
+                                <p align="right">
+                                    <a href="{{ url('/profile/edit/'.$data->id)}}"><button class="btn btn-primary">Edit Profile</button></a>
+                                </p>
+                            @endforeach
+                        @else
+                            <p align="right">
+                                <a href="{{ url('/profile/tambah')}}"><button class="btn btn-primary">Tambah Profile</button></a>
+                            </p>
+                        @endif    
                   
                     
                 </div>
