@@ -13,7 +13,7 @@
                 </div>
                 <div class="panel-body">
                     <table class="table" style="width: 100%">
-                        
+                        @foreach($profile as $data)
                             <tr>
                                 <th>Nama Lembaga</th>
                                 <td>{{ $data->nama_lembaga }}</td>
