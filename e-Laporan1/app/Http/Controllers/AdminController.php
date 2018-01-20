@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Profile;
+use App\User;
 class AdminController extends Controller
 {
     /**
@@ -25,13 +26,16 @@ class AdminController extends Controller
     {   
         $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
         return view('admin', compact('notif'));
-
-        // return view('layouts.app', compact('count'));
     }
 
-    // public function checkverifikasi(){
-        // $notif = Laporan::where("status","=","Belum terverifikasi");
-        // $count = count($notif);
-        // return view('layouts.app', compact('count'));
-    // }
+    public function indexProfile(){
+        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        $profile = Profile::all();
+        return view('admin.indexProfile', compact('profile','notif'));
+    }
+    public function detailProfile($id){
+        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        $profile = Profile::where('id','=',$id)->get();
+        return view('admin.detailProfile', compact('profile','notif'));
+    }
 }

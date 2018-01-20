@@ -42,3 +42,6 @@ Route::get('/profile/tambah','ProfileController@create');
 Route::post('/profile/simpan','ProfileController@store');
 Route::get('/profile/edit/{id}','ProfileController@edit');
 Route::post('/profile/update/{id}','ProfileController@update');
+
+Route::get('/admin/profile/', 'AdminController@indexProfile')->name('admin.profile');
+Route::get('/admin/profile/detail/{id}', 'AdminController@detailProfile');
