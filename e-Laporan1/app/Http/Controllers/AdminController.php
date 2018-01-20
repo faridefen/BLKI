@@ -22,7 +22,16 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('admin');
+    {   
+        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        return view('admin', compact('notif'));
+
+        // return view('layouts.app', compact('count'));
     }
+
+    // public function checkverifikasi(){
+        // $notif = Laporan::where("status","=","Belum terverifikasi");
+        // $count = count($notif);
+        // return view('layouts.app', compact('count'));
+    // }
 }

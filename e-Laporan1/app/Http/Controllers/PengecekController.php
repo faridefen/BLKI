@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Laporan;
 use Auth;
 use App\User;
+use Storage;
 
 class PengecekController extends Controller
 {
@@ -18,10 +19,19 @@ class PengecekController extends Controller
     {
         $this->middleware('auth:admin');
     }
+
+
+    // public function checkverifikasi(){
+    //     $notif = Laporan::where("status","=","Belum terverifikasi");
+    //     $count = count($notif);
+    //     return view('layouts.app', compact('count'));
+    // }
+
     public function index()
     {
+        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
         $laporan = Laporan::orderBy('users_id','asc')->orderBy('created_at','asc')->get();
-        return view('pengecek.index', compact('laporan'));
+        return view('pengecek.index', compact('laporan'), compact('notif'));
     }
 
     /**
@@ -51,9 +61,22 @@ class PengecekController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    // public function get($file){
+    
+    //     $entry = \DB::table('laporans')->where('file', '=', $file)->first();
+    //     $filez = public_path('upload')->$file;
+ 
+    //     return (new Response($file, 200))
+    //           ->header('Content-Type', $entry->mime);
+    // }
+ 
+
+    public function show($file)
     {
-        //
+        $destinationPath = public_path('upload');
+        $path = $destinationPath."/".$file;
+        return Response()->file($path);
     }
 
     /**
@@ -63,9 +86,10 @@ class PengecekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
+        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
         $laporan = Laporan::where('id','=',$id)->get();
-        return view('pengecek.edit', compact('laporan'));
+        return view('pengecek.edit', compact('laporan'), compact('notif'));
     }
 
     /**
@@ -91,8 +115,14 @@ class PengecekController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $destinationPath = public_path('upload');
+        $filess =  \DB::table('laporans')->where('id','$id')->value('file');
+        $laporan = Laporan::find($id);
+        Storage::delete($destinationPath."/".$filess);
+        $laporan->delete();
+
+        return redirect()->route('admin.cek');
     }
-    
+
 }

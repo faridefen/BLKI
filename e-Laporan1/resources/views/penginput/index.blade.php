@@ -25,11 +25,12 @@
                                 <td>{{ $x++ }}</td>
                                 <td>{{ $data->namafile }}</td>
                                 <td>{{ $data->file }}</td>
-                                
                                     @if($data->status == 'Fix')
-                                    <td><strong class="alert-success">{{ $data->status }}</strong></td>
+                                    <td><strong style="color: green">{{ $data->status }}</strong></td>
                                     @elseif($data->status == 'Revisi')
-                                    <td><strong class="alert-danger">{{ $data->status }}</strong></td>
+                                    <td><strong style="color: red">{{ $data->status }}</strong></td>
+                                    @else
+                                    <td><strong style="color: orange">{{ $data->status }}</strong></td>
                                     @endif
                                 
 

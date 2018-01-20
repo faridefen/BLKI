@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
@@ -65,34 +67,33 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
+        <div class="flex-top position-ref full-height">
+
+            <div class="content">
+                <div class="title m-b-md" style="font-size: 60px">
+                    <br>
+                    <img src="{{URL::asset('image/logo.png')}}"> <br>
+                    BLKI Kalimantan Timur
+
+                </div>
+
+                <div class="links">
+                    @if (Route::has('login'))
                     @if (Auth::guard('web')->check())
                         <a href="{{ url('/home') }}">Home</a>
                     @elseif(Auth::guard('admin')->check())
                         <a href="{{ route('admin')}}">Home</a>
                     @else
-                        <a href="{{ url('/login') }}">Login UPTD</a>
-                        <a href="{{ route('admin.login') }}">Login Admin</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        |   <a class="waves-effect waves-light btn" href="{{ url('/login') }}" style="color: white">Login UPTD</a>
+                        |   <a class="waves-effect waves-light btn" href="{{ route('admin.login') }}" style="color: white">Login Admin</a>
+                        |   <a class="waves-effect waves-light btn" href="{{ url('/register') }}" style="color: white">Register</a>
                     @endif
-                </div>
             @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    e-Laporan
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
     </body>
 </html>

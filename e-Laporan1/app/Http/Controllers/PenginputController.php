@@ -60,7 +60,7 @@ class PenginputController extends Controller
             $laporan->users_id = Auth::user()->id;
             $laporan->save();
         }
-        return redirect('penginput');
+        return redirect('penginput')->with(compact('destinationPath'));
     }
 
     /**

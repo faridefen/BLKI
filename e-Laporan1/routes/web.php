@@ -33,6 +33,9 @@ Route::get('/admin/laporan','PengecekController@index')->name('admin.cek');
 Route::get('/admin/download/{id}','PengecekController@download');
 Route::get('admin/edit/{id}','PengecekController@edit');
 Route::post('admin/update/{id}','PengecekController@update');
+Route::get('admin/hapus/{id}','PengecekController@destroy');
+Route::get('/uploads/{file}','PengecekController@show');
+// Route::get('admin','PengecekController@checkverifikasi');
 
 Route::get('profile','ProfileController@index')->name('profile');
 Route::get('/profile/tambah','ProfileController@create');

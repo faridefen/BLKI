@@ -5,9 +5,11 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading" align="center">
+                <img src="{{URL::asset('image/logo.png')}}" height="60" width="60">
+                Login</div>
 
-                <div class="panel-body">
+                <div class="panel-body" >
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 

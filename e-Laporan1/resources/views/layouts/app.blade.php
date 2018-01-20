@@ -8,9 +8,16 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>e-Laporan</title>
+    <title>BLKI E-Laporan</title>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+ 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -26,10 +33,10 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
+                    <img src="{{URL::asset('image/logo.png')}}" height="40" width="40">
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        e-Laporan
+                        BLKI
                     </a>
                 </div>
 
@@ -47,8 +54,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Login <span class="caret"></span>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{route('login')}}">Login UPTD</a></li>
-                                        <li><a href="{{route('admin.login')}}">Login Admin</a></li>
+                                        <li><a href="{{route('login')}}">Login as UPTD</a></li>
+                                        <li><a href="{{route('admin.login')}}">Login as Admin</a></li>
                                     </ul>
                                 </a>
                             
@@ -77,7 +84,23 @@
                                 </ul>
                             </li>
                         @elseif(Auth::guard('admin')->check())
-                            <li><a href="{{route('admin.cek')}}">Data Laporan</a></li>
+                        
+                        <!-- floating icon  -->
+                        <div class="fixed-action-btn vertical click-to-toggle">
+                                <a class="btn-floating btn-large red">
+                                  <i class="material-icons">menu</i>
+                                </a>
+                                <ul>
+                                  <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+                                  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                                  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+                                  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                                </ul>
+                              </div>
+
+
+
+                            <li><a href="{{route('admin.cek')}}">Data Laporan<span class="new badge">{{$notif}}</span></a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -89,6 +112,7 @@
                                     </li>
                                 </ul>
                             </li>
+
                         @endif
                     </ul>
                 </div>
@@ -105,5 +129,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+
 </body>
 </html>
