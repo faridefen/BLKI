@@ -42,8 +42,10 @@ Route::get('/admin/user/edit/{id}','AdminController@editUser');
 Route::post('/admin/user/update/{id}','AdminController@updateUser');
 
 Route::get('/admin/renlakgiat','RenlakgiatController@index')->name('admin.renlakgiat');
-Route::get('/admin/renlakgiat/tambah','RenlakgiatController@create')->name('admin.renlakgiat.add');
+Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create')->name('admin.renlakgiat.add');
 Route::post('/admin/renlakgiat/simpan','RenlakgiatController@store');
 Route::get('/admin/renlakgiat/edit/{id}','RenlakgiatController@edit');
 Route::post('/admin/renlakgiat/update/{id}','RenlakgiatController@update');
 Route::get('/admin/renlakgiat/hapus/{id}','RenlakgiatController@destroy');
+
+Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');

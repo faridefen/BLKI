@@ -24,6 +24,7 @@
                                 <td>
                                     <a href="{{url('admin/user/edit/'.$data->id)}}"><button class="btn btn-primary" title="Edit"><i class="large material-icons">edit</i></button></a>
                                     <a href="{{url('admin/user/hapus/'.$data->id)}}"><button class="btn btn-danger" title="Hapus"><i class="large material-icons">delete</i></button></a>
+                                    
                                 </td> 
                             </tr>
                         @endforeach

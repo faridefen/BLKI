@@ -63,23 +63,19 @@
                         </li>
                         
                         @elseif (Auth::guard('web')->check())
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Data Laporan <span class="caret"></span>
-                                </a>
-                                
-                            </li>
+                            <li><a href="{{route('uptd.renlakgiat')}}">Data Renlakgiat</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                       <a href="{{route('user.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
+                                        <a href="{{route('profile')}}"><i class="material-icons">person</i> Profile</a>
                                     </li>
                                     <li>
-                                        <a href="{{route('profile')}}">Profile</a>
+                                       <a href="{{route('user.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>
+                                    
                                 </ul>
                             </li>
                         @elseif(Auth::guard('admin')->check())

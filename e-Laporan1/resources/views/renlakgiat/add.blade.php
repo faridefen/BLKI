@@ -9,7 +9,23 @@
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{url('admin/renlakgiat/simpan/')}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
-                    	
+                               
+                                <div class="form-group{{ $errors->has('users_id') ? 'has-error': ''}}">
+                                    <label for="users_id" class="col-md-4 control-label">users_id</label>
+                                    
+                                        <div class="col-md-6">
+                                        @foreach($user as $data)
+                                            <input type="text" name="users_id" id="users_id" class="form-control" value="{{ $data->users_id }}" readonly required>
+                                        @endforeach
+                                        </div>
+                                   
+                                         @if ($errors->has('users_id'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('users_id') }}</strong>
+                                            </span>
+                                        @endif
+                                </div>
+
                     		    <div class="form-group{{ $errors->has('kejuruan') ? 'has-error': ''}}">
                                     <label for="kejuruan" class="col-md-4 control-label">Kejuruan</label>
                                         <div class="col-md-6">

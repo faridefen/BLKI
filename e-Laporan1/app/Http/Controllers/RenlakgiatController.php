@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Renlakgiat;
+use App\User;
+use App\Profile;
 use Auth;
 class RenlakgiatController extends Controller
 {
@@ -27,9 +29,10 @@ class RenlakgiatController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('renlakgiat.add');
+        $user = Profile::where('id','=',$id)->get();
+        return view('renlakgiat.add', compact('user'));
     }
 
     /**
@@ -49,6 +52,7 @@ class RenlakgiatController extends Controller
         $renlakgiat->orang = $request->orang;
         $renlakgiat->tgl_mulai = $request->tgl_mulai;
         $renlakgiat->tgl_selesai = $request->tgl_selesai;
+        $renlakgiat->users_id = $request->users_id;
         $renlakgiat->save();
         return redirect()->route('admin.renlakgiat');
     }
