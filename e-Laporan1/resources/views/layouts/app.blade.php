@@ -67,9 +67,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Data Laporan <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{route('penginput')}}">Data Laporan</a></li>
-                                </ul>
+                                
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -98,11 +96,9 @@
                                   <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
                                 </ul>
                               </div>
-
+                            <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
                             <li><a href="{{route('admin.user')}}">Data User</a></li>
                             <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>
-                            
-                                <li><a href="{{route('admin.cek')}}">Data Laporan<span class="new badge" id="cek">{{ $notif }}</span></a></li>
                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

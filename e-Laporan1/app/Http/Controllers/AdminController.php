@@ -24,30 +24,30 @@ class AdminController extends Controller
      */
     public function index()
     {   
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         return view('admin', compact('notif'));
     }
 
     public function indexProfile(){
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         $profile = Profile::all();
         return view('admin.indexProfile', compact('profile','notif'));
     }
 
     public function detailProfile($id){
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         $profile = Profile::where('id','=',$id)->get();
         return view('admin.detailProfile', compact('profile','notif'));
     }
 
     public function indexUser(){
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         $user = User::all();
         return view('admin.indexUser', compact('user','notif','passEncrypt'));
     }
 
     public function formAddUser(){
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         return view('admin.add-user', compact('notif'));
     }
 
@@ -67,7 +67,7 @@ class AdminController extends Controller
     }
 
     public function editUser($id){
-        $notif = \DB::table('laporans')->where("status","=","Belum terverifikasi")->count();
+        
         $user = User::where('id','=',$id)->get();
         return view('admin.editUser', compact('user','notif'));
     }

@@ -20,22 +20,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
 
-Route::get('/penginput','PenginputController@index')->name('penginput');
-Route::get('/penginput/tambah','PenginputController@create');
-Route::post('/penginput/upload','PenginputController@store')->name('penginput.upload');
-
 Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/admin/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login','Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/admin/logout','Auth\AdminLoginController@logout')->name('admin.logout');
-
-Route::get('/admin/laporan','PengecekController@index')->name('admin.cek');
-Route::get('/admin/download/{id}','PengecekController@download');
-Route::get('admin/edit/{id}','PengecekController@edit');
-Route::post('admin/update/{id}','PengecekController@update');
-Route::get('admin/hapus/{id}','PengecekController@destroy');
-Route::get('/uploads/{file}','PengecekController@show');
-// Route::get('admin','PengecekController@checkverifikasi');
 
 Route::get('profile','ProfileController@index')->name('profile');
 Route::get('/profile/tambah','ProfileController@create');
@@ -52,3 +40,10 @@ Route::post('/admin/user/simpan','AdminController@addUser')->name('admin.user.st
 Route::get('/admin/user/hapus/{id}','AdminController@hapusUser');
 Route::get('/admin/user/edit/{id}','AdminController@editUser');
 Route::post('/admin/user/update/{id}','AdminController@updateUser');
+
+Route::get('/admin/renlakgiat','RenlakgiatController@index')->name('admin.renlakgiat');
+Route::get('/admin/renlakgiat/tambah','RenlakgiatController@create')->name('admin.renlakgiat.add');
+Route::post('/admin/renlakgiat/simpan','RenlakgiatController@store');
+Route::get('/admin/renlakgiat/edit/{id}','RenlakgiatController@edit');
+Route::post('/admin/renlakgiat/update/{id}','RenlakgiatController@update');
+Route::get('/admin/renlakgiat/hapus/{id}','RenlakgiatController@destroy');

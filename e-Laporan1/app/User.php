@@ -27,9 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function laporan(){
-        return $this->hasMany(Laporan::class);
-    }
+    
     public function Profile(){
         return $this->hasOne(Profile::class);
     }
