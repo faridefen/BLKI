@@ -4,7 +4,7 @@
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Profile UPTD
-                    <a href="{{route('admin.user.add')}}"><button class="btn btn-success">Tambah User</button></a>
+                    <a href="{{route('admin.user.add')}}" class="pull-right"><span class="medium material-icons">person_add</span></a>
                 </div>
 
                 <div class="panel-body">
@@ -22,8 +22,8 @@
                                 <td>{{ $data->name }}</td>
                                 <td>{{ $data->email }}</td>
                                 <td>
-                                    <a href="{{url('admin/user/edit/'.$data->id)}}"><button class="btn btn-primary" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button></a>
-                                    <a href="{{url('admin/user/hapus/'.$data->id)}}"><button class="btn btn-danger" title="Hapus"><span class="glyphicon glyphicon-remove"></span></button></a>
+                                    <a href="{{url('admin/user/edit/'.$data->id)}}"><button class="btn btn-primary" title="Edit"><i class="large material-icons">edit</i></button></a>
+                                    <a href="{{url('admin/user/hapus/'.$data->id)}}"><button class="btn btn-danger" title="Hapus"><i class="large material-icons">delete</i></button></a>
                                 </td> 
                             </tr>
                         @endforeach
