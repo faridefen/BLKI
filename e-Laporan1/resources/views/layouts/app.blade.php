@@ -7,8 +7,8 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>BLKI E-Laporan</title>
+    <link rel="shortcut icon" href="{{URL::asset('image/logo.png')}}" />
+    <title>BLKI SAMARINDA</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -33,11 +33,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <img src="{{URL::asset('image/logo.png')}}" height="40" width="40">
-                    <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        BLKI
+                        <img src="{{URL::asset('image/logo.png')}}" height="40" width="40">
                     </a>
+                    
+                    <!-- Branding Image -->
+                    
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -60,7 +61,7 @@
                                 </a>
                             
                         </li>
-                        <li><a href="{{ route('register') }}">Register</a></li>
+                        
                         @elseif (Auth::guard('web')->check())
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -98,9 +99,11 @@
                                 </ul>
                               </div>
 
-
+                            <li><a href="{{route('admin.user')}}">Data User</a></li>
                             <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>
-                            <li><a href="{{route('admin.cek')}}">Data Laporan<span class="new badge">{{ $notif }}</span></a></li>
+                            
+                                <li><a href="{{route('admin.cek')}}">Data Laporan<span id="cek" class="new badge">{{ $notif }}</span></a></li>
+                           
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin <span class="caret"></span>
@@ -131,6 +134,5 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-
 </body>
 </html>

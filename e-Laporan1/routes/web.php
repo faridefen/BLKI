@@ -45,3 +45,10 @@ Route::post('/profile/update/{id}','ProfileController@update');
 
 Route::get('/admin/profile/', 'AdminController@indexProfile')->name('admin.profile');
 Route::get('/admin/profile/detail/{id}', 'AdminController@detailProfile');
+
+Route::get('/admin/user','AdminController@indexUser')->name('admin.user');
+Route::get('/admin/user/tambah','AdminController@formAddUser')->name('admin.user.add');
+Route::post('/admin/user/simpan','AdminController@addUser')->name('admin.user.store');
+Route::get('/admin/user/hapus/{id}','AdminController@hapusUser');
+Route::get('/admin/user/edit/{id}','AdminController@editUser');
+Route::post('/admin/user/update/{id}','AdminController@updateUser');

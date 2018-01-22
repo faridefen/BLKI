@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
+        <link rel="shortcut icon" href="{{URL::asset('image/logo.png')}}" />
+        <title>BLKI SMD</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>
@@ -86,7 +86,7 @@
                     @else
                         |   <a class="waves-effect waves-light btn" href="{{ url('/login') }}" style="color: white">Login UPTD</a>
                         |   <a class="waves-effect waves-light btn" href="{{ route('admin.login') }}" style="color: white">Login Admin</a>
-                        |   <a class="waves-effect waves-light btn" href="{{ url('/register') }}" style="color: white">Register</a>
+                        |   
                     @endif
             @endif
                 </div>
