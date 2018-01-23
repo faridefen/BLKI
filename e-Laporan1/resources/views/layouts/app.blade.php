@@ -71,21 +71,17 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                   <?php 
-                                    $authid = Auth::user()->id;
-                                    $dataid= \App\profile::where('id',$authid)->count();
-                                    if ($dataid<=0) {
-                                   ?>
+                                @if(DB::table('profils')->where('users_id','=',Auth::user()->id)->count() > 0)
+                                   <li>
+                                        @foreach(DB::table('profils')->where('users_id','=',Auth::user()->id)->get() as $data)
+                                            <a href="{{ url('/profile/edit/'.$data->id) }}"><i class="material-icons">person</i> edit</a>
+                                        </li>
+                                        @endforeach
+                                @else
                                         <li>
-                                            <li>
                                             <a href="{{url('profile/tambah')}}"><i class="material-icons">person</i>Tambah Profile</a>
                                         </li>
-                                        </li>
-                                   <?php } else { ?>
-                                        <li>
-                                            <a href="{{url('profile/edit/'.Auth::user()->id)}}"><i class="material-icons">person</i> edit Profile</a>
-                                        </li>
-                                    <?php } ?>
+                                @endif
                                     <li>
                                        <a href="{{route('user.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>

@@ -15,6 +15,11 @@ class RenlakgiatController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+    
     public function uptdrenlakgiat($id){
      $renlakgiat = Renlakgiat::where('id',$id)->get();   
      return view('renlakgiat.index', compact('renlakgiat'));

@@ -10,19 +10,22 @@ use Storage;
 
 class PktpController extends Controller
 {
-    
-public function indexpktp($id){
+    public function __construct()
+    {
+        $this->middleware('auth:web');
+    }
+    public function indexpktp($id){
 
-	$pktp = Pktp::where('renlakgiat_id',$id)->get();
-	return view('user.indexpktp', compact('pktp'));
-}
+	   $pktp = Pktp::where('renlakgiat_id',$id)->get();
+	   return view('user.indexpktp', compact('pktp'));
+    }
 
-public function create($id){
-	$renlakgiat = Renlakgiat::where('id',$id)->get();
-	return view('user.addpktp', compact('renlakgiat'));
-}
+    public function create($id){
+	   $renlakgiat = Renlakgiat::where('id',$id)->get();
+	   return view('user.addpktp', compact('renlakgiat'));
+    }
 
-public function store(Request $request)
+    public function store(Request $request)
     {
 
     	if($request->hasFile('foto')){
@@ -43,7 +46,7 @@ public function store(Request $request)
         return redirect('uptd/pktp/'.$request->renlakgiat_id);
     }
 
-public function destroy($id){
+    public function destroy($id){
         $destinationPath = public_path('upload');
         $filess =  \DB::table('pktps')->where('id','$id')->value('foto');
         $pktp = Pktp::find($id);
@@ -51,7 +54,7 @@ public function destroy($id){
         $pktp->delete();
 
         return redirect()->back();
-}
+    }
 
 }
 

@@ -9,7 +9,6 @@
                 <div class="panel-body">
 
                     @foreach($profile as $data)
-
                     <form class="form-horizontal" action="{{url('profile/update/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
                     	   
@@ -182,19 +181,9 @@
                                         @endif
                                 </div>
                             @endforeach
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <strong>BELUM ADA Profile, SILAHKAN TAMBAH</strong>
-                                <a href="{{url('profile/tambah')}}">
-                                <button class="btn">tambah profile</button></a>
-                            </div>
-                        </div>
-                     
-                            
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
-                    			<button class="btn btn-success">Simpan</button>
+                    			<button class="btn btn-success">Update</button>
                     		</div>
                     	</div>
                    		 

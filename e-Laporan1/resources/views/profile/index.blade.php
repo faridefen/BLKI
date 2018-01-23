@@ -31,9 +31,14 @@
                             <tr>
                                 <td></td>
                             </tr>
+                            
                             <tr>
                                 <th>Nama Lembaga</th>
                                 <td>{{ $data->nama_lembaga }}</td>
+                            </tr>
+                            <tr>
+                                <th>Nama Pimpinan</th>
+                                <td>{{ $data->nama_pimpinan }}</td>
                             </tr>
                             <tr>
                                 <th>Eselonisasi</th>
