@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Renlakgiat;
 use App\User;
 use App\Profile;
-use Auth;
+use App\Admin;
 class RenlakgiatController extends Controller
 {
     /**
@@ -14,6 +14,13 @@ class RenlakgiatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function uptdrenlakgiat($id){
+     $renlakgiat = Renlakgiat::where('id',$id)->get();   
+     return view('renlakgiat.index', compact('renlakgiat'));
+    }
+
+
     public function __construct()
     {
         $this->middleware('auth:admin');

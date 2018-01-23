@@ -11,11 +11,10 @@
                     	{{ csrf_field() }}
                                
                                 <div class="form-group{{ $errors->has('users_id') ? 'has-error': ''}}">
-                                    <label for="users_id" class="col-md-4 control-label">users_id</label>
                                     
                                         <div class="col-md-6">
                                         @foreach($user as $data)
-                                            <input type="text" name="users_id" id="users_id" class="form-control" value="{{ $data->users_id }}" readonly required>
+                                            <input type="hidden" name="users_id" id="users_id" class="form-control" value="{{ $data->users_id }}" readonly required>
                                         @endforeach
                                         </div>
                                    

@@ -63,15 +63,29 @@
                         </li>
                         
                         @elseif (Auth::guard('web')->check())
+                            <li><a href=" {{ route('home')}}">Dashboard</a></li>
+                            <li><a href=" {{ route('profile')}}">Profile</a></li>
                             <li><a href="{{route('uptd.renlakgiat')}}">Data Renlakgiat</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{route('profile')}}"><i class="material-icons">person</i> Profile</a>
-                                    </li>
+                                   <?php 
+                                    $authid = Auth::user()->id;
+                                    $dataid= \App\profile::where('id',$authid)->count();
+                                    if ($dataid<=0) {
+                                   ?>
+                                        <li>
+                                            <li>
+                                            <a href="{{url('profile/tambah')}}"><i class="material-icons">person</i>Tambah Profile</a>
+                                        </li>
+                                        </li>
+                                   <?php } else { ?>
+                                        <li>
+                                            <a href="{{url('profile/edit/'.Auth::user()->id)}}"><i class="material-icons">person</i> edit Profile</a>
+                                        </li>
+                                    <?php } ?>
                                     <li>
                                        <a href="{{route('user.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>
@@ -92,6 +106,8 @@
                                   <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
                                 </ul>
                               </div>
+                             
+                            <li><a href=" {{ route('admin')}}">Dashboard</a></li>
                             <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
                             <li><a href="{{route('admin.user')}}">Data User</a></li>
                             <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>

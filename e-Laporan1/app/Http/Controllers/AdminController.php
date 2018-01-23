@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Profile;
 use App\User;
+use App\Renlakgiat;
 class AdminController extends Controller
 {
     /**
@@ -26,6 +27,11 @@ class AdminController extends Controller
     {   
         
         return view('admin', compact('notif'));
+    }
+    
+    public function Renlakgiatdata(){
+        $renlakgiat = Renlakgiat::all();
+        return view(compact('renlakgiat'));
     }
 
     public function indexProfile(){

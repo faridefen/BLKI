@@ -20,6 +20,7 @@
                 </div>
                 
                     @foreach($profile as $data)
+
                         <img class="img " src="{{asset('upload/'.$data->foto_gedung)}}" height="500" style="width: 100%; float: left; position: relative;">
                         
                         <img class="img img-thumbnail" align="center" src="{{asset('upload/'.$data->foto_pimpinan)}}" width="180" height="180" style="  position: absolute; top: 70%; left:10%; ">
@@ -28,6 +29,7 @@
                 <div class="panel-body">
                     <table class="table" style="width: 100%">
                         @foreach($profile as $data)
+
                             <tr>
                                 <td></td>
                             </tr>
@@ -64,9 +66,12 @@
                                 <td>{{ $data->email_kantor }}</td>
                             </tr>
                             
-                        
                         @endforeach
-                    </table>  
+                        
+                       
+                            
+                            
+                        </table>
                 </div>
             </div>
                 

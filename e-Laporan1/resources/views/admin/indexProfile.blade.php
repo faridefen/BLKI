@@ -27,6 +27,7 @@
                                 <td>
                                     <a href="{{url('admin/profile/detail/'.$data->id)}}"><button class="btn btn-primary">Detail</button></a>
                                     <a href="{{url('admin/renlakgiat/tambah/'.$data->id)}}"><button class="btn btn-info">Renlakgiat</button></a>
+                                    <a href="{{url('admin/renlakgiat/'.$data->id)}}"><button class="btn btn-info">Data Renlakgiat</button></a>
                                 </td>
                             </tr>
                         @endforeach

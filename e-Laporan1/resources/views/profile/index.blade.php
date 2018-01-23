@@ -71,7 +71,7 @@
                         @if($profile->count() > 0)
                              @foreach($profile as $data)
                                 <p align="right">
-                                    <a href="{{ url('/profile/edit/'.$data->id)}}"><button class="btn btn-primary">Edit Profile</button></a>
+                                    <!-- <a href="{{ url('/profile/edit/'.$data->id)}}"><button class="btn btn-primary">Edit Profile</button></a> -->
                                 </p>
                             @endforeach
                         @else

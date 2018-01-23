@@ -31,6 +31,7 @@ Route::post('/profile/simpan','ProfileController@store');
 Route::get('/profile/edit/{id}','ProfileController@edit');
 Route::post('/profile/update/{id}','ProfileController@update');
 
+
 Route::get('/admin/profile/', 'AdminController@indexProfile')->name('admin.profile');
 Route::get('/admin/profile/detail/{id}', 'AdminController@detailProfile');
 
@@ -41,11 +42,19 @@ Route::get('/admin/user/hapus/{id}','AdminController@hapusUser');
 Route::get('/admin/user/edit/{id}','AdminController@editUser');
 Route::post('/admin/user/update/{id}','AdminController@updateUser');
 
+
 Route::get('/admin/renlakgiat','RenlakgiatController@index')->name('admin.renlakgiat');
 Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create')->name('admin.renlakgiat.add');
 Route::post('/admin/renlakgiat/simpan','RenlakgiatController@store');
 Route::get('/admin/renlakgiat/edit/{id}','RenlakgiatController@edit');
 Route::post('/admin/renlakgiat/update/{id}','RenlakgiatController@update');
 Route::get('/admin/renlakgiat/hapus/{id}','RenlakgiatController@destroy');
+Route::get('/admin/renlakgiat/{id}','RenlakgiatController@uptdrenlakgiat');
 
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');
+
+
+Route::get('uptd/pktp/{id}','PktpController@indexpktp');
+Route::get('uptd/pktp/tambah/{id}','PktpController@create');
+Route::post('uptd/pktp/simpan','PktpController@store');
+Route::get('uptd/pktp/hapus/{id}','PktpController@destroy');

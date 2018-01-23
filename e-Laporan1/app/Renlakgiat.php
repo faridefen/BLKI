@@ -8,7 +8,16 @@ class Renlakgiat extends Model
 {
     protected $table = 'renlakgiats';
     protected $guarded = ['id'];
+
     public function User(){
         return $this->belongsTo('App\User','users_id');
+    }
+
+    public function Pktp(){
+        return $this->hasMany(pktp::class);
+    }
+
+    public function Profile(){
+        return $this->belongsTo('App\Profile','profile_id');
     }
 }

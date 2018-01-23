@@ -30,6 +30,7 @@ class CreateProfilsTable extends Migration
             $table->string('no_hp_pimpinan');
             $table->string('foto_pimpinan');
             $table->string('foto_gedung');
+            $table->string('renklakgiats');
             $table->timestamps();
         });
     }

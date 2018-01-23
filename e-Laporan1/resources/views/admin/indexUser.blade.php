@@ -16,14 +16,15 @@
                             <th>Aksi</th>
                         </tr>
                         <?php $x=1; ?>
-                        @foreach($user as $data)
+                        @foreach($user as $datauser)
                             <tr>
                                 <td>{{ $x++ }}</td>
-                                <td>{{ $data->name }}</td>
-                                <td>{{ $data->email }}</td>
+                                <td><a href=" {{ url('/admin/profile/detail/'.$datauser->id)}}">{{ $datauser->name }}</a></td>
+                                <td>{{ $datauser->email }}</td>
                                 <td>
-                                    <a href="{{url('admin/user/edit/'.$data->id)}}"><button class="btn btn-primary" title="Edit"><i class="large material-icons">edit</i></button></a>
-                                    <a href="{{url('admin/user/hapus/'.$data->id)}}"><button class="btn btn-danger" title="Hapus"><i class="large material-icons">delete</i></button></a>
+
+                                    <a href="{{url('admin/user/edit/'.$datauser->id)}}"><button class="btn btn-primary" title="Edit"><i class="large material-icons">edit</i></button></a>
+                                    <a href="{{url('admin/user/hapus/'.$datauser->id)}}"><button class="btn btn-danger" title="Hapus"><i class="large material-icons">delete</i></button></a>
                                     
                                 </td> 
                             </tr>
