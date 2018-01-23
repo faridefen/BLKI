@@ -8,38 +8,60 @@
 
                 <div class="panel-body">
                     <table class="table">
-                        <tr>
-                            <th>No</th>
-                            <th>UPTD Terkait</th>
-                            <th>Kejuruan</th>
-                            <th>Program Pelatihan</th>
-                            <th>Sumber Dana</th>
-                            <th>Durasi</th>
-                            <th>Paket</th>
-                            <th>Orang</th>
-                            <th>Tanggal Mulai</th>
-                            <th>Tanggal Selesai</th>
-                            <th>Aksi</th>
-                        </tr>
-                        <?php $x=1; ?>
                         @foreach($renlakgiat as $data)
-                            <tr>
-
-                                <td>{{ $x++ }}</td>
-                                <td>{{ $data->User->name }}</td>
-                                <td>{{ $data->kejuruan }}</td>
-                                <td>{{ $data->program_pelatihan }}</td>
-                                <td>{{ $data->sumber_dana }}</td>
-                                <td>{{ $data->durasi }}</td>
-                                <td>{{ $data->paket }}</td>
-                                <td>{{ $data->orang }}</td>
-                                <td>{{ $data->tgl_mulai }}</td>
-                                <td>{{ $data->tgl_selesai }}</td>
-                                <td>
+                        <tr>
+                            <th>UPTD Terkait</th>
+                            <td>{{ $data->User->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kejuruan</th>
+                            <td>{{ $data->kejuruan }}</td>
+                        </tr>
+                        <tr>
+                            <th>Program Pelatihan</th>
+                            <td>{{ $data->program_pelatihan }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sumber Dana</th>
+                            <td>{{ $data->sumber_dana }}</td>
+                        </tr>
+                        <tr>
+                            <th>Durasi</th>
+                            <td>{{ $data->durasi }}</td>
+                        </tr>
+                        <tr>
+                            <th>Paket</th>
+                            <td>{{ $data->paket }}</td>
+                        </tr>
+                        <tr>
+                            <th>Orang</th>
+                            <td>{{ $data->orang }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Mulai</th>
+                            <td>{{ $data->tgl_mulai }}</td>
+                        </tr>
+                        <tr>
+                            
+                            <th>Tanggal Selesai</th>
+                            <td>{{ $data->tgl_selesai }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>kosong</td>
+                        </tr>
+                        <tr>
+                            <th>Laporan</th>
+                            <td>link laporan</td>
+                        </tr>
+                        <tr>
+                            <th>Aksi</th>
+                            <td>
+                                    <a href=""><button class="btn btn-primary"><i class="large material-icons">print</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
                                 </td>
-                            </tr>
+                        </tr>
                         @endforeach
                     </table>
                 </div>

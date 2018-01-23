@@ -105,6 +105,7 @@
                              
                             <li><a href=" {{ route('admin')}}">Dashboard</a></li>
                             <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
+                            <li><a href=" {{ url('/laporan/index')}}">Laporan</a></li>
                             <li><a href="{{route('admin.user')}}">Data User</a></li>
                             <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>
                            

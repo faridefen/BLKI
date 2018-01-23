@@ -50,6 +50,8 @@ Route::get('/admin/renlakgiat/edit/{id}','RenlakgiatController@edit');
 Route::post('/admin/renlakgiat/update/{id}','RenlakgiatController@update');
 Route::get('/admin/renlakgiat/hapus/{id}','RenlakgiatController@destroy');
 Route::get('/admin/renlakgiat/{id}','RenlakgiatController@uptdrenlakgiat');
+Route::get('/admin/renlakgiat/detail/{id}','RenlakgiatController@detailrenlakgiat');
+
 
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');
 
@@ -58,3 +60,6 @@ Route::get('uptd/pktp/{id}','PktpController@indexpktp');
 Route::get('uptd/pktp/tambah/{id}','PktpController@create');
 Route::post('uptd/pktp/simpan','PktpController@store');
 Route::get('uptd/pktp/hapus/{id}','PktpController@destroy');
+
+Route::get('/laporan/index','LaporanController@index');
+Route::get('/laporan/detaillaporan','LaporanController@detail');

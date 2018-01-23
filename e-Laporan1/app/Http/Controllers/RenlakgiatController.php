@@ -25,17 +25,17 @@ class RenlakgiatController extends Controller
      return view('renlakgiat.index', compact('renlakgiat'));
     }
 
-
-    public function __construct()
-    {
-        $this->middleware('auth:admin');
-    }
     public function index()
     {
         $renlakgiat = Renlakgiat::all();
         return view('renlakgiat.index', compact('renlakgiat'));
     }
 
+    public function detailrenlakgiat()
+    {
+        $renlakgiat = Renlakgiat::all();
+        return view('renlakgiat.indexdetail', compact('renlakgiat'));
+    }
     /**
      * Show the form for creating a new resource.
      * 
