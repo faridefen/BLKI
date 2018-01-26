@@ -43,7 +43,7 @@ Route::get('/admin/user/edit/{id}','AdminController@editUser');
 Route::post('/admin/user/update/{id}','AdminController@updateUser');
 
 
-Route::get('/admin/renlakgiat','RenlakgiatController@index')->name('admin.renlakgiat');
+Route::get('/admin/renlakgiat','RenlakgiatController@indexadmin')->name('admin.renlakgiat');
 Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create');
 Route::get('/admin/renlakgiat/tambah/excel/{id}','RenlakgiatController@uploadform');
 Route::post('/admin/renlakgiat/simpan','RenlakgiatController@store');

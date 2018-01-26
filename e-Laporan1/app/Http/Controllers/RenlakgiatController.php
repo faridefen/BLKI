@@ -11,7 +11,6 @@ use App\Laporan;
 use carbon;
 class RenlakgiatController extends Controller
 {
-    protected $delimiter = ';';
     /**
      * Display a listing of the resource.
      *
@@ -24,15 +23,24 @@ class RenlakgiatController extends Controller
     }
     
     public function uptdrenlakgiat($id){
-     $renlakgiat = Renlakgiat::where('id',$id)->get();   
-     return view('renlakgiat.index', compact('renlakgiat'));
+     $profile = Profile::where('id', $id)->get();
+     $renlakgiat = Renlakgiat::where('users_id',$id)->get();   
+     return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
 
     public function index()
-    {
+    {   
+        $profile = Profile::all();
         $renlakgiat = Renlakgiat::all();
-        return view('renlakgiat.index', compact('renlakgiat'));
+        return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
+
+    public function indexadmin()
+    {   
+        $renlakgiat = Renlakgiat::all();
+        return view('admin.indexRenlakgiat', compact('renlakgiat','profile'));
+    }
+
 
     public function detailrenlakgiat()
     {
@@ -58,7 +66,7 @@ class RenlakgiatController extends Controller
      */
     public function store(Request $request)
     {
-
+        $profile = Profile::where('id', $request->users_id)->get();
         $renlakgiat = new Renlakgiat;
         $renlakgiat->kejuruan = $request->kejuruan;
         $renlakgiat->program_pelatihan = $request->program_pelatihan;
@@ -66,7 +74,7 @@ class RenlakgiatController extends Controller
         $renlakgiat->paket = $request->paket;
         $renlakgiat->users_id = $request->users_id;
         $renlakgiat->save();
-        return redirect()->route('admin.renlakgiat');
+        return redirect()->route('admin.renlakgiat','profile');
     }
 
     public function uploadform($id)
@@ -174,4 +182,5 @@ class RenlakgiatController extends Controller
         $laporan = laporan::where('renlakgiat_id',$id)->get();
         return view('renlakgiat.detailLaporan', compact('laporan'));
     }
+
 }

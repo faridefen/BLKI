@@ -35,9 +35,8 @@ class AdminController extends Controller
     }
 
     public function indexProfile(){
-        
         $profile = Profile::all();
-        return view('admin.indexProfile', compact('profile','notif'));
+        return view('admin.indexProfile', compact('profile','notif','renlakgiat'));
     }
 
     public function detailProfile($id){

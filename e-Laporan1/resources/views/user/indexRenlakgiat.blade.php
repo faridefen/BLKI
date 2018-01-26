@@ -17,6 +17,7 @@
                             <th>Durasi</th>
                             <th>Paket</th>
                             <th>Orang</th>
+                            <th>Status</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>Aksi</th>
@@ -24,6 +25,9 @@
                         </tr>
                         <?php $x=1; ?>
                         @foreach($renlakgiat as $data)
+                        <?php
+                            $status = $data->status
+                         ?>
                             <tr>
                                 <td>{{ $x++ }}</td>
                                 <td>{{ $data->kejuruan }}</td>
@@ -32,6 +36,7 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
+                                <td>{{ $status }}</td>
                                 <td>{{ $data->tgl_mulai }}</td>
                                 <td>{{ $data->tgl_selesai }}</td>
                                 

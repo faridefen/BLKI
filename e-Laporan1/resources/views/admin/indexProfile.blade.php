@@ -16,18 +16,19 @@
                             <th>Nama Pimpinan</th>
                             <th>Aksi</th>
                         </tr>
-                        <?php $x=1; ?>
+                        <?php $x=1;
+                        ?>
                         @foreach($profile as $data)
                             <tr>
+                                
                                 <td>{{ $x++ }}</td>
                                 <td>{{ $data->nama_lembaga }}</td>
                                 <td>{{ $data->eselonisasi }}</td>
                                 <td>{{ $data->kab_kota }} - {{$data->provinsi}}</td>
                                 <td>{{ $data->nama_pimpinan }}</td>
                                 <td>
-                                    <a href="{{url('admin/profile/detail/'.$data->id)}}"><button class="btn btn-primary">Detail</button></a><br>
-                                    <a href="{{url('admin/renlakgiat/tambah/'.$data->id)}}"><button class="btn btn-warning">Tambah Renlakgiat</button></a><br>
-                                    <a href="{{url('admin/renlakgiat/'.$data->id)}}"><button class="btn btn-info">Data Renlakgiat</button></a>
+                                    <a href="{{url('admin/profile/detail/'.$data->id)}}"><i class="material-icons">details</i>Details</a>|
+                                    <a href="{{url('admin/renlakgiat/'.$data->id)}}"><i class="material-icons">pageview</i>Renlakgiat</a>
                                 </td>
                             </tr>
                         @endforeach
