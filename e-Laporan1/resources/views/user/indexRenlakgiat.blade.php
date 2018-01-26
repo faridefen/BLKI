@@ -13,7 +13,12 @@
                             <th>No</th>
                             <th>Kejuruan</th>
                             <th>Program Pelatihan</th>
-
+                            <th>Sumber Dana</th>
+                            <th>Durasi</th>
+                            <th>Paket</th>
+                            <th>Orang</th>
+                            <th>Tanggal Mulai</th>
+                            <th>Tanggal Selesai</th>
                             <th>Aksi</th>
                             
                         </tr>
@@ -23,11 +28,16 @@
                                 <td>{{ $x++ }}</td>
                                 <td>{{ $data->kejuruan }}</td>
                                 <td>{{ $data->program_pelatihan }}</td>
+                                <td>{{ $data->sumber_dana }}</td>
+                                <td>{{ $data->durasi }}</td>
+                                <td>{{ $data->paket }}</td>
+                                <td>{{ $data->orang }}</td>
+                                <td>{{ $data->tgl_mulai }}</td>
+                                <td>{{ $data->tgl_selesai }}</td>
                                 
                                 <td>
                                     <a href="{{url('uptd/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-warning">Edit</button></a>
                                     <a href="{{url('uptd/pktp/'.$data->id)}}"><button class="btn btn-primary">Data PKTP</button></a>
-                                    <a href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-primary">Tambah PKTP</button></a>
                                     <a href="{{url('uptd/laporan/detail/'.$data->id)}}"><button class="btn btn-info">Detail</button></a>
                                 </td>
                                 

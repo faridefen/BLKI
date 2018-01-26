@@ -11,6 +11,7 @@ use App\Laporan;
 use carbon;
 class RenlakgiatController extends Controller
 {
+    protected $delimiter = ';';
     /**
      * Display a listing of the resource.
      *
@@ -57,6 +58,7 @@ class RenlakgiatController extends Controller
      */
     public function store(Request $request)
     {
+
         $renlakgiat = new Renlakgiat;
         $renlakgiat->kejuruan = $request->kejuruan;
         $renlakgiat->program_pelatihan = $request->program_pelatihan;
@@ -67,6 +69,49 @@ class RenlakgiatController extends Controller
         return redirect()->route('admin.renlakgiat');
     }
 
+    public function uploadform($id)
+    {
+        $user = User::where('id','=',$id)->get();
+        return view('renlakgiat.upload', compact('user'));
+    }
+
+    public function upload(Request $request, $id){
+
+        $upload = $request->file('excel');
+        
+        $filepath = $upload->getRealPath();
+
+        $file = fopen($filepath, 'r');
+
+        $header = fgetcsv($file);
+
+        $row = fgetcsv($file);
+
+        $data = array_combine($header, $row);
+
+        $kejuruan = $data['kejuruan'];
+        $program_pelatihan = $data['program_pelatihan'];
+        $sumber_dana = $data['sumber_dana'];
+        $durasi = $data['durasi'];
+        $paket = $data['paket'];
+        $orang = $data['orang'];
+
+        $users_id = $id;
+
+        $renlakgiat = new Renlakgiat;
+        $renlakgiat->kejuruan = $kejuruan;
+        $renlakgiat->program_pelatihan = $program_pelatihan;
+        $renlakgiat->sumber_dana = $sumber_dana;
+        $renlakgiat->durasi = $durasi;
+        $renlakgiat->paket = $paket;
+        $renlakgiat->orang = $orang;
+        $renlakgiat->users_id = $users_id;
+        $renlakgiat->save();
+
+
+
+        return redirect()->route('admin.renlakgiat');
+    }
     /**
      * Display the specified resource.
      *

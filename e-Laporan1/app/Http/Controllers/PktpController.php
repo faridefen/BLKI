@@ -15,9 +15,9 @@ class PktpController extends Controller
         $this->middleware('auth:web');
     }
     public function indexpktp($id){
-
+        $renlakgiat = Renlakgiat::where('id',$id)->get();
 	   $pktp = Pktp::where('renlakgiat_id',$id)->get();
-	   return view('user.indexpktp', compact('pktp'));
+	   return view('user.indexpktp', compact('pktp'), compact('renlakgiat'));
     }
 
     public function create($id){

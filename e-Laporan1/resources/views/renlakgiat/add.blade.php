@@ -76,6 +76,10 @@
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
                     			<button class="btn btn-success">Simpan</button>
+                                <p>or</p>
+                                 @foreach($user as $data)
+                                <a class="button" href="{{url('admin/renlakgiat/tambah/excel/'.$data->id)}}">upload excel</a>
+                                @endforeach
                     		</div>
                     	</div>
                    		

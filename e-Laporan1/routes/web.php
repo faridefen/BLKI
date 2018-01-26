@@ -44,7 +44,8 @@ Route::post('/admin/user/update/{id}','AdminController@updateUser');
 
 
 Route::get('/admin/renlakgiat','RenlakgiatController@index')->name('admin.renlakgiat');
-Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create')->name('admin.renlakgiat.add');
+Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create');
+Route::get('/admin/renlakgiat/tambah/excel/{id}','RenlakgiatController@uploadform');
 Route::post('/admin/renlakgiat/simpan','RenlakgiatController@store');
 Route::get('/admin/renlakgiat/edit/{id}','RenlakgiatController@edit');
 Route::post('/admin/renlakgiat/update/{id}','RenlakgiatController@update');
@@ -52,6 +53,7 @@ Route::get('/admin/renlakgiat/hapus/{id}','RenlakgiatController@destroy');
 Route::get('/admin/renlakgiat/{id}','RenlakgiatController@uptdrenlakgiat');
 Route::get('/admin/renlakgiat/detail/{id}','RenlakgiatController@detailrenlakgiat');
 Route::get('/admin/renlakgiat/laporan/{id}','RenlakgiatController@laporanRenlakgiat');
+Route::post('/admin/renlakgiat/upload/{id}', 'RenlakgiatController@upload');
 
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');
 Route::get('/uptd/laporan/detail/{id}','UptdController@detailRenlakgiat');
