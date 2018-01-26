@@ -17,6 +17,10 @@ class Renlakgiat extends Model
         return $this->hasMany(pktp::class);
     }
 
+    public function Laporan(){
+        return $this->hasMany(Laporan::class);
+    }
+
     public function Profile(){
         return $this->belongsTo('App\Profile','profile_id');
     }

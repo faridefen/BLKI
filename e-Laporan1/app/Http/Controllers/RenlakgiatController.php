@@ -7,6 +7,8 @@ use App\Renlakgiat;
 use App\User;
 use App\Profile;
 use App\Admin;
+use App\Laporan;
+use carbon;
 class RenlakgiatController extends Controller
 {
     /**
@@ -59,11 +61,7 @@ class RenlakgiatController extends Controller
         $renlakgiat->kejuruan = $request->kejuruan;
         $renlakgiat->program_pelatihan = $request->program_pelatihan;
         $renlakgiat->sumber_dana = $request->sumber_dana;
-        $renlakgiat->durasi = $request->durasi;
         $renlakgiat->paket = $request->paket;
-        $renlakgiat->orang = $request->orang;
-        $renlakgiat->tgl_mulai = $request->tgl_mulai;
-        $renlakgiat->tgl_selesai = $request->tgl_selesai;
         $renlakgiat->users_id = $request->users_id;
         $renlakgiat->save();
         return redirect()->route('admin.renlakgiat');
@@ -125,5 +123,10 @@ class RenlakgiatController extends Controller
         $renlakgiat = Renlakgiat::find($id);
         $renlakgiat->delete();
         return redirect()->route('admin.renlakgiat');
+    }
+
+    public function laporanRenlakgiat($id){
+        $laporan = laporan::where('renlakgiat_id',$id)->get();
+        return view('renlakgiat.detailLaporan', compact('laporan'));
     }
 }

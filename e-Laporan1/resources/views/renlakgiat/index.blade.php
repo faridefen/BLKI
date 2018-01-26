@@ -39,6 +39,7 @@
                                     <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}" name="detail"><button class="btn btn-primary"><i class="large material-icons">art_track</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
+                                    <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
                                 </td>
                             </tr>
                         @endforeach

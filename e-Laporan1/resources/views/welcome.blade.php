@@ -73,7 +73,7 @@
                 <div class="title m-b-md" style="font-size: 60px">
                     <br>
                     <img src="{{URL::asset('image/logo.png')}}"> <br>
-                    BLKI Kalimantan Timur
+                    BLKI SAMARINDA
 
                 </div>
 

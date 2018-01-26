@@ -25,8 +25,8 @@
                                 <td>{{ $data->kab_kota }} - {{$data->provinsi}}</td>
                                 <td>{{ $data->nama_pimpinan }}</td>
                                 <td>
-                                    <a href="{{url('admin/profile/detail/'.$data->id)}}"><button class="btn btn-primary">Detail</button></a>
-                                    <a href="{{url('admin/renlakgiat/tambah/'.$data->id)}}"><button class="btn btn-info">Renlakgiat</button></a>
+                                    <a href="{{url('admin/profile/detail/'.$data->id)}}"><button class="btn btn-primary">Detail</button></a><br>
+                                    <a href="{{url('admin/renlakgiat/tambah/'.$data->id)}}"><button class="btn btn-warning">Tambah Renlakgiat</button></a><br>
                                     <a href="{{url('admin/renlakgiat/'.$data->id)}}"><button class="btn btn-info">Data Renlakgiat</button></a>
                                 </td>
                             </tr>

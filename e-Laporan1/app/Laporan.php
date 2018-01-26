@@ -9,7 +9,7 @@ class Laporan extends Model
     protected $table = 'laporans';
     protected $guarded = ['id'];
 
-    public function User(){
-        return $this->belongsTo('App\User','users_id');
+    public function Renlakgiat(){
+        return $this->belongsTo('App\Renlakgiat','renlakgiat_id');
     }
 }
