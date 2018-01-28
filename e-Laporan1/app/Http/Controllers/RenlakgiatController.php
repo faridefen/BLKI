@@ -11,6 +11,7 @@ use App\Laporan;
 use Carbon\Carbon;
 use PDF;
 use Session;
+use Excel;
 class RenlakgiatController extends Controller
 {
     /**
@@ -96,6 +97,7 @@ class RenlakgiatController extends Controller
         return view('renlakgiat.upload', compact('user'));
     }
 
+
     public function upload(Request $request, $id){
 
         $upload = $request->file('excel');
@@ -107,42 +109,46 @@ class RenlakgiatController extends Controller
         $header = fgetcsv($file);
 
         $row = fgetcsv($file);
+
         $id = Profile::where('id',$id)->get();
             foreach ($id as $c) {
                 $users_id = $c->users_id;
             }
+
+
         foreach ($row as $data) {
             
-            $data = array_combine($header, $row);
+            $countheader= count($header);
+            $data = Excel::load($filepath, function($reader) {
+            })->get();
+
+         if($countheader<7  && in_array('kejuruan',$header) && in_array('program_pelatihan',$header) && in_array('sumber_dana',$header)&& in_array('durasi',$header)&& in_array('paket',$header)&& in_array('orang',$header)){
             $countheader= count($header); 
-            
-                if($countheader<7  && in_array('kejuruan',$header) && in_array('program_pelatihan',$header) && in_array('sumber_dana',$header)&& in_array('durasi',$header)&& in_array('paket',$header)&& in_array('orang',$header)){
-
-                    $kejuruan = $data['kejuruan'];
-                    $program_pelatihan = $data['program_pelatihan'];
-                    $sumber_dana = $data['sumber_dana'];
-                    $durasi = $data['durasi'];
-                    $paket = $data['paket'];
-                    $orang = $data['orang'];
-
-                    $renlakgiat = new Renlakgiat;
-                    $renlakgiat->kejuruan = $kejuruan;
-                    $renlakgiat->program_pelatihan = $program_pelatihan;
-                    $renlakgiat->sumber_dana = $sumber_dana;
-                    $renlakgiat->durasi = $durasi;
-                    $renlakgiat->paket = $paket;
-                    $renlakgiat->orang = $orang;
-                    $renlakgiat->users_id = $users_id;
-                    $renlakgiat->save();
-
-                    Session::flash('message', 'Berhasil Upload file Csv'); 
+            if(!empty($data) && $data->count()){
+                foreach ($data as $key => $value) {
+                    $insert[] = ['kejuruan' => $value->kejuruan, 
+                                 'program_pelatihan' => $value->program_pelatihan,
+                                 'sumber_dana' => $value->sumber_dana,
+                                 'durasi' => $value->durasi,
+                                 'paket' => $value->paket,
+                                 'orang' => $value->orang,
+                                 'users_id' => $users_id
+                                ];
+                }
+                if(!empty($insert)){
+                    \DB::table('renlakgiats')->insert($insert);
+                    Session::flash('message', 'Success Uploading Csv file'); 
                     Session::flash('alert-class', 'alert-success');
-                } else {
-                    Session::flash('message', 'Gagal Upload file Csv, column pada csv tidak cocok dengan database atau file error'); 
-                    Session::flash('alert-class', 'alert-danger');
                 }
             }
-            return redirect()->route('admin.renlakgiat');
+        }
+        else {
+                    Session::flash('message', 'Failed Upload file Csv, Please Check your csv file format!'); 
+                    Session::flash('alert-class', 'alert-danger');
+        }
+            return redirect()->route('admin.profile');
+    }
+
     }
     /**
      * Display the specified resource.

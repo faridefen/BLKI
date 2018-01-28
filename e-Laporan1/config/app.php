@@ -179,6 +179,7 @@ return [
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
