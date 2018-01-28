@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Renlakgiat;
 use App\Laporan;
 use Auth;
-use carbon;
+use Carbon\Carbon;
 use Hash;
 use Session;
 use App\User;
+use PDF;
 class UptdController extends Controller
 {
 	public function __construct()
@@ -40,6 +41,7 @@ class UptdController extends Controller
         $renlakgiat->save();
         return redirect()->route('uptd.renlakgiat');
     }
+
     public function formCover($id){
     	$renlakgiat = Renlakgiat::where('id','=',$id)->get();
     	return view('user.formCover', compact('renlakgiat'));
@@ -60,6 +62,11 @@ class UptdController extends Controller
         Session::flash('message', 'Berhasil Upload Cover'); 
         Session::flash('alert-class', 'alert-success'); 
     	return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
+    }
+    public function cetakRenlakgiat($id){
+        $renlakgiat = Renlakgiat::where('id',$id)->get();
+        $pdf = PDF::loadView('user.cetakRenlakgiat',compact('renlakgiat'));
+        return $pdf->stream('Renlakgiat.pdf');
     }
 
     public function editpass($id){

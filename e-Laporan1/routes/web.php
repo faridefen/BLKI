@@ -63,7 +63,7 @@ Route::get('uptd/renlakgiat/laporan/cover/tambah/{id}','UptdController@formCover
 Route::post('uptd/renlakgiat/laporan/cover/simpan','UptdController@uploadCover');
 Route::get('/uptd/editpass/{id}','UptdController@editpass');
 Route::post('/uptd/editpass/update/{id}', 'UptdController@verif');
-
+Route::get('/uptd/renlakgiat/cetak/{id}','UptdController@cetakRenlakgiat');
 
 
 Route::get('uptd/pktp/{id}','PktpController@indexpktp');

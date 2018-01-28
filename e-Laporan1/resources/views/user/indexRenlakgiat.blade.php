@@ -31,8 +31,8 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>{{ $data->tgl_mulai }}</td>
-                                <td>{{ $data->tgl_selesai }}</td>
+                                <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
+                                <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
                                     
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>
@@ -69,6 +69,7 @@
                                     @endif
                                     <a href="{{url('uptd/pktp/'.$data->id)}}"><button class="btn btn-primary">Data PKTP</button></a>
                                     <a href="{{url('uptd/laporan/detail/'.$data->id)}}"><button class="btn btn-info">Detail</button></a>
+                                    <a href="{{url('uptd/renlakgiat/cetak/'.$data->id)}}"><button class="btn btn-info">Cetak</button></a>
                                 </td>
                         @endforeach
                     </table>

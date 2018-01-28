@@ -8,7 +8,8 @@ use App\User;
 use App\Profile;
 use App\Admin;
 use App\Laporan;
-use carbon;
+use Carbon\Carbon;
+use PDF;
 use Session;
 class RenlakgiatController extends Controller
 {
@@ -47,6 +48,11 @@ class RenlakgiatController extends Controller
     {
         $renlakgiat = Renlakgiat::all();
         return view('renlakgiat.indexdetail', compact('renlakgiat'));
+    }
+    public function cetakRenlakgiat($id){
+        $renlakgiat = Renlakgiat::where('id',$id)->get();
+        $pdf = PDF::loadView('user.cetakRenlakgiat',compact('renlakgiat'));
+        return $pdf->download('Renlakgiat.pdf');
     }
     /**
      * Show the form for creating a new resource.
@@ -100,28 +106,35 @@ class RenlakgiatController extends Controller
 
         $data = array_combine($header, $row);
 
-        $kejuruan = $data['kejuruan'];
-        $program_pelatihan = $data['program_pelatihan'];
-        $sumber_dana = $data['sumber_dana'];
-        $durasi = $data['durasi'];
-        $paket = $data['paket'];
-        $orang = $data['orang'];
-
         $users_id = $id;
 
-        $renlakgiat = new Renlakgiat;
-        $renlakgiat->kejuruan = $kejuruan;
-        $renlakgiat->program_pelatihan = $program_pelatihan;
-        $renlakgiat->sumber_dana = $sumber_dana;
-        $renlakgiat->durasi = $durasi;
-        $renlakgiat->paket = $paket;
-        $renlakgiat->orang = $orang;
-        $renlakgiat->users_id = $users_id;
-        $renlakgiat->save();
+        $countheader= count($header); 
+        
+            if($countheader<7  && in_array('kejuruan',$header) && in_array('program_pelatihan',$header) && in_array('sumber_dana',$header)&& in_array('durasi',$header)&& in_array('paket',$header)&& in_array('orang',$header)){
 
+                $kejuruan = $data['kejuruan'];
+                $program_pelatihan = $data['program_pelatihan'];
+                $sumber_dana = $data['sumber_dana'];
+                $durasi = $data['durasi'];
+                $paket = $data['paket'];
+                $orang = $data['orang'];
 
-
-        return redirect()->route('admin.renlakgiat');
+                $renlakgiat = new Renlakgiat;
+                $renlakgiat->kejuruan = $kejuruan;
+                $renlakgiat->program_pelatihan = $program_pelatihan;
+                $renlakgiat->sumber_dana = $sumber_dana;
+                $renlakgiat->durasi = $durasi;
+                $renlakgiat->paket = $paket;
+                $renlakgiat->orang = $orang;
+                $renlakgiat->users_id = $users_id;
+                $renlakgiat->save();
+                Session::flash('message', 'Berhasil Upload file Csv'); 
+                Session::flash('alert-class', 'alert-success');
+            } else {
+                Session::flash('message', 'Gagal Upload file Csv, column pada csv tidak cocok dengan database atau file error'); 
+                Session::flash('alert-class', 'alert-danger');
+            }
+            return redirect()->route('admin.renlakgiat');
     }
     /**
      * Display the specified resource.
