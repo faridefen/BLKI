@@ -9,7 +9,7 @@
                 <a class="pull-right" href="{{url('admin/renlakgiat/tambah/'.$datap->id)}}"><i class="material-icons">add</i>Renlakgiat</a>
                 @endforeach
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="responsive-table">
                         <tr>
                             <th>No</th>
                             <th>UPTD Terkait</th>

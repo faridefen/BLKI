@@ -7,6 +7,9 @@ use App\Renlakgiat;
 use App\Laporan;
 use Auth;
 use carbon;
+use Hash;
+use Session;
+use App\User;
 class UptdController extends Controller
 {
 	public function __construct()
@@ -16,7 +19,7 @@ class UptdController extends Controller
 
     public function indexRenlakgiat(){
     	$renlakgiat = Renlakgiat::where('users_id','=',Auth::user()->id)->get();
-    	return view('user.indexRenlakgiat', compact('renlakgiat'));
+    	return view('user.indexRenlakgiat', compact('renlakgiat','current'));
     }
     public function detailRenlakgiat($id){
     	$renlakgiat = Renlakgiat::where('id','=',$id)->get();
@@ -35,7 +38,7 @@ class UptdController extends Controller
         $renlakgiat->tgl_selesai = $request->tgl_selesai;
         $renlakgiat->status = $request->status;
         $renlakgiat->save();
-        return redirect()->route('user.renlakgiat');
+        return redirect()->route('uptd.renlakgiat');
     }
     public function formCover($id){
     	$renlakgiat = Renlakgiat::where('id','=',$id)->get();
@@ -54,6 +57,48 @@ class UptdController extends Controller
 	    	$laporan->catatan = "-";
 	    }
 	    $laporan->save();
+        Session::flash('message', 'Berhasil Upload Cover'); 
+        Session::flash('alert-class', 'alert-success'); 
     	return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
+    }
+
+    public function editpass($id){
+        $user = user::where('id', $id)->get();
+        return view('user.editpass', compact('user'));
+
+
+    }
+    public function verif(Request $request, $id){
+
+         $user = Auth::user();
+
+        $old = $request->old;
+        $new = $request->new;
+        $confirm = $request->confirm;
+
+        $user = User::find($id);
+        $check = User::where('password', $old)->where('id', $id)->get();
+        $cek = count($check);
+
+
+
+
+        if (Hash::check($old, $user->password)) {
+             $user->password = bcrypt($new);
+            $user->save();
+
+            Session::flash('message', 'Berhasil Ubah Password'); 
+            Session::flash('alert-class', 'alert-success'); 
+            return redirect('profile');
+           
+        }
+        else
+        {
+            Session::flash('message', 'Password lama salah!'); 
+            Session::flash('alert-class', 'alert-danger'); 
+
+            return redirect()->back();
+        }
+
     }
 }

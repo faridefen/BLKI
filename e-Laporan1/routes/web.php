@@ -61,6 +61,8 @@ Route::get('/uptd/renlakgiat/edit/{id}','UptdController@editRenlakgiat');
 Route::post('/uptd/renlakgiat/update/{id}','UptdController@updateRenlakgiat');
 Route::get('uptd/renlakgiat/laporan/cover/tambah/{id}','UptdController@formCover');
 Route::post('uptd/renlakgiat/laporan/cover/simpan','UptdController@uploadCover');
+Route::get('/uptd/editpass/{id}','UptdController@editpass');
+Route::post('/uptd/editpass/update/{id}', 'UptdController@verif');
 
 
 

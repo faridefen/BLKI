@@ -9,6 +9,7 @@ use App\Profile;
 use App\Admin;
 use App\Laporan;
 use carbon;
+use Session;
 class RenlakgiatController extends Controller
 {
     /**
@@ -24,7 +25,7 @@ class RenlakgiatController extends Controller
     
     public function uptdrenlakgiat($id){
      $profile = Profile::where('id', $id)->get();
-     $renlakgiat = Renlakgiat::where('users_id',$id)->get();   
+     $renlakgiat = Renlakgiat::where('users_id',$id)->get();    
      return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
 
@@ -71,10 +72,12 @@ class RenlakgiatController extends Controller
         $renlakgiat->kejuruan = $request->kejuruan;
         $renlakgiat->program_pelatihan = $request->program_pelatihan;
         $renlakgiat->sumber_dana = $request->sumber_dana;
+        $renlakgiat->durasi = $request->durasi;
         $renlakgiat->paket = $request->paket;
+        $renlakgiat->orang = $request->orang;
         $renlakgiat->users_id = $request->users_id;
         $renlakgiat->save();
-        return redirect()->route('admin.renlakgiat','profile');
+        return redirect()->route('admin.profile','profile');
     }
 
     public function uploadform($id)

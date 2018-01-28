@@ -108,22 +108,7 @@
                                         @endif
                                 </div>
                                 
-                                <div class="form-group{{ $errors->has('status') ? 'has-error': ''}}">
-                                    <label for="status" class="col-md-4 control-label">Tanggal Selesai</label>
-                                        <div class="col-md-6">
-                                            <select name="status" id="status" class="form-control" required>
-                                                <option value="Belum Berjalan">Belum Berjalan</option>
-                                                <option value="Sedang Berjalan">Sedang Berjalan</option>
-                                                <option value="Sudah Selesai">Sudah Selesai</option>
-                                            </select>
-                                        </div>
-
-                                         @if ($errors->has('status'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('status') }}</strong>
-                                            </span>
-                                        @endif
-                                </div>
+                             
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
                                 <button class="btn btn-success">Update</button>

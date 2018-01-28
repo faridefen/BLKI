@@ -61,6 +61,18 @@
                                             </span>
                                         @endif
                                 </div>
+                                <div class="form-group{{ $errors->has('durasi') ? 'has-error': ''}}">
+                                    <label for="durasi" class="col-md-4 control-label">Durasi</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="durasi" id="durasi" class="form-control" required>
+                                        </div>
+
+                                         @if ($errors->has('durasi'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('durasi') }}</strong>
+                                            </span>
+                                        @endif
+                                </div>  
                                 <div class="form-group{{ $errors->has('paket') ? 'has-error': ''}}">
                                     <label for="paket" class="col-md-4 control-label">Paket</label>
                                         <div class="col-md-6">
@@ -73,6 +85,18 @@
                                             </span>
                                         @endif
                                 </div>   
+                                <div class="form-group{{ $errors->has('orang') ? 'has-error': ''}}">
+                                    <label for="orang" class="col-md-4 control-label">Orang</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="orang" id="orang" class="form-control" required>
+                                        </div>
+
+                                         @if ($errors->has('orang'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('orang') }}</strong>
+                                            </span>
+                                        @endif
+                                </div>  
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
                     			<button class="btn btn-success">Simpan</button>

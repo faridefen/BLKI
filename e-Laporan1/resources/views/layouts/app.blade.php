@@ -83,6 +83,9 @@
                                         </li>
                                 @endif
                                     <li>
+                                       <a href="{{ url('/uptd/editpass/'.Auth::user()->id) }}"><i class="material-icons">lock</i> Ubah Password</a>
+                                    </li>
+                                    <li>
                                        <a href="{{route('user.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>
                                     
@@ -112,7 +115,6 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin <span class="caret"></span>
                                 </a>
-
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{route('admin.logout')}}"><i class="large material-icons">power_settings_new</i> Logout</a>

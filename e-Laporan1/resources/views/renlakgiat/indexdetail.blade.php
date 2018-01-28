@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="responsive-table">
                         @foreach($renlakgiat as $data)
                         <tr>
                             <th>UPTD Terkait</th>

@@ -8,7 +8,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="responsive-table">
                         <tr>
                             <th>No</th>
                             <th>Nama</th>

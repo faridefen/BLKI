@@ -9,7 +9,7 @@
                      <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-primary">Tambah PKTP</button></a>
                     @endforeach
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="responsive-table">
                         <tr>
                             <th>Nama</th>
                             <th>Nip</th>

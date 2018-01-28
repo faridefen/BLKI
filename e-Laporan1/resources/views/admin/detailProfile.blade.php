@@ -27,7 +27,7 @@
                     @endforeach
                 
                 <div class="panel-body">
-                    <table class="table" style="width: 100%">
+                    <table class="responsive-table" style="width: 100%">
                         @foreach($profile as $data)
 
                             <tr>

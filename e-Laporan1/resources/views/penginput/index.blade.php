@@ -10,7 +10,7 @@
 
                 <div class="panel-body">
                     <div class="right"><a href="{{url('/penginput/tambah')}}"><button class="btn btn-primary">Upload</button></a></div><br>
-                    <table class="table">
+                    <table class="responsive-table">
                         <tr>
                             <th>No</th>
                             <th>Nama Laporan</th>

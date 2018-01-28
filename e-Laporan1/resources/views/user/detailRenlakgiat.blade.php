@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     @foreach($renlakgiat as $data)
-                    <table class="table">
+                    <table class="responsive-table">
                         <tr>
                             <td>Id</td>
                             <td>:</td>

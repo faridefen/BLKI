@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Profile;
+use App\User;
+use App\Renlakgiat;
+use Lava;
+use Charts;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Profile::all();
+        foreach ($user as $data) {
+            $userid = $data->users_id;
+             $belum = Renlakgiat::where('users_id',$userid)->where('status', 'Belum Berjalan')->get();
+             $sedang = Renlakgiat::where('users_id',$userid)->where('status', 'Sedang Berjalan')->get();
+             $telah = Renlakgiat::where('users_id',$userid)->where('status', 'Sudah Selesai')->get();
+                $data->nama_lembaga = Charts::create('donut', 'highcharts')
+                    ->title($data->nama_lembaga)
+                    ->labels(['Belum Berjalan', 'sudah Berjalan', 'Selesai'])
+                    ->values([count($belum),count($sedang),count($telah)])
+                    ->dimensions(1000,500)
+                    ->responsive(false)
+                    ->credits(false);
+        }
+        return view('home',compact('user'),['chart' => $data->nama_lembaga]);
     }
 }
