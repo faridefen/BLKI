@@ -26,7 +26,11 @@ class RenlakgiatController extends Controller
     
     public function uptdrenlakgiat($id){
      $profile = Profile::where('id', $id)->get();
-     $renlakgiat = Renlakgiat::where('users_id',$id)->get();    
+     $id = Profile::where('id',$id)->get();
+        foreach ($id as $c) {
+                $users_id = $c->users_id;
+        }
+     $renlakgiat = Renlakgiat::where('users_id',$users_id)->get();    
      return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
 
@@ -103,40 +107,40 @@ class RenlakgiatController extends Controller
         $header = fgetcsv($file);
 
         $row = fgetcsv($file);
-
-        $data = array_combine($header, $row);
-
         $id = Profile::where('id',$id)->get();
-        foreach ($id as $c) {
-            $users_id = $c->users_id;
-        }
+            foreach ($id as $c) {
+                $users_id = $c->users_id;
+            }
+        foreach ($row as $data) {
+            
+            $data = array_combine($header, $row);
+            $countheader= count($header); 
+            
+                if($countheader<7  && in_array('kejuruan',$header) && in_array('program_pelatihan',$header) && in_array('sumber_dana',$header)&& in_array('durasi',$header)&& in_array('paket',$header)&& in_array('orang',$header)){
 
-        $countheader= count($header); 
-        
-            if($countheader<7  && in_array('kejuruan',$header) && in_array('program_pelatihan',$header) && in_array('sumber_dana',$header)&& in_array('durasi',$header)&& in_array('paket',$header)&& in_array('orang',$header)){
+                    $kejuruan = $data['kejuruan'];
+                    $program_pelatihan = $data['program_pelatihan'];
+                    $sumber_dana = $data['sumber_dana'];
+                    $durasi = $data['durasi'];
+                    $paket = $data['paket'];
+                    $orang = $data['orang'];
 
-                $kejuruan = $data['kejuruan'];
-                $program_pelatihan = $data['program_pelatihan'];
-                $sumber_dana = $data['sumber_dana'];
-                $durasi = $data['durasi'];
-                $paket = $data['paket'];
-                $orang = $data['orang'];
+                    $renlakgiat = new Renlakgiat;
+                    $renlakgiat->kejuruan = $kejuruan;
+                    $renlakgiat->program_pelatihan = $program_pelatihan;
+                    $renlakgiat->sumber_dana = $sumber_dana;
+                    $renlakgiat->durasi = $durasi;
+                    $renlakgiat->paket = $paket;
+                    $renlakgiat->orang = $orang;
+                    $renlakgiat->users_id = $users_id;
+                    $renlakgiat->save();
 
-                $renlakgiat = new Renlakgiat;
-                $renlakgiat->kejuruan = $kejuruan;
-                $renlakgiat->program_pelatihan = $program_pelatihan;
-                $renlakgiat->sumber_dana = $sumber_dana;
-                $renlakgiat->durasi = $durasi;
-                $renlakgiat->paket = $paket;
-                $renlakgiat->orang = $orang;
-                $renlakgiat->users_id = $users_id;
-                $renlakgiat->save();
-
-                Session::flash('message', 'Berhasil Upload file Csv'); 
-                Session::flash('alert-class', 'alert-success');
-            } else {
-                Session::flash('message', 'Gagal Upload file Csv, column pada csv tidak cocok dengan database atau file error'); 
-                Session::flash('alert-class', 'alert-danger');
+                    Session::flash('message', 'Berhasil Upload file Csv'); 
+                    Session::flash('alert-class', 'alert-success');
+                } else {
+                    Session::flash('message', 'Gagal Upload file Csv, column pada csv tidak cocok dengan database atau file error'); 
+                    Session::flash('alert-class', 'alert-danger');
+                }
             }
             return redirect()->route('admin.renlakgiat');
     }
