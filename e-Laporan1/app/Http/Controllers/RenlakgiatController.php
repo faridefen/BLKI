@@ -88,7 +88,7 @@ class RenlakgiatController extends Controller
 
     public function uploadform($id)
     {
-        $user = User::where('id','=',$id)->get();
+        $user = Profile::where('id','=',$id)->get();
         return view('renlakgiat.upload', compact('user'));
     }
 
@@ -106,7 +106,10 @@ class RenlakgiatController extends Controller
 
         $data = array_combine($header, $row);
 
-        $users_id = $id;
+        $id = Profile::where('id',$id)->get();
+        foreach ($id as $c) {
+            $users_id = $c->users_id;
+        }
 
         $countheader= count($header); 
         
@@ -128,6 +131,7 @@ class RenlakgiatController extends Controller
                 $renlakgiat->orang = $orang;
                 $renlakgiat->users_id = $users_id;
                 $renlakgiat->save();
+
                 Session::flash('message', 'Berhasil Upload file Csv'); 
                 Session::flash('alert-class', 'alert-success');
             } else {
