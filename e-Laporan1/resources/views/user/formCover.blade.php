@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Upload Cover</div>
                 <div class="panel-body">
-                     @foreach($renlakgiat as $data)
+                    @foreach($renlakgiat as $data)
                     <form class="form-horizontal" action="{{url('uptd/renlakgiat/laporan/cover/simpan/')}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
                                 <div>

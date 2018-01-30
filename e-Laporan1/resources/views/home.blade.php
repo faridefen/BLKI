@@ -1,11 +1,12 @@
 @extends('layouts.app')
 {!! Charts::assets() !!}
 @section('content')
+<link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
 <div class="container">
     <div class="row">
         <div class="col-md-14 col-md-offset-0">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard
+                <div class="panel-heading">Home Dashboard
                 </div>
                 <div class="panel-body">
                     @if (session('status'))
@@ -13,14 +14,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @foreach($user as $datauser)
+                    @foreach($user as $datauserr)
                     <div class="progress">
                         <div class="determinate" style="width: 100%">
                             </div>
                     </div>
-                    <div class="pull-right">
-                    </div>
-                     {!! $datauser->nama_lembaga->render() !!}
+                    
+                     {!! $datauserr->nama_lembaga->render() !!}
+
                     @endforeach
                 </div>
             </div>

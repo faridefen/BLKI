@@ -31,8 +31,8 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
-                                <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
+                                <td>{{ $data->tgl_mulai }}</td>
+                                <td>{{ $data->tgl_selesai }}</td>
                                     
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>

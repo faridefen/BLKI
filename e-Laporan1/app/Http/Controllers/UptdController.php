@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Hash;
 use Session;
 use App\User;
+use App\Dokumen;
 use PDF;
 class UptdController extends Controller
 {
@@ -107,5 +108,9 @@ class UptdController extends Controller
             return redirect()->back();
         }
 
+    }
+    Public function indexDokumen(){
+        $dokumen = Dokumen::orderBy('updated_at','desc')->get();
+        return view('user.indexDokumen', compact('dokumen'));
     }
 }

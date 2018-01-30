@@ -66,6 +66,7 @@
                             <li><a href=" {{ route('home')}}">Dashboard</a></li>
                             <li><a href=" {{ route('profile')}}">Profile</a></li>
                             <li><a href="{{route('uptd.renlakgiat')}}">Data Renlakgiat</a></li>
+                            <li><a href="{{route('uptd.dokumen')}}">Pemberitahuan</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -110,12 +111,12 @@
                             <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
                             <li><a href="{{route('admin.user')}}">Data User</a></li>
                             <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>
-                           
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{route('dokumen')}}"><i class="large material-icons">list</i> Upload Dokumen Khusus</a></li>
                                     <li>
                                         <a href="{{route('admin.logout')}}"><i class="large material-icons">power_settings_new</i> Logout</a>
                                     </li>

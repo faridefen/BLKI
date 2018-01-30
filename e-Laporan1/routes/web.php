@@ -42,6 +42,10 @@ Route::get('/admin/user/hapus/{id}','AdminController@hapusUser');
 Route::get('/admin/user/edit/{id}','AdminController@editUser');
 Route::post('/admin/user/update/{id}','AdminController@updateUser');
 
+Route::get('/admin/dokumen/','DokumenController@index')->name('dokumen');
+Route::get('/admin/dokumen/tambah','DokumenController@create')->name('dokumen.add');
+Route::post('/admin/dokumen/simpan','DokumenController@store')->name('dokumen.store');
+
 
 Route::get('/admin/renlakgiat','RenlakgiatController@indexadmin')->name('admin.renlakgiat');
 Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create');
@@ -70,6 +74,8 @@ Route::get('uptd/pktp/{id}','PktpController@indexpktp');
 Route::get('uptd/pktp/tambah/{id}','PktpController@create');
 Route::post('uptd/pktp/simpan','PktpController@store');
 Route::get('uptd/pktp/hapus/{id}','PktpController@destroy');
+Route::get('/uptd/dokumen','UptdController@indexDokumen')->name('uptd.dokumen');
+
 
 Route::get('/laporan/index','LaporanController@index');
 Route::get('/laporan/detaillaporan','LaporanController@detail');
