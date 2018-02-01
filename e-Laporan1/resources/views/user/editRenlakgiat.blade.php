@@ -62,7 +62,7 @@
                                 <div class="form-group{{ $errors->has('durasi') ? 'has-error': ''}}">
                                     <label for="durasi" class="col-md-4 control-label">Durasi</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="durasi" id="durasi" class="form-control" required value="{{$data->durasi}}" >
+                                            <input type="text" name="durasi" id="durasi" class="form-control" value="{{$data->durasi}}" readonly>
                                         </div>
 
                                          @if ($errors->has('durasi'))
@@ -74,7 +74,7 @@
                                 <div class="form-group{{ $errors->has('orang') ? 'has-error': ''}}">
                                     <label for="orang" class="col-md-4 control-label">Orang</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="orang" id="orang" class="form-control" required value="{{$data->orang}}">
+                                            <input type="text" name="orang" id="orang" class="form-control"  value="{{$data->orang}}" readonly="">
                                         </div>
 
                                          @if ($errors->has('orang'))

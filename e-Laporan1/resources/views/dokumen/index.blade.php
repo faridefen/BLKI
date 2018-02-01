@@ -4,9 +4,10 @@
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Dokumen Khusus
+                    <a class="pull-right" align="right" href="{{route('dokumen.add')}}"><button class="btn btn-link">Tambah Dokumen Khusus</button></a>
                 </div>
                   
-                     <a class="pull-right" align="right" href="{{route('dokumen.add')}}"><button class="btn btn-linkk">Tambah Dokumen Khusus</button></a>
+                     
                    
                 <div class="panel-body">
                     <table class="responsive-table">
@@ -26,7 +27,7 @@
                                 <td>{{ $data->file }}</td>
                                 
                                 <td>
-                                   
+                                   <a href="{{url('admin/dokumen/hapus/'.$data->id)}}"><button class="btn btn-danger">Hapus</button></a>
                                 </td>
                         @endforeach
                     </table>

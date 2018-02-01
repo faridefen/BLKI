@@ -48,7 +48,7 @@ class DokumenController extends Controller
         $this->validate($request, [
             'judul' => 'required|min:6',
             'isi' => 'required',
-            'file' => 'required|max:500',
+            'file' => 'required|mimes:pdf|max:500',
         ]);
 
         if($request->hasFile('file')){
@@ -85,7 +85,8 @@ class DokumenController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dokumen = Dokumen::where('id',$id)->get();
+        return view('dokumen.edit', compact('dokumen'));
     }
 
     /**
@@ -108,6 +109,9 @@ class DokumenController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $dokumen = Dokumen::find($id);
+        $dokumen->delete();
+        Session::flash('message','Berhasil Menghapus Dokumen Khusus untuk diberikan ke seluruh UPTD/BLK');    
+        return redirect()->route('dokumen');
     }
 }

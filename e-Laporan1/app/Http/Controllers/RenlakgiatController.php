@@ -209,8 +209,29 @@ class RenlakgiatController extends Controller
     }
 
     public function laporanRenlakgiat($id){
+        $renlakgiat = Renlakgiat::where('id','=',$id)->get();
         $laporan = laporan::where('renlakgiat_id',$id)->get();
-        return view('renlakgiat.detailLaporan', compact('laporan'));
+        return view('renlakgiat.detailLaporan', compact('laporan','renlakgiat'));
     }
 
+    public function editTanggal($id){
+        $renlakgiat = Renlakgiat::where('id','=',$id)->get();
+        return view('renlakgiat.editTanggal', compact('renlakgiat'));
+    }
+
+    public function updateTanggal(Request $request, $id)
+    {
+        $renlakgiat = Renlakgiat::find($id);
+        $newtgl_mulai = $request->newtgl_mulai;
+        $newtgl_selesai = $request->newtgl_selesai;
+        $tgl_mulai = $request->tgl_mulai;
+        $tgl_selesai = $request->tgl_selesai;
+        $alasan = $request->alasan;
+        $now = Carbon::now();
+        $renlakgiat->tgl_mulai = $request->newtgl_mulai;
+        $renlakgiat->tgl_selesai = $request->newtgl_selesai;
+        $renlakgiat->histori_perubahan = "Perubahan tanggal rencana perencanaan kegiatan yang awalnya dimulai pada tanggal ".''.$tgl_mulai.''." sampai dengan tanggal ".''.$tgl_selesai.''." menjadi dimulai pada tanggal ".''.$newtgl_mulai.''." sampai dengan ".''.$newtgl_selesai.''." karena alasan ".''.$alasan.''.", . Perubahan ini dilakukan pada tanggal ".''.$now;
+        $renlakgiat->save();
+        return redirect()->route('admin.renlakgiat');
+    }
 }

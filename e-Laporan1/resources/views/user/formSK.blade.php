@@ -5,17 +5,19 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Upload Cover</div>
+                <div class="panel-heading">Upload Surat Keputusan</div>
                 <div class="panel-body">
                     @foreach($renlakgiat as $data)
-                    <form class="form-horizontal" action="{{url('uptd/renlakgiat/laporan/cover/simpan/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{url('uptd/renlakgiat/laporan/sk/simpan/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
-                                <div>
+                        
+                                <div class="form-group{{ $errors->has('renlakgiat_id') ? 'has-error': ''}}">
                                     <input type="hidden" name="renlakgiat_id" id="renlakgiat_id" class="form-control" value="{{ $data->id }}" readonly required>
                                 </div>
-                    		    
+                        		 
+                                <br>   
                                 <div class="form-group{{ $errors->has('file') ? 'has-error': ''}}">
-                                    <label for="file" class="col-md-4 control-label">Cover</label>
+                                    <label for="file" class="col-md-4 control-label">Surat Keputusan</label>
                                         <div class="col-md-6">
                                             <input type="file" name="file" id="file" class="form-control" required>
                                         </div>
@@ -29,9 +31,10 @@
                                 <div class="form-group">
                                     <label class="col-md-8 control-label">Format File PDF, Maksimal ukuran file adalah 500 Kb</label>
                                 </div>
+                                    
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
-                    			<button class="btn btn-success">Upload Cover</button>
+                    			<button class="btn btn-success">Upload Surat keputusan</button>
                     		</div>
                     	</div>
                    		

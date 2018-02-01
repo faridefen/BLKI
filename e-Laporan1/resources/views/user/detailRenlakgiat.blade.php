@@ -3,13 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
                     @foreach($renlakgiat as $data)
-                    <table class="responsive-table">
+                    <table class="table">
                         <tr>
                             <td>Id</td>
                             <td>:</td>
@@ -60,26 +59,33 @@
                             <td>:</td>
                             <td>{{ $data->status }}</td>
                         </tr>
+                        
                         <tr>
-                            <td>Upload Laporan</td>
+                            <td>Laporan</td>
                             <td>:</td>
                             <td>
-                                @if(DB::table('laporans')->select('id','status','catatan')-> where('nama_laporan','like','%cover%')->where('renlakgiat_id',$data->id)->count() > 0)
-
-                                    @foreach(DB::table('laporans')-> where('nama_laporan','like','%cover%')->where('renlakgiat_id',$data->id)->get() as $lp)
-                                        <a href="{{url('uptd/renlakgiat/laporan/cover/edit/'.$lp->id)}}"><button class="btn btn-link">cover</button></a>
-                                            @foreach(DB::table('laporans')->select('status','catatan')-> where('nama_laporan','like','%cover%')->where('renlakgiat_id',$data->id)->get() as $lp)
-                                    Status: {{$lp->status}}; Catatan: {{$lp->catatan}}
-                                @endforeach
-                                    @endforeach
-                                @else
-                                    <a href="{{url('uptd/renlakgiat/laporan/cover/tambah/'.$data->id)}}"><button class="btn btn-link">cover</button></a>
-                                @endif
+                                
+                                <a href="{{url('uptd/renlakgiat/laporan/cover/tambah/'.$data->id)}}"><button class="btn btn-link">cover</button></a> {{$data->cover}},<strong>Status:</strong>  {{ $data->status_cover}}, <strong> Catatan:</strong> {{ $data->catatan_cover}}
                                 <br>
-                                <button class="btn btn-link">pengantar, pendahuluan dan isi laporan</button><br>
-                                <button class="btn btn-link">Surat Keputusan</button><br>
-                                <button class="btn btn-link">Nominatif Perserta Pelatihan</button><br>
-                                <button class="btn btn-link">nominatif instruktur</button><br>
+
+                                <a href="{{url('uptd/renlakgiat/laporan/pendahuluan/tambah/'.$data->id)}}">
+                                    <button class="btn btn-link">pengantar, pendahuluan dan isi laporan</button>
+                                </a>
+                                {{$data->pendahuluan}}, <strong>Status:</strong> {{$data->status_pendahuluan}} <strong>Catatan:</strong> {{ $data->catatan_pendahuluan}}
+                                <br>
+
+                                <a href="{{url('uptd/renlakgiat/laporan/sk/tambah/'.$data->id)}}">
+                                    <button class="btn btn-link">Surat Keputusan</button>
+                                </a>{{$data->surat_keputusan}} <strong>Status</strong> {{$data->status_surat_keputusan}} <strong>Catatan</strong> {{$data->catatan_surat_keputusan}}<br>
+                                <a href="{{url('uptd/renlakgiat/laporan/npp/tambah/'.$data->id)}}">
+                                    <button class="btn btn-link">Nominatif Perserta Pelatihan</button>
+                                </a>
+                                {{$data->nominatif_peserta_pelatihan}}, <strong>Status:</strong> {{$data->status_nominatif_peserta_pelatihan}} <strong>Catatan:</strong> {{ $data->catatan_nominatif_peserta_pelatihan}}
+                                <br>
+                                <a href="{{url('uptd/renlakgiat/laporan/ni/tambah/'.$data->id)}}">
+                                    <button class="btn btn-link">nominatif instruktur</button>
+                                </a>{{$data->nominatif_instruktur}}, <strong>Status:</strong> {{$data->status_nominatif_instruktur}} <strong>Catatan:</strong> {{ $data->catatan_nominatif_instruktur}}
+                                <br>
                                 <button class="btn btn-link">kurikulum</button><br>
                                 <button class="btn btn-link">jadwal pelatihan mingguan</button><br>
                                 <button class="btn btn-link">Daftar hadir instruktur</button><br>
@@ -102,10 +108,11 @@
                                 <button class="btn btn-link">tanda terima konsumsi perserta</button><br>
                                 <button class="btn btn-link">foto dokumentasi kegiatan</button><br>
                                 <button class="btn btn-link">fotocopy sertifikasi peserta</button><br>
+                                @endforeach
                             </td>
                         </tr>
                     </table>
-                    @endforeach
+                    
                 </div>
             </div>
         </div>

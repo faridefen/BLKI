@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="panel-body">
-                    <table class="responsive-table">
+                    <table class="table">
                         <tr>
                             <th>No</th>
                             <th>Kejuruan</th>
@@ -19,7 +19,11 @@
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>Status</th>
-                            <th>Aksi</th>   
+                            <th>Edit</th>
+                            <th>Data PKTP</th>
+                            <th>Laporan</th>
+                            <th>Cetak Renlakgiat</th>
+                            <th></th>   
                         </tr>
                         <?php $x=1; ?>
                         @foreach($renlakgiat as $data)
@@ -31,8 +35,8 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>{{ $data->tgl_mulai }}</td>
-                                <td>{{ $data->tgl_selesai }}</td>
+                                <td>@if($data->tgl_mulai == "") Silahkan Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
+                                <td>@if($data->tgl_selesai == "") Silahkan Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
                                     
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>
@@ -63,14 +67,22 @@
                                 @endif
                                 <td>
                                     @if($data->tgl_mulai=="" && $data->tgl_selesai=="")
-                                    <a href="{{url('uptd/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-warning">Edit</button></a>
+                                    <a href="{{url('uptd/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-warning"><span class="material-icons">edit</span></button></a>
                                     @else
-                                    <h6>silahkan hubungi admin untuk edit</h6>
+                                    <h6>silahkan hubungi admin untuk mengubah tanggal</h6>
                                     @endif
-                                    <a href="{{url('uptd/pktp/'.$data->id)}}"><button class="btn btn-primary">Data PKTP</button></a>
-                                    <a href="{{url('uptd/laporan/detail/'.$data->id)}}"><button class="btn btn-info">Detail</button></a>
-                                    <a href="{{url('uptd/renlakgiat/cetak/'.$data->id)}}"><button class="btn btn-info">Cetak</button></a>
                                 </td>
+                                <td>
+                                    <a href="{{url('uptd/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
+                                </td> 
+                                <td>
+                                    <a href="{{url('uptd/laporan/detail/'.$data->id)}}"><button class="btn btn-info"><span class="material-icons">details</span></button></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('uptd/renlakgiat/cetak/'.$data->id)}}"><button class="btn btn-info"><span class="material-icons">font_download</span></button></a>
+                                
+                                </td>  
+                                    
                         @endforeach
                     </table>
                 </div>

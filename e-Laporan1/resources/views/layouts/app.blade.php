@@ -94,18 +94,6 @@
                             </li>
                         @elseif(Auth::guard('admin')->check())
                         
-                        <!-- floating icon  -->
-                        <div class="fixed-action-btn vertical click-to-toggle">
-                                <a class="btn-floating btn-large red">
-                                  <i class="material-icons">menu</i>
-                                </a>
-                                <ul>
-                                  <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
-                                  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                                  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-                                  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
-                                </ul>
-                              </div>
                              
                             <li><a href=" {{ route('admin')}}">Dashboard</a></li>
                             <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
@@ -136,7 +124,15 @@
         
         @yield('content')
     </div>
-
+    
+        <footer class="page-footer">
+             <div class="container">
+                <div class="container">
+                    © 2018 Copyright D'Canteen Coworking
+                </div>
+            </div>
+        </footer>
+    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

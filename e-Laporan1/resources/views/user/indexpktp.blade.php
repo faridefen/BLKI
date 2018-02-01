@@ -4,12 +4,13 @@
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard pktp
-                </div>
                     @foreach($renlakgiat as $data)
-                     <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-primary">Tambah PKTP</button></a>
+                     <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-link">Tambah PKTP</button></a>
                     @endforeach
+                </div>
+                    
                 <div class="panel-body">
-                    <table class="responsive-table">
+                    <table class="table">
                         <tr>
                             <th>Nama</th>
                             <th>Nip</th>

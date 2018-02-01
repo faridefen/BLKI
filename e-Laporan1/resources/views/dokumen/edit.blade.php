@@ -7,14 +7,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Pemberitahuan</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" action="{{route('dokumen.store')}}" method="POST"  enctype="multipart/form-data">
+                @foreach($dokumen as $data)
+                    <form class="form-horizontal" action="{{url('admin/dokumen/update/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
                     	
                     		
                     			<div class="form-group{{ $errors->has('judul') ? 'has-error': ''}}">
 	                				<label for="judul" class="col-md-4 control-label">Judul</label>
 		                				<div class="col-md-6">
-		                					<input type="text" name="judul" id="judul" class="form-control" value="{{ old('judul') }}">
+		                					<input type="text" name="judul" id="judul" class="form-control" value="{{ $data->judul }}">
 		                				</div>
 
 		                				 @if ($errors->has('judul'))
@@ -26,8 +27,7 @@
                                 <div class="form-group{{ $errors->has('isi') ? 'has-error': ''}}">
                                     <label for="isi" class="col-md-4 control-label">isi</label>
                                         <div class="col-md-6">
-                                            <textarea name="isi" id="isi" class="form-control">{{ old('isi') }}    
-                                            </textarea>
+                                            <textarea name="isi" id="isi" class="form-control">{{ $data->isi }}</textarea>
                                             
                                         </div>
 
@@ -49,7 +49,7 @@
 		                                @endif
                     			</div>
                     		
-                  
+                @endforeach
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
                     			<button class="btn btn-success">Upload</button>

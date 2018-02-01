@@ -7,7 +7,7 @@
                 <div class="panel-heading">Dashboard Renlakgiat
                 </div>
                 <div class="panel-body">
-                    <table class="highlight">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>No</th>
@@ -37,8 +37,8 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>{{ $data->tgl_mulai }}</td>
-                                <td>{{ $data->tgl_selesai }}</td>
+                                <td>@if($data->tgl_mulai == "") UPTD/BLK terkati belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
+                                <td>@if($data->tgl_selesai == "") UPTD/BLK terkati belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>
                                 @else
@@ -71,6 +71,7 @@
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
+                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-link">Edit Tanggal</button></a>
                                 </td>
                             </tr>
                             </tbody>

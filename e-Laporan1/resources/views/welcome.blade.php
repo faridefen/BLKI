@@ -80,9 +80,9 @@
                 <div class="links">
                     @if (Route::has('login'))
                     @if (Auth::guard('web')->check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}"><span class="material-icons large">home</span></a>
                     @elseif(Auth::guard('admin')->check())
-                        <a href="{{ route('admin')}}">Home</a>
+                        <a href="{{ route('admin')}}"><span class="material-icons large">home</span></a>
                     @else
                         |   <a class="waves-effect waves-light btn" href="{{ url('/login') }}" style="color: white">Login UPTD</a>
                         |   <a class="waves-effect waves-light btn" href="{{ route('admin.login') }}" style="color: white">Login Admin</a>

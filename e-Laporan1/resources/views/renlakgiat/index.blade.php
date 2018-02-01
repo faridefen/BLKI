@@ -4,12 +4,13 @@
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Renlakgiat
+                    @foreach($profile as $datap)
+                        <a class="pull-right" href="{{url('admin/renlakgiat/tambah/'.$datap->id)}}"><i class="material-icons">add</i>Renlakgiat</a>
+                    @endforeach
                 </div>
-                @foreach($profile as $datap)
-                <a class="pull-right" href="{{url('admin/renlakgiat/tambah/'.$datap->id)}}"><i class="material-icons">add</i>Renlakgiat</a>
-                @endforeach
+                
                 <div class="panel-body">
-                    <table class="responsive-table">
+                    <table class="table">
                         <tr>
                             <th>No</th>
                             <th>UPTD Terkait</th>
@@ -21,6 +22,7 @@
                             <th>Orang</th>
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                         <?php $x=1; ?>
@@ -35,13 +37,42 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>{{date('d M Y', strtotime($data->tgl_mulai))}}</td>
-                                <td>{{date('d M Y', strtotime($data->tgl_selesai))}}</td>
+                                <td>@if($data->tgl_mulai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
+                                <td>@if($data->tgl_selesai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
+                                    
+                                @if($data->tgl_mulai == "")
+                                <td>Belum Direncanakan</td>
+                                @else
+                                    @if(Carbon\Carbon::now() < $data->tgl_mulai)
+                                    
+                                        <?php DB::table('renlakgiats')
+                                            ->where('id', $data->id)
+                                            ->update(['status' => 'Belum Berjalan']); ?>
+                                           <td> Belum Berjalan</td>
+                                    
+                                    @elseif(Carbon\Carbon::now() > $data->tgl_selesai)
+                                    
+                                        <?php DB::table('renlakgiats')
+                                                ->where('id', $data->id)
+                                                ->update(['status' => 'Sudah Selesai']) ?>
+                                        <td> Sudah Selesai</td>
+                                    
+                                    @else
+                                    
+                                        <?php DB::table('renlakgiats')
+                                                ->where('id', $data->id)
+                                                ->update(['status' => 'Sedang Berjalan']) ?>
+
+                                        <td> Sedang Berjalan</td>
+
+                                    @endif
+                                @endif
                                 <td>
-                                    <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}" name="detail"><button class="btn btn-primary"><i class="large material-icons">art_track</i></button></a>
+                                    <!-- <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}" name="detail"><button class="btn btn-primary"><i class="large material-icons">art_track</i></button></a> -->
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
                                     <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
+                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-link">Edit Tanggal</button></a>
                                 </td>
                             </tr>
                         @endforeach

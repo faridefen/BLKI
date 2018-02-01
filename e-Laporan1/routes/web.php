@@ -45,7 +45,8 @@ Route::post('/admin/user/update/{id}','AdminController@updateUser');
 Route::get('/admin/dokumen/','DokumenController@index')->name('dokumen');
 Route::get('/admin/dokumen/tambah','DokumenController@create')->name('dokumen.add');
 Route::post('/admin/dokumen/simpan','DokumenController@store')->name('dokumen.store');
-
+Route::get('/admin/dokumen/edit/{id}','DokumenController@edit');
+Route::get('/admin/dokumen/hapus/{id}','DokumenController@destroy');
 
 Route::get('/admin/renlakgiat','RenlakgiatController@indexadmin')->name('admin.renlakgiat');
 Route::get('/admin/renlakgiat/tambah/{id}','RenlakgiatController@create');
@@ -58,13 +59,25 @@ Route::get('/admin/renlakgiat/{id}','RenlakgiatController@uptdrenlakgiat');
 Route::get('/admin/renlakgiat/detail/{id}','RenlakgiatController@detailrenlakgiat');
 Route::get('/admin/renlakgiat/laporan/{id}','RenlakgiatController@laporanRenlakgiat');
 Route::post('/admin/renlakgiat/upload/{id}', 'RenlakgiatController@upload');
+Route::get('/admin/renlakgiat/editTanggal/{id}','RenlakgiatController@editTanggal');
+Route::post('/admin/renlakgiat/updateTanggal/{id}', 'RenlakgiatController@updateTanggal');
 
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');
 Route::get('/uptd/laporan/detail/{id}','UptdController@detailRenlakgiat');
 Route::get('/uptd/renlakgiat/edit/{id}','UptdController@editRenlakgiat');
 Route::post('/uptd/renlakgiat/update/{id}','UptdController@updateRenlakgiat');
+
 Route::get('uptd/renlakgiat/laporan/cover/tambah/{id}','UptdController@formCover');
-Route::post('uptd/renlakgiat/laporan/cover/simpan','UptdController@uploadCover');
+Route::post('uptd/renlakgiat/laporan/cover/simpan/{id}','UptdController@uploadCover');
+Route::get('uptd/renlakgiat/laporan/pendahuluan/tambah/{id}','UptdController@formPendahuluan');
+Route::post('uptd/renlakgiat/laporan/pendahuluan/simpan/{id}','UptdController@uploadPendahuluan');
+Route::get('uptd/renlakgiat/laporan/sk/tambah/{id}','UptdController@formSK');
+Route::post('uptd/renlakgiat/laporan/sk/simpan/{id}','UptdController@uploadSK');
+Route::get('uptd/renlakgiat/laporan/npp/tambah/{id}','UptdController@formNPP');
+Route::post('uptd/renlakgiat/laporan/npp/simpan/{id}','UptdController@uploadNPP');
+Route::get('uptd/renlakgiat/laporan/ni/tambah/{id}','UptdController@formNI');
+Route::post('uptd/renlakgiat/laporan/ni/simpan/{id}','UptdController@uploadNI');
+
 Route::get('/uptd/editpass/{id}','UptdController@editpass');
 Route::post('/uptd/editpass/update/{id}', 'UptdController@verif');
 Route::get('/uptd/renlakgiat/cetak/{id}','UptdController@cetakRenlakgiat');

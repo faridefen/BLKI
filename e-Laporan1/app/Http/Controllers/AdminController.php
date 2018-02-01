@@ -34,7 +34,7 @@ class AdminController extends Controller
              $telah = Renlakgiat::where('users_id',$userid)->where('status', 'Sudah Selesai')->get();
                 $data->nama_lembaga = Charts::create('pie', 'highcharts')
                     ->title($data->nama_lembaga)
-                    ->labels(['Belum Berjalan', 'sudah Berjalan', 'Selesai'])
+                    ->labels(['Belum Berjalan', 'Sedang Berjalan', 'Sudah Selesai'])
                     ->values([count($belum),count($sedang),count($telah)])
                     ->dimensions(1000,500)
                     ->responsive(false)
