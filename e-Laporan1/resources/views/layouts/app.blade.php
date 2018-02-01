@@ -21,31 +21,23 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{URL::asset('image/logo.png')}}" height="40" width="40">
-                    </a>
-                    
-                    <!-- Branding Image -->
-                    
-                </div>
-
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+                    @if (Auth::guest())
+                    
+                    @else
+                    <ul class="nav navbar-nav" >
+                        <li>
+                            
+                            <a href="#" data-activates="slide-out" class="button-collapse menu"><i class="material-icons">dehaze</i></a>
+                           
+                        </li>
                     </ul>
+                    @endif
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -63,10 +55,6 @@
                         </li>
                         
                         @elseif (Auth::guard('web')->check())
-                            <li><a href=" {{ route('home')}}">Dashboard</a></li>
-                            <li><a href=" {{ route('profile')}}">Profile</a></li>
-                            <li><a href="{{route('uptd.renlakgiat')}}">Data Renlakgiat</a></li>
-                            <li><a href="{{route('uptd.dokumen')}}">Pemberitahuan</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -92,13 +80,7 @@
                                     
                                 </ul>
                             </li>
-                        @elseif(Auth::guard('admin')->check())
-                        
-                             
-                            <li><a href=" {{ route('admin')}}">Dashboard</a></li>
-                            <li><a href="{{route('admin.renlakgiat')}}">Data Renlakgiat</a></li>
-                            <li><a href="{{route('admin.user')}}">Data User</a></li>
-                            <li><a href="{{route('admin.profile')}}">Data UPTD</a></li>
+                        @elseif(Auth::guard('admin')->check()) 
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin <span class="caret"></span>
@@ -113,9 +95,50 @@
 
                         @endif
                     </ul>
-                </div>
+                </div>  
+
+                        @if(Auth::guard('admin')->check()) 
+                          <ul id="slide-out" class="side-nav">
+                            <li><div class="user-view">
+                              <div class="background">
+                                <img src="https://cdn.pixabay.com/photo/2016/10/29/01/16/abstract-1779540_960_720.png">
+                              </div>
+                              <a href="#!user"><img class="circle" src="https://www.knowmuhammad.org/img/noavatarn.png"></a>
+                              <a href="#!name"><span class="white-text name"><i class="material-icons">person</i>Admin</span></a>
+                            </div></li>
+                            <li><a href=" {{ route('admin')}}"><i class="material-icons">dashboard</i>Dashboard</a></li>
+                            <li><a href="{{route('admin.renlakgiat')}}"><i class="material-icons">description</i>Data Renlakgiat</a></li>
+                            <li><a href="{{route('admin.user')}}"><i class="material-icons">wc</i>Data User</a></li>
+                            <li><a href="{{route('admin.profile')}}"><i class="material-icons">work</i>Data UPTD</a></li>
+                            <li><div class="divider"></div></li>
+                            <li><a class="subheader">Other</a></li>
+                            
+              
+
+                        @elseif (Auth::guard('web')->check())
+
+                        <ul id="slide-out" class="side-nav">
+                            @foreach(DB::table('profils')->where('users_id','=',Auth::user()->id)->get() as $data)
+                            <li><div class="user-view">
+                              <div class="background">
+                                <img src="{{asset('upload/'.$data->foto_gedung)}}">
+                              </div>
+                              <a href="#!user"><img class="circle" src="{{asset('upload/'.$data->foto_pimpinan)}}"></a>
+                              
+                                <a href="{{ route('profile')}}"><span class="white-text name"><i class="material-icons">person</i>{{ $data->nama_lembaga }}</span></a>
+                            </div></li>
+                            <li><a href=" {{ route('home')}}"><i class="material-icons">dashboard</i>Dashboard</a></li>
+                            <li><a href="{{route('uptd.renlakgiat')}}"><i class="material-icons">storage</i>Data Renlakgiat</a></li>
+                            <li><div class="divider"></div></li>
+                            <li><a class="subheader">Other</a></li>
+                            <li><a class="waves-effect" href="{{route('uptd.dokumen')}}"><i class="material-icons">warning</i>Pemberitahuan</a></li>
+                            @endforeach
+                        @endif
             </div>
-        </nav>
+        </nav> 
+       <div id="app">
+                    
+        </ul>
         <div class="container">
             @if(Session::has('message'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
@@ -124,21 +147,21 @@
         
         @yield('content')
     </div>
-    
-        <footer class="page-footer">
-             <div class="container">
-                <div class="container">
-                    © 2018 Copyright D'Canteen Coworking
-                </div>
-            </div>
-        </footer>
-    
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
     <script type="text/javascript">
-        
+        $(".button-collapse").sideNav(
+            {
+      menuWidth: 300,
+      edge: 'left', 
+      closeOnClick: true,
+      draggable: true, 
+      onOpen: function(el) {},
+      onClose: function(el) {  },
+        }
+            );
     </script>
 </body>
 </html>

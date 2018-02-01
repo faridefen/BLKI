@@ -92,3 +92,7 @@ Route::get('/uptd/dokumen','UptdController@indexDokumen')->name('uptd.dokumen');
 
 Route::get('/laporan/index','LaporanController@index');
 Route::get('/laporan/detaillaporan','LaporanController@detail');
+
+Route::get('/test',function(){
+	return view('test');
+});
