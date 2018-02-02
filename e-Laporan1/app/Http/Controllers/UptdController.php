@@ -20,7 +20,7 @@ class UptdController extends Controller
     }
 
     public function indexRenlakgiat(){
-    	$renlakgiat = Renlakgiat::where('users_id','=',Auth::user()->id)->get();
+    	$renlakgiat = Renlakgiat::where('users_id','=',Auth::user()->id)->paginate(10);
     	return view('user.indexRenlakgiat', compact('renlakgiat','current'));
     }
 

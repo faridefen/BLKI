@@ -19,28 +19,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
  
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+    html, body {
+                color: #636b6f;
+                font-family: 'Raleway', sans-serif;
+                font-weight: 100;
+                height: 100vh;
+                margin: 0;
+                background-blend-mode: true;
+                background-size:cover;
+                border-width: 0px;
+                background-image: url("{{URL::asset('image/bghome.jpg')}}")
+            }
+        a {
+            color: #97a39f !important;
+        }
+    </style>
 </head>
 <body>
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-
+        <nav style="background-color: rgba(255,255,255,0.8) !important;">
+            <div class="nav-wrapper">
                     <!-- Left Side Of Navbar -->
                     @if (Auth::guest())
                     
                     @else
-                    <ul class="nav navbar-nav" >
+                    <ul class="nav navbar-nav navbar-left" >
                         <li>
-                            
-                            <a href="#" data-activates="slide-out" class="button-collapse menu"><i class="material-icons">dehaze</i></a>
-                           
+                            <a href="#" data-activates="slide-out" class="button-collapse menu" style="background-color: rgba(190,200,255,0.8) !important;"><i class="material-icons" style=" color: #97a39f">dehaze</i></a>
                         </li>
                     </ul>
-                    @endif
-
-
+                    @endif  
+                    <a href="/">
+                    <img class="brand-logo center" src="{{ asset('image/logo.png') }}" height="60" style="padding-top: 5"></a>
+                        
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="padding-right: 30px">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                         <li class="dropdown">
@@ -48,6 +62,7 @@
                                     Login <span class="caret"></span>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{route('login')}}">Login as UPTD</a></li>
+                                        <li class="divider"></li>
                                         <li><a href="{{route('admin.login')}}">Login as Admin</a></li>
                                     </ul>
                                 </a>
@@ -82,26 +97,26 @@
                             </li>
                         @elseif(Auth::guard('admin')->check()) 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Admin <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{route('dokumen')}}"><i class="large material-icons">list</i> Upload Dokumen Khusus</a></li>
+                                    <li><a href="{{route('dokumen')}}" class="button"><i class="material-icons">list</i> Upload Dokumen Khusus</a></li>
                                     <li>
-                                        <a href="{{route('admin.logout')}}"><i class="large material-icons">power_settings_new</i> Logout</a>
+                                        <a href="{{route('admin.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>
                                 </ul>
                             </li>
 
                         @endif
                     </ul>
-                </div>  
+                 
 
                         @if(Auth::guard('admin')->check()) 
                           <ul id="slide-out" class="side-nav">
                             <li><div class="user-view">
                               <div class="background">
-                                <img src="https://cdn.pixabay.com/photo/2016/10/29/01/16/abstract-1779540_960_720.png">
+                                <img src="{{ URL::asset('image/bghome.jpg') }}">
                               </div>
                               <a href="#!user"><img class="circle" src="https://www.knowmuhammad.org/img/noavatarn.png"></a>
                               <a href="#!name"><span class="white-text name"><i class="material-icons">person</i>Admin</span></a>
@@ -131,15 +146,15 @@
                             <li><a href="{{route('uptd.renlakgiat')}}"><i class="material-icons">storage</i>Data Renlakgiat</a></li>
                             <li><div class="divider"></div></li>
                             <li><a class="subheader">Other</a></li>
-                            <li><a class="waves-effect" href="{{route('uptd.dokumen')}}"><i class="material-icons">warning</i>Pemberitahuan</a></li>
+                            <li><a class="waves-effect" href="{{route('uptd.dokumen')}}"><i class="material-icons">announcement</i>Pemberitahuan</a></li>
                             @endforeach
+                        </ul>
                         @endif
             </div>
         </nav> 
-       <div id="app">
-                    
-        </ul>
-        <div class="container">
+       <div id="app" style="background-color: rgba(255,255,255,0.4) !important;">
+        <div class="container" >
+            <br>
             @if(Session::has('message'))
                 <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
             @endif
@@ -151,6 +166,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+
     <script type="text/javascript">
         $(".button-collapse").sideNav(
             {

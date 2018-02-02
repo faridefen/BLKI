@@ -18,12 +18,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Profil UPTD
                 </div>
-                
+                <div class="panel-body">
                     @foreach($profile as $data)
-
-                        <img class="img " src="{{asset('upload/'.$data->foto_gedung)}}" height="500" style="width: 100%; float: left; position: relative;">
-                        
-                        <img class="img img-thumbnail" align="center" src="{{asset('upload/'.$data->foto_pimpinan)}}" width="180" height="180" style="  position: absolute; top: 70%; left:10%; ">
+                        <div class="background">
+                        <img class="img materialboxed" src="{{asset('upload/'.$data->foto_gedung)}}" height="500" style="width: 100%; float: left; position: relative; padding-bottom: 10px"> </div>
+                            
+                        <img class="responsive-img img-thumbnail materialboxed"  src="{{asset('upload/'.$data->foto_pimpinan)}}" width="180" height="180" style="  position: absolute; top: 70%; left:10%; ">
                     @endforeach
                 
                 <div class="panel-body">
@@ -72,6 +72,7 @@
                             
                             
                         </table>
+                        </div>
                 </div>
             </div>
                 

@@ -24,7 +24,7 @@
 <body>
 <a class="button-collapse" href="#" data-activates="slide-out">
                         <img src="{{URL::asset('image/logo.png')}}" height="40" width="40">
-                    </a>
+         </a>
                     <ul id="slide-out" class="side-nav">
                             <li><div class="user-view">
                               <div class="background">

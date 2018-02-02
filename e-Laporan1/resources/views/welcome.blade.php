@@ -21,6 +21,9 @@
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
+                background-repeat : no-repeat;
+                background-size:cover;
+                background-image: url("{{URL::asset('image/bghome.jpg')}}");
             }
 
             .full-height {
@@ -70,7 +73,7 @@
         <div class="flex-top position-ref full-height">
 
             <div class="content">
-                <div class="title m-b-md" style="font-size: 60px">
+                <div class="title m-b-md" style="font-size: 60px; color: white">
                     <br>
                     <img src="{{URL::asset('image/logo.png')}}"> <br>
                     BLKI SAMARINDA
@@ -80,9 +83,9 @@
                 <div class="links">
                     @if (Route::has('login'))
                     @if (Auth::guard('web')->check())
-                        <a href="{{ url('/home') }}"><span class="material-icons large">home</span></a>
+                        <a href="{{ url('/home') }}"><span class="material-icons large" style="font-size: 60px; color: white">home</span></a>
                     @elseif(Auth::guard('admin')->check())
-                        <a href="{{ route('admin')}}"><span class="material-icons large">home</span></a>
+                        <a href="{{ route('admin')}}"><span class="material-icons large" style="font-size: 40px; color: white">home</span></a>
                     @else
                         |   <a class="waves-effect waves-light btn" href="{{ url('/login') }}" style="color: white">Login UPTD</a>
                         |   <a class="waves-effect waves-light btn" href="{{ route('admin.login') }}" style="color: white">Login Admin</a>
