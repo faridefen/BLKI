@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Upload Nominatif Instruktur</div>
+                <div class="panel-heading">Upload Daftar Hadir Pertemuan Sidang Kelulusan</div>
                 <div class="panel-body">
                     @foreach($renlakgiat as $data)
-                        <form class="form-horizontal" action="{{url('uptd/renlakgiat/laporan/ni/simpan/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{url('uptd/renlakgiat/laporan/dhpsk/simpan/'.$data->id)}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
                         
                                 <div class="form-group{{ $errors->has('renlakgiat_id') ? 'has-error': ''}}">
@@ -17,7 +17,7 @@
                         		 
                                 <br>   
                                 <div class="form-group{{ $errors->has('file') ? 'has-error': ''}}">
-                                    <label for="file" class="col-md-4 control-label">Nominatif Instruktur</label>
+                                    <label for="file" class="col-md-4 control-label">Daftar Hadir Pertemuan Sidang Kelulusan</label>
                                         <div class="col-md-6">
                                             <input type="file" name="file" id="file" class="form-control" required>
                                         </div>

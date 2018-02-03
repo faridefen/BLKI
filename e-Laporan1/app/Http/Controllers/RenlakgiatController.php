@@ -44,7 +44,7 @@ class RenlakgiatController extends Controller
 
     public function indexadmin()
     {   
-        $renlakgiat = Renlakgiat::paginate(10);
+        $renlakgiat = Renlakgiat::all();
         return view('admin.indexRenlakgiat', compact('renlakgiat','profile'));
     }
 

@@ -168,16 +168,14 @@
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
 
     <script type="text/javascript">
-        $(".button-collapse").sideNav(
-            {
-      menuWidth: 300,
-      edge: 'left', 
-      closeOnClick: true,
-      draggable: true, 
-      onOpen: function(el) {},
-      onClose: function(el) {  },
-        }
-            );
+        $(".button-collapse").sideNav({
+              menuWidth: 300,
+              edge: 'left', 
+              closeOnClick: true,
+              draggable: true, 
+              onOpen: function(el) {},
+              onClose: function(el) {  },
+        });
     </script>
 </body>
 </html>

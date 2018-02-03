@@ -33,7 +33,7 @@
                             </div>
                     	<div class="form-group">
                     		<div class="col-md-8 col-md-offset-4">
-                    			<button class="btn btn-success">Upload Pengantar, Pendahuluan dan Isi Laporan</button>
+                    			<button class="btn btn-success">Upload</button>
                     		</div>
                     	</div>
                    		

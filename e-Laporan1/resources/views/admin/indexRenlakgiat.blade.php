@@ -77,7 +77,6 @@
                             </tbody>
                         @endforeach
                     </table>
-                    {{ $renlakgiat->links() }}
                 </div>
             </div>
         

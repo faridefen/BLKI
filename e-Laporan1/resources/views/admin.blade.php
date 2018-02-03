@@ -17,7 +17,7 @@
                     @foreach($user as $datauser)
                     <div class="progress">
                         <div class="determinate" style="width: 100%">
-                        </div>
+                            </div>
                     </div>
                      {!! $datauser->nama_lembaga->render() !!}
                     @endforeach
