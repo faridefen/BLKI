@@ -17,7 +17,7 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
@@ -76,7 +76,9 @@
                 <div class="title m-b-md" style="font-size: 60px; color: white">
                     <br>
                     <img src="{{URL::asset('image/logo.png')}}"> <br>
+                    <b>
                     BLKI SAMARINDA
+                    </b>
 
                 </div>
 

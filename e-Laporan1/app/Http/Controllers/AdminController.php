@@ -32,7 +32,7 @@ class AdminController extends Controller
              $belum = Renlakgiat::where('users_id',$userid)->where('status', 'Belum Berjalan')->get();
              $sedang = Renlakgiat::where('users_id',$userid)->where('status', 'Sedang Berjalan')->get();
              $telah = Renlakgiat::where('users_id',$userid)->where('status', 'Sudah Selesai')->get();
-                $data->nama_lembaga = Charts::create('pie', 'highcharts')
+             $data->nama_lembaga = Charts::create('donut', 'highcharts')
                     ->title($data->nama_lembaga)
                     ->labels(['Belum Berjalan', 'Sedang Berjalan', 'Sudah Selesai'])
                     ->values([count($belum),count($sedang),count($telah)])

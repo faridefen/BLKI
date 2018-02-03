@@ -56,5 +56,38 @@ class PktpController extends Controller
         return redirect()->back();
     }
 
+    public function editpktp($id){
+        $pktp = Pktp::where('id',$id)->get();
+        return view('user.editPktp', compact('pktp'));
+    }
+
+    public function update(Request $request, $id){
+        $pktp = Pktp::where('id',$id)->get();
+        foreach ($pktp as $key => $value) {
+           $renlakgiatid = $value->renlakgiat_id;        }
+        $pktps = Pktp::find($id);
+        if($request->hasFile('foto')){
+                $request->file('foto')->move('upload', $request->foto->getClientOriginalName());
+                $pktps->nama = $request->nama;
+                $pktps->nip = $request->nip;
+                $pktps->pangkat = $request->pangkat;
+                $pktps->jabatan = $request->jabatan;
+                $pktps->kedudukan = $request->kedudukan;
+                $pktps->alamat = $request->alamat;
+                $pktps->nohp = $request->nohp;
+                $pktps->foto = $request->foto->getClientOriginalName();
+            }else{
+                $pktps->nama = $request->nama;
+                $pktps->nip = $request->nip;
+                $pktps->pangkat = $request->pangkat;
+                $pktps->jabatan = $request->jabatan;
+                $pktps->kedudukan = $request->kedudukan;
+                $pktps->alamat = $request->alamat;
+                $pktps->nohp = $request->nohp;
+            }
+            $pktps->save(); 
+            return redirect('uptd/pktp/'.$renlakgiatid);
+                
+        }
 }
 

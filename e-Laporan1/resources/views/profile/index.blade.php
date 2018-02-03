@@ -21,12 +21,12 @@
                 </div>
                 <div class="panel-body">
                     @foreach($profile as $data)
-                        
-                        <img class="img materialboxed" src="{{asset('upload/'.$data->foto_gedung)}}" height="500" style="width: 100%; float: left; position: relative; padding-bottom: 10px">
-                            
-                        <img class="img img-thumbnail materialboxed"  src="{{asset('upload/'.$data->foto_pimpinan)}}" width="180" height="180" style="  position: absolute; top: 70%; left:10%; ">
+                      <div style="width: 100%; height: 100%; position: relative;">
+                    <img class="img materialboxed" src="{{asset('upload/'.$data->foto_gedung)}}" height="500" style="width: 100%; z-index: 1; position: relative;">
+                    <img class="img materialboxed img-thumbnail" align="center" src="{{asset('upload/'.$data->foto_pimpinan)}}" width="180" height="180" style=" left:5%; top: 70%;  z-index: 2; position: absolute; float: none;">  
+                    </div>
                     @endforeach
-                    <table class="responsive-table striped" style="width: 100%">
+                    <table class="responsive-table" style="width: 100%">
 
                         @foreach($profile as $data)
                             

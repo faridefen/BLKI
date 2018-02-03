@@ -21,7 +21,10 @@
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>status</th>
-                            <th>Aksi</th>
+                            <th>Edit</th>
+                            <th>Hapus</th>
+                            <th>Laporan</th>
+                            <th>Edit tanggal</th>
                         </tr>
                         </thead>
                         <?php $x=1; ?>
@@ -37,8 +40,8 @@
                                 <td>{{ $data->durasi }}</td>
                                 <td>{{ $data->paket }}</td>
                                 <td>{{ $data->orang }}</td>
-                                <td>@if($data->tgl_mulai == "") UPTD/BLK terkati belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
-                                <td>@if($data->tgl_selesai == "") UPTD/BLK terkati belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
+                                <td>@if($data->tgl_mulai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
+                                <td>@if($data->tgl_selesai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>
                                 @else
@@ -67,16 +70,25 @@
                                     @endif
                                 @endif
                                 <td>
-                                    <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}" name="detail"><button class="btn btn-primary"><i class="large material-icons">art_track</i></button></a>
+                                   
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
+                                </td>
+                                <td>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
+                                </td>
+                                <td>
                                     <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
-                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-link">Edit Tanggal</button></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
                                 </td>
                             </tr>
                             </tbody>
                         @endforeach
                     </table>
+                    <div class="justify" align="center">
+                    {{ $renlakgiat->links() }}
+                    </div>
                 </div>
             </div>
         

@@ -10,7 +10,7 @@
                 </div>
                     
                 <div class="panel-body">
-                    <table class="table">
+                    <table class="table-responsive">
                         <tr>
                             <th>Nama</th>
                             <th>Nip</th>
@@ -32,9 +32,9 @@
                                 <td>{{ $data->kedudukan }}</td>
                                 <td>{{ $data->alamat }}</td>
                                 <td>{{ $data->nohp }}</td>
-                                <td><img src="{{asset('upload/'.$data->foto)}}" width="150" height="150"></td>
+                                <td><img src="{{asset('upload/'.$data->foto)}}" width="120" height="120"></td>
                                 <td>
-                                    <a href=""><i class="material-icons">more</i></a>
+                                    <a href="{{url('uptd/pktp/edit/'.$data->id)}}"><i class="material-icons">edit</i></a>
                                     <a href="{{url('uptd/pktp/hapus/'.$data->id)}}"><i style="color: red" class="material-icons">delete</i></a>
                                 </td>
                         @endforeach

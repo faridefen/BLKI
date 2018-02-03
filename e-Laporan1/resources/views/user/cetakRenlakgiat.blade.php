@@ -46,7 +46,7 @@
                             <td>{{$data->durasi}}</td>
                         </tr>
                         <tr>
-                            <th>Pakte</th>
+                            <th>Paket</th>
                             <td>:</td>
                             <td>{{$data->paket}}</td>
                         </tr>

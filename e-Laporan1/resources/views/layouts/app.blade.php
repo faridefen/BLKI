@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{URL::asset('image/logo.png')}}" />
-    <title>BLKI SAMARINDA</title>
+    <title>BLKI Provinsi Kalimantan Timur</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -23,19 +23,26 @@
     <style type="text/css">
     html, body {
                 color: #636b6f;
-                font-family: 'Raleway', sans-serif;
+                font-family: 'Roboto', sans-serif;
                 font-weight: 100;
                 height: 100vh;
                 margin: 0;
                 background-blend-mode: true;
-                background-size:cover;
-                border-width: 0px;
-                background-image: url("{{URL::asset('image/bghome.jpg')}}")
+                background-size:100%;
+                background-image: url("{{URL::asset('image/bghome.jpg')}}");
+                height: 100%;
+                width: 100%;
+                overflow: scroll;
+                overflow-x: hidden;
+            }
+            ::-webkit-scrollbar {
+            display: none;
+            -ms-overflow-style: none;
             }
         a {
             color: #97a39f !important;
-        }
-    </style>
+            }
+        </style>
 </head>
 <body>
         <nav style="background-color: rgba(255,255,255,0.8) !important;">
@@ -101,7 +108,6 @@
                                     Admin <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{route('dokumen')}}" class="button"><i class="material-icons">list</i> Upload Dokumen Khusus</a></li>
                                     <li>
                                         <a href="{{route('admin.logout')}}"><i class="material-icons">power_settings_new</i> Logout</a>
                                     </li>
@@ -127,6 +133,7 @@
                             <li><a href="{{route('admin.profile')}}"><i class="material-icons">work</i>Data UPTD</a></li>
                             <li><div class="divider"></div></li>
                             <li><a class="subheader">Other</a></li>
+                            <li><a href="{{route('dokumen')}}"><i class="material-icons">list</i> Upload Dokumen Khusus</a></li>
                             
               
 
@@ -153,15 +160,29 @@
             </div>
         </nav> 
        <div id="app" style="background-color: rgba(255,255,255,0.4) !important;">
-        <div class="container" >
-            <br>
-            @if(Session::has('message'))
-                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-            @endif
+            <div class="container" >
+               
+            </div>
         </div>
+        <br>
+        <div class="container">
+              @if(Session::has('message'))
+                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+              @endif
+            @yield('content')
+        </div>
+      
         
-        @yield('content')
-    </div>
+
+    <footer class="footer" style=" position: fixed; bottom: 0; width: 100%; background-color: rgba(255,255,255,0.6);">
+          <div class="footer-copyright">
+            <div class="container" style="color: grey">
+            © 2018 Copyright D'canteen Corp
+            <a class="grey-text text-lighten-4 right" href="#!" style="color: grey">BLKI Provinsi Kalimantan Timur</a>
+            </div>
+          </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
