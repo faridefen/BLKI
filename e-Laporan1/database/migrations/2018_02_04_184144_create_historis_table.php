@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLaporanBaru extends Migration
+class CreateHistorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateLaporanBaru extends Migration
      */
     public function up()
     {
-        Schema::create('laporans', function (Blueprint $table) {
+        Schema::create('historis', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('renlakgiat_id',false,true);
             $table->foreign('renlakgiat_id')->references('id')->on('renlakgiats')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nama_laporan');
-            $table->string('status');
-            $table->text('catatan');
+            $table->date('tgl_mulai_lama');
+            $table->date('tgl_selesai_lama');
+            $table->date('tgl_mulai_baru');
+            $table->date('tgl_selesai_baru');
+            $table->text('alasan');
             $table->timestamps();
         });
     }
@@ -31,6 +33,6 @@ class CreateLaporanBaru extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('historis');
     }
 }

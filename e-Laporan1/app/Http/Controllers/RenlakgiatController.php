@@ -9,6 +9,7 @@ use App\Profile;
 use App\Admin;
 use App\Laporan;
 use Carbon\Carbon;
+use App\Histori;
 use PDF;
 use Session;
 use Excel;
@@ -31,14 +32,14 @@ class RenlakgiatController extends Controller
         foreach ($id as $c) {
                 $users_id = $c->users_id;
         }
-     $renlakgiat = Renlakgiat::where('users_id',$users_id)->get();    
+     $renlakgiat = Renlakgiat::where('users_id',$users_id)->orderBy('users_id','asc')->paginate(5);    
      return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
 
     public function index()
     {   
         $profile = Profile::all();
-        $renlakgiat = Renlakgiat::all();
+        $renlakgiat = Renlakgiat::all()->orderBy('users_id','asc')->paginate(5);
         return view('renlakgiat.index', compact('renlakgiat','profile'));
     }
 
@@ -54,6 +55,7 @@ class RenlakgiatController extends Controller
         $renlakgiat = Renlakgiat::all();
         return view('renlakgiat.indexdetail', compact('renlakgiat'));
     }
+
     public function cetakRenlakgiat($id){
         $renlakgiat = Renlakgiat::where('id',$id)->get();
         $pdf = PDF::loadView('user.cetakRenlakgiat',compact('renlakgiat'));
@@ -221,17 +223,32 @@ class RenlakgiatController extends Controller
 
     public function updateTanggal(Request $request, $id)
     {
-        $renlakgiat = Renlakgiat::find($id);
-        $newtgl_mulai = $request->newtgl_mulai;
-        $newtgl_selesai = $request->newtgl_selesai;
-        $tgl_mulai = $request->tgl_mulai;
-        $tgl_selesai = $request->tgl_selesai;
-        $alasan = $request->alasan;
-        $now = Carbon::now();
-        $renlakgiat->tgl_mulai = $request->newtgl_mulai;
-        $renlakgiat->tgl_selesai = $request->newtgl_selesai;
-        $renlakgiat->histori_perubahan = "Perubahan tanggal rencana perencanaan kegiatan yang awalnya dimulai pada tanggal ".''.$tgl_mulai.''." sampai dengan tanggal ".''.$tgl_selesai.''." menjadi dimulai pada tanggal ".''.$newtgl_mulai.''." sampai dengan ".''.$newtgl_selesai.''." karena alasan ".''.$alasan.''.", . Perubahan ini dilakukan pada tanggal ".''.$now;
-        $renlakgiat->save();
-        return redirect()->route('admin.renlakgiat');
+        $cek = Histori::where('renlakgiat_id',$id)->get();
+        if (count($cek) < 3) {
+            $histori = new Histori;
+            
+            $renlakgiat_id = $id;
+            $histori->renlakgiat_id = $id;
+            $histori->tgl_mulai_lama = $request->tgl_mulai;
+            $histori->tgl_selesai_lama = $request->tgl_selesai;
+            $histori->tgl_mulai_baru = $request->newtgl_mulai;
+            $histori->tgl_selesai_baru = $request->newtgl_selesai;
+            $histori->alasan = $request->alasan;
+            $histori->save();
+
+            $renlakgiat = Renlakgiat::find($id);
+            $renlakgiat->tgl_mulai  = $request->newtgl_mulai;
+            $renlakgiat->tgl_selesai  = $request->newtgl_selesai;
+            $renlakgiat->save();
+            Session::flash('message', 'Berhasil merubah tanggal rencana pelaksanaan kegiatan'); 
+            Session::flash('alert-class', 'alert-success');
+            return redirect()->route('admin.renlakgiat');
+        }else{
+            Session::flash('message', 'Tidak bisa merubah tanggal rencana pelaksanaan kegiatan karena sudah mencapai batas maksimal untuk melakukan perubahan tanggal'); 
+            Session::flash('alert-class', 'alert-danger');
+            return redirect()->route('admin.renlakgiat');
+        }
+
+        
     }
 }

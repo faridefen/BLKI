@@ -64,6 +64,7 @@ Route::get('/admin/renlakgiat/laporan/{id}','RenlakgiatController@laporanRenlakg
 Route::post('/admin/renlakgiat/upload/{id}', 'RenlakgiatController@upload');
 Route::get('/admin/renlakgiat/editTanggal/{id}','RenlakgiatController@editTanggal');
 Route::post('/admin/renlakgiat/updateTanggal/{id}', 'RenlakgiatController@updateTanggal');
+Route::get('/admin/pktp/{id}','AdminController@indexPktp');
 
 //uptd renlakgiat
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');

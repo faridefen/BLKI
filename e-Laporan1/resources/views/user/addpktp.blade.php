@@ -29,7 +29,7 @@
                     			<div class="form-group{{ $errors->has('nip') ? 'has-error': ''}}">
                                     <label for="nip" class="col-md-4 control-label">Nip</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="nip" id="nip" class="form-control" required>
+                                            <input type="number" name="nip" id="nip" class="form-control" required>
                                         </div>
 
                                          @if ($errors->has('nip'))

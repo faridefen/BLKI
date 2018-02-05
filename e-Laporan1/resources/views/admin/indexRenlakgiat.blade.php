@@ -23,8 +23,9 @@
                             <th>status</th>
                             <th>Edit</th>
                             <th>Hapus</th>
-                            <th>Laporan</th>
+                            <th>Detail & Laporan</th>
                             <th>Edit tanggal</th>
+                            <th>PKTP</th>
                         </tr>
                         </thead>
                         <?php $x=1; ?>
@@ -69,6 +70,7 @@
 
                                     @endif
                                 @endif
+
                                 <td>
                                    
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
@@ -81,6 +83,9 @@
                                 </td>
                                 <td>
                                     <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('admin/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
                                 </td>
                             </tr>
                             </tbody>

@@ -24,4 +24,8 @@ class Renlakgiat extends Model
     public function Profile(){
         return $this->belongsTo('App\Profile','profile_id');
     }
+
+    public function Histori(){
+        return $this->hasMany(Histori::class);
+    }
 }

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Profile;
 use App\User;
 use App\Renlakgiat;
+use App\Pktp;
 use Lava;
 use Charts;
 class AdminController extends Controller
@@ -32,10 +33,11 @@ class AdminController extends Controller
              $belum = Renlakgiat::where('users_id',$userid)->where('status', 'Belum Berjalan')->get();
              $sedang = Renlakgiat::where('users_id',$userid)->where('status', 'Sedang Berjalan')->get();
              $telah = Renlakgiat::where('users_id',$userid)->where('status', 'Sudah Selesai')->get();
+             $null = Renlakgiat::where('users_id',$userid)->where('status', (NULL))->get();
              $data->nama_lembaga = Charts::create('donut', 'highcharts')
                     ->title($data->nama_lembaga)
-                    ->labels(['Belum Berjalan', 'Sedang Berjalan', 'Sudah Selesai'])
-                    ->values([count($belum),count($sedang),count($telah)])
+                    ->labels(['Belum Berjalan', 'Sedang Berjalan', 'Sudah Selesai','Belum Direncanakan'])
+                    ->values([count($belum),count($sedang),count($telah),count($null)])
                     ->dimensions(1000,500)
                     ->responsive(false)
                     ->credits(false);
@@ -49,7 +51,7 @@ class AdminController extends Controller
     }
 
     public function indexProfile(){
-        $profile = Profile::all();
+        $profile = Profile::paginate(5);
         return view('admin.indexProfile', compact('profile','notif','renlakgiat'));
     }
 
@@ -98,5 +100,10 @@ class AdminController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('admin.user');
+    }
+    public function indexPktp($id){
+        $renlakgiat = Renlakgiat::where('id',$id)->get();
+        $pktp = Pktp::where('renlakgiat_id',$id)->orderBy('nama','asc')->paginate(5);
+        return view('admin.indexpktp', compact('pktp'), compact('renlakgiat'));
     }
 }

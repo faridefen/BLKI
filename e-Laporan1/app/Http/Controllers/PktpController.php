@@ -16,8 +16,8 @@ class PktpController extends Controller
     }
     public function indexpktp($id){
         $renlakgiat = Renlakgiat::where('id',$id)->get();
-	   $pktp = Pktp::where('renlakgiat_id',$id)->get();
-	   return view('user.indexpktp', compact('pktp'), compact('renlakgiat'));
+	    $pktp = Pktp::where('renlakgiat_id',$id)->orderBy('nama','asc')->paginate(5);
+	    return view('user.indexpktp', compact('pktp'), compact('renlakgiat'));
     }
 
     public function create($id){

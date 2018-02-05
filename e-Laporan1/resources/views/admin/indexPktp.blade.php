@@ -3,11 +3,7 @@
 <div class="container">
     <div class="row">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard pktp
-                    @foreach($renlakgiat as $data)
-                     <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-link">Tambah PKTP</button></a>
-                    @endforeach
-                </div>
+                <div class="panel-heading"><strong>Dashboard PKTP</strong></div>
                     
                 <div class="panel-body">
                     <table class="table">
@@ -20,7 +16,7 @@
                             <th>Alamat</th>
                             <th>No. Hp</th>
                             <th>Foto</th>
-                            <th>Aksi</th>
+                           
                         </tr>
                         <?php $x=1; ?>
                         @foreach($pktp as $data)
@@ -33,11 +29,7 @@
                                 <td>{{ $data->alamat }}</td>
                                 <td>{{ $data->nohp }}</td>
                                 <td><img src="{{asset('upload/'.$data->foto)}}" width="120" height="120"></td>
-                                <td>
-                                    <a href="{{url('uptd/pktp/edit/'.$data->id)}}"><i class="material-icons">edit</i></a>
-                                    <a href="{{url('uptd/pktp/hapus/'.$data->id)}}"><i style="color: red" class="material-icons">delete</i></a>
-                                </td>
-                        @endforeach
+                         @endforeach
                     </table>
                     {{ $pktp->links()}}
                 </div>

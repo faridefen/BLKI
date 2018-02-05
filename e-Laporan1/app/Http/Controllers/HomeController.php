@@ -33,10 +33,11 @@ class HomeController extends Controller
              $belum = Renlakgiat::where('users_id',$userid)->where('status', 'Belum Berjalan')->get();
              $sedang = Renlakgiat::where('users_id',$userid)->where('status', 'Sedang Berjalan')->get();
              $telah = Renlakgiat::where('users_id',$userid)->where('status', 'Sudah Selesai')->get();
-                $data->nama_lembaga = Charts::create('pie', 'highcharts')
+             $null = Renlakgiat::where('users_id',$userid)->where('status', (NULL))->get();
+                $data->nama_lembaga = Charts::create('donut', 'highcharts')
                     ->title($data->nama_lembaga)
-                    ->labels(['Belum Berjalan', 'sudah Berjalan', 'Selesai'])
-                    ->values([count($belum),count($sedang),count($telah)])
+                    ->labels(['Belum Berjalan', 'Sedang Berjalan', 'Selesai','Belum Direncanakan'])
+                    ->values([count($belum),count($sedang),count($telah),count($null)])
                     ->dimensions(1000,500)
                     ->responsive(false)
                     ->credits(false);

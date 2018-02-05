@@ -85,7 +85,7 @@
                                 @if(DB::table('profils')->where('users_id','=',Auth::user()->id)->count() > 0)
                                    <li>
                                         @foreach(DB::table('profils')->where('users_id','=',Auth::user()->id)->get() as $data)
-                                            <a href="{{ url('/profile/edit/'.$data->id) }}"><i class="material-icons">person</i> edit</a>
+                                            <a href="{{ url('/profile/edit/'.$data->id) }}"><i class="material-icons">person</i> Edit Profile</a>
                                         </li>
                                         @endforeach
                                 @else
@@ -166,14 +166,14 @@
         </div>
         <br>
         <div class="container">
-              @if(Session::has('message'))
+            <div class="row">
+                @if(Session::has('message'))
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
               @endif
-            @yield('content')
+              @yield('content')
+            </div>
+              
         </div>
-      
-        
-
     <footer class="footer" style=" position: fixed; bottom: 0; width: 100%; background-color: rgba(255,255,255,0.6);">
           <div class="footer-copyright">
             <div class="container" style="color: grey">

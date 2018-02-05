@@ -23,7 +23,11 @@
                             <th>Tanggal Mulai</th>
                             <th>Tanggal Selesai</th>
                             <th>Status</th>
-                            <th>Aksi</th>
+                            <th>Edit</th>
+                            <th>Hapus</th>
+                            <th>Detail & Laporan</th>
+                            <th>Edit tanggal</th>
+                            <th>PKTP</th>
                         </tr>
                         <?php $x=1; ?>
                         @foreach($renlakgiat as $data)
@@ -67,16 +71,29 @@
 
                                     @endif
                                 @endif
-                                <td>
-                                    <!-- <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}" name="detail"><button class="btn btn-primary"><i class="large material-icons">art_track</i></button></a> -->
+                               
+                                    
+                                    <td>
+                                   
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
+                                </td>
+                                <td>
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
+                                </td>
+                                <td>
                                     <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
-                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-link">Edit Tanggal</button></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
+                                </td>
+                                <td>
+                                    <a href="{{url('admin/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
+                                
                                 </td>
                             </tr>
                         @endforeach
                     </table>
+                    {{ $renlakgiat->links() }}
                 </div>
             </div>
         

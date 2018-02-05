@@ -21,7 +21,7 @@
                             <th>Status</th>
                             <th>Edit</th>
                             <th>Data PKTP</th>
-                            <th>Laporan</th>
+                            <th>Detail & Laporan</th>
                             <th>Cetak Renlakgiat</th>
                             <th></th>   
                         </tr>
@@ -85,6 +85,7 @@
                                     
                         @endforeach
                     </table>
+                    {{$renlakgiat->links()}}
                 </div>
             </div>
         
