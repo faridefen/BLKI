@@ -8,6 +8,9 @@ use Auth;
 use Session;
 use Carbon\Carbon;
 use App\User;
+use App\Notifications\notifdokumen;
+use App\Notifications;
+use Illuminate\Notifications\Notifiable;
 
 class DokumenController extends Controller
 {
@@ -16,6 +19,7 @@ class DokumenController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -46,9 +50,9 @@ class DokumenController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'judul' => 'required|min:6',
+            'judul' => 'bail|required|min:6',
             'isi' => 'required',
-            'file' => 'required|mimes:pdf|max:500',
+            'file' => 'bail|required|mimes:pdf|max:500',
         ]);
 
         if($request->hasFile('file')){
@@ -61,7 +65,14 @@ class DokumenController extends Controller
         $dokumen->file = $request->file->getClientOriginalName();
         
         $dokumen->save();
+
+        $isi = $request->isi;
         Session::flash('message','Berhasil Menambahkan Dokumen Khusus untuk diberikan ke seluruh UPTD/BLK');
+
+        $User = User::All();
+        foreach ($User as $user) {
+            $user->notify(new notifdokumen($isi));
+        }
         return redirect()->route('dokumen');
 
     }

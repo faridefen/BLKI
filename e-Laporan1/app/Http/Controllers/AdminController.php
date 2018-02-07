@@ -6,8 +6,11 @@ use App\Profile;
 use App\User;
 use App\Renlakgiat;
 use App\Pktp;
+use App\Dokumen;
 use Lava;
 use Charts;
+use Notification;
+
 class AdminController extends Controller
 {
     /**
@@ -42,6 +45,7 @@ class AdminController extends Controller
                     ->responsive(false)
                     ->credits(false);
         }
+
         return view('admin', compact('user'), ['chart' => $data->nama_lembaga]);
     }
     

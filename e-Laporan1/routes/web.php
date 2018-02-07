@@ -146,3 +146,6 @@ Route::get('/uptd/dokumen','UptdController@indexDokumen')->name('uptd.dokumen');
 Route::get('/laporan/index','LaporanController@index');
 Route::get('/laporan/detaillaporan','LaporanController@detail');
 
+Route::get('/markAsRead', function() {
+	\Auth::user()->unreadNotifications->markAsRead();
+} );

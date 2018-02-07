@@ -136,7 +136,6 @@
                             <li><a href="{{route('dokumen')}}"><i class="material-icons">list</i> Upload Dokumen Khusus</a></li>
                             
               
-
                         @elseif (Auth::guard('web')->check())
 
                         <ul id="slide-out" class="side-nav">
@@ -153,7 +152,9 @@
                             <li><a href="{{route('uptd.renlakgiat')}}"><i class="material-icons">storage</i>Data Renlakgiat</a></li>
                             <li><div class="divider"></div></li>
                             <li><a class="subheader">Other</a></li>
-                            <li><a class="waves-effect" href="{{route('uptd.dokumen')}}"><i class="material-icons">announcement</i>Pemberitahuan</a></li>
+                            <li id="markasread" onclick="marknotifasread()"><a class="waves-effect" href="{{route('uptd.dokumen')}}"><i class="material-icons">announcement</i>Pemberitahuan<span class="badge" style="color: pink; font-size: 15px"><strong>{{ count( \Auth::user()->unreadNotifications ) }}</strong></span></a></li>
+
+
                             @endforeach
                         </ul>
                         @endif
@@ -185,9 +186,9 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
-
     <script type="text/javascript">
         $(".button-collapse").sideNav({
               menuWidth: 300,
