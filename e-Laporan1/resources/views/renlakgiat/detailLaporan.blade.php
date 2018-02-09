@@ -132,6 +132,7 @@
                                 <strong>Catatan</strong> {{$data->catatan_surat_keputusan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/npp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">Nominatif Perserta Pelatihan</button>
@@ -141,15 +142,17 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_nominatif_peserta_pelatihan}}
                                 <br>
                                 </div>
+                                
                                 <div class="well">
-                                <a href="{{url('admin/renlakgiat/laporan/ni/tambah/'.$data->id)}}">
-                                    <button class="btn btn-link">nominatif instruktur</button>
-                                </a><br>
-                                <strong>File: </strong>{{$data->nominatif_instruktur}}<br> 
-                                <strong>Status:</strong> {{$data->status_nominatif_instruktur}}<br>
-                                <strong>Catatan:</strong> {{ $data->catatan_nominatif_instruktur}}
-                                <br>
+                                    <a href="{{url('admin/renlakgiat/laporan/ni/tambah/'.$data->id)}}">
+                                        <button class="btn btn-link">nominatif instruktur</button>
+                                    </a><br>
+                                    <strong>File: </strong>{{$data->nominatif_instruktur}}<br> 
+                                    <strong>Status:</strong> {{$data->status_nominatif_instruktur}}<br>
+                                    <strong>Catatan:</strong> {{ $data->catatan_nominatif_instruktur}}
+                                    <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/kurikulum/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">kurikulum</button>
@@ -178,6 +181,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_daftar_hadir_instruktur}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/djmi/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">daftar jam mengajar instruktur</button>
@@ -187,6 +191,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_daftar_jam_mengajar_instruktur}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/dhpp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">daftar hadir peserta pelatihan</button>
@@ -197,6 +202,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_daftar_hadir_peserta_pelatihan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/dpbl/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">daftar permintaan bahan latihan</button>
@@ -206,6 +212,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_daftar_permintaan_bahan_latihan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/bpbl/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">bukti penerimaan bahan pelatihan</button>
@@ -225,6 +232,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_laporan_mingguan_penggunaan_bahan_latihan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/usk/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">undangan sidang kelulusan</button>
@@ -235,6 +243,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_undangan_sidang_kelulusan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/bask/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">berita acara sidang kelulusan</button>
@@ -245,6 +254,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_berita_acara_sidang_kelulusan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/dhpsk/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">daftar hadir pertemuan sidang kelulusan</button>
@@ -255,6 +265,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_daftar_hadir_pertemuan_sidang_kelulusan}}
                                 <br>
                                 </div>
+                                
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/dna/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">daftar nilai akhir</button>
@@ -275,6 +286,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_rekap_penilaian_pelatihan_berbasis_kompetensi}}
                                 <br>
                                 </div>
+                                
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/rahp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">Rekapitulasi Akhir Hasil Pelatihan</button>
@@ -285,6 +297,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_rekapitulasi_akhir_hasil_pelatihan}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/tttp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">tanda terima transport peserta</button>
@@ -295,6 +308,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_tanda_terima_transport_peserta}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/ttap/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">Tanda Terima Kartu Asuransi Peserta</button>
@@ -305,6 +319,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_tanda_terima_asuransi_peserta}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/ttpkp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">tanda terima pakaian kerja perserta</button>
@@ -315,6 +330,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_tanda_terima_pakaian_kerja_peserta}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/ttatkp/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">tanda terima atk peserta</button>
@@ -325,6 +341,7 @@
                                 <strong>Catatan:</strong> {{ $data->catatan_tanda_terima_atk_peserta}}
                                 <br>
                                 </div>
+
                                 <div class="well">
                                 <a href="{{url('admin/renlakgiat/laporan/ttm/tambah/'.$data->id)}}">
                                     <button class="btn btn-link">tanda terima modul</button>

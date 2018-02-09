@@ -170,10 +170,9 @@
             <div class="row">
                 @if(Session::has('message'))
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-              @endif
-              @yield('content')
-            </div>
-              
+                @endif
+                @yield('content')
+            </div>   
         </div>
     <footer class="footer" style=" position: fixed; bottom: 0; width: 100%; background-color: rgba(255,255,255,0.6);">
           <div class="footer-copyright">

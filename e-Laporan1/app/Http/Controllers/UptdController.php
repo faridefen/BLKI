@@ -25,9 +25,9 @@ class UptdController extends Controller
     }
 
     public function detailRenlakgiat($id){
-        $laporan = Laporan::where('renlakgiat_id',$id)->get();
+        
     	$renlakgiat = Renlakgiat::where('id','=',$id)->get();
-    	return view('user.detailRenlakgiat', compact('renlakgiat','laporan'));
+    	return view('user.detailRenlakgiat', compact('renlakgiat'));
     }
 
     public function editRenlakgiat($id){

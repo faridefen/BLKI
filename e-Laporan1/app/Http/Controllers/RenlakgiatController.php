@@ -50,9 +50,9 @@ class RenlakgiatController extends Controller
     }
 
 
-    public function detailrenlakgiat()
+    public function detailrenlakgiat($id)
     {
-        $renlakgiat = Renlakgiat::all();
+        $renlakgiat = Renlakgiat::where('id',$id)->get();
         return view('renlakgiat.indexdetail', compact('renlakgiat'));
     }
 
@@ -90,6 +90,8 @@ class RenlakgiatController extends Controller
         $renlakgiat->orang = $request->orang;
         $renlakgiat->users_id = $request->users_id;
         $renlakgiat->save();
+        Session::flash('message', 'Berhasil input data renlakgiat'); 
+        Session::flash('alert-class', 'alert-success');
         return redirect()->route('admin.profile','profile');
     }
 
@@ -194,6 +196,8 @@ class RenlakgiatController extends Controller
         $renlakgiat->tgl_mulai = $request->tgl_mulai;
         $renlakgiat->tgl_selesai = $request->tgl_selesai;
         $renlakgiat->save();
+        Session::flash('message', 'Berhasil update data renlakgiat'); 
+        Session::flash('alert-class', 'alert-success');
         return redirect()->route('admin.renlakgiat');
     }
 
@@ -207,6 +211,8 @@ class RenlakgiatController extends Controller
     {
         $renlakgiat = Renlakgiat::find($id);
         $renlakgiat->delete();
+        Session::flash('message', 'Berhasil hapus data renlakgiat'); 
+        Session::flash('alert-class', 'alert-success');
         return redirect()->route('admin.renlakgiat');
     }
 

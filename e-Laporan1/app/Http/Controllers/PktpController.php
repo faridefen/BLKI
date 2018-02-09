@@ -14,6 +14,7 @@ class PktpController extends Controller
     {
         $this->middleware('auth:web');
     }
+
     public function indexpktp($id){
         $renlakgiat = Renlakgiat::where('id',$id)->get();
 	    $pktp = Pktp::where('renlakgiat_id',$id)->orderBy('nama','asc')->paginate(5);
@@ -43,6 +44,8 @@ class PktpController extends Controller
         $pktp->foto = $request->foto->getClientOriginalName();
         $pktp->renlakgiat_id = $request->renlakgiat_id;
         $pktp->save();
+        Session::flash('message', 'Berhasil simpan data PKTP'); 
+        Session::flash('alert-class', 'alert-success');
         return redirect('uptd/pktp/'.$request->renlakgiat_id);
     }
 
@@ -52,7 +55,8 @@ class PktpController extends Controller
         $pktp = Pktp::find($id);
         Storage::delete($destinationPath."/".$filess);
         $pktp->delete();
-
+        Session::flash('message', 'Berhasil hapus data PKTP'); 
+        Session::flash('alert-class', 'alert-success');
         return redirect()->back();
     }
 
@@ -86,6 +90,8 @@ class PktpController extends Controller
                 $pktps->nohp = $request->nohp;
             }
             $pktps->save(); 
+            Session::flash('message', 'Berhasil update data PKTP'); 
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/pktp/'.$renlakgiatid);
                 
         }

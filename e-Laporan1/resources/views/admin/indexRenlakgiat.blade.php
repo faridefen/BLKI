@@ -1,14 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="container">
-    <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard Renlakgiat
-                </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">Dashboard Renlakgiat</div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
                         <tr>
                             <th>No</th>
                             <th>UPTD Terkait</th>
@@ -27,24 +24,23 @@
                             <th>Edit tanggal</th>
                             <th>PKTP</th>
                         </tr>
-                        </thead>
-                        <?php $x=1; ?>
-                        @foreach($renlakgiat as $data)
-                        <tbody>
-                            <tr>
-
-                                <td>{{ $x++ }}   .</td>
-                                <td>{{ $data->User->name }}</td>
-                                <td>{{ $data->kejuruan }}</td>
-                                <td>{{ $data->program_pelatihan }}</td>
-                                <td>{{ $data->sumber_dana }}</td>
-                                <td>{{ $data->durasi }}</td>
-                                <td>{{ $data->paket }}</td>
-                                <td>{{ $data->orang }}</td>
-                                <td>@if($data->tgl_mulai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
-                                <td>@if($data->tgl_selesai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
-                                @if($data->tgl_mulai == "")
-                                <td>Belum Direncanakan</td>
+                    </thead>
+                    <?php $x=1; ?>
+                    @foreach($renlakgiat as $data)
+                    <tbody>
+                        <tr>
+                            <td>{{ $x++ }}   .</td>
+                            <td>{{ $data->User->name }}</td>
+                            <td>{{ $data->kejuruan }}</td>
+                            <td>{{ $data->program_pelatihan }}</td>
+                            <td>{{ $data->sumber_dana }}</td>
+                            <td>{{ $data->durasi }}</td>
+                            <td>{{ $data->paket }}</td>
+                            <td>{{ $data->orang }}</td>
+                            <td>@if($data->tgl_mulai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
+                            <td>@if($data->tgl_selesai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
+                            @if($data->tgl_mulai == "")
+                            <td>Belum Direncanakan</td>
                                 @else
                                     @if(Carbon\Carbon::now() < $data->tgl_mulai)
                                     
@@ -90,13 +86,11 @@
                             </tr>
                             </tbody>
                         @endforeach
-                    </table>
-                    <div class="justify" align="center">
-                    {{ $renlakgiat->links() }}
-                    </div>
-                </div>
+            </table>
+            <div class="justify" align="center">
+                {{ $renlakgiat->links() }}
             </div>
-        
+        </div>
     </div>
 </div>
 @endsection

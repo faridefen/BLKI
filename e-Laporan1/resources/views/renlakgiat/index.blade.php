@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard Renlakgiat
@@ -81,7 +80,7 @@
                                     <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
                                 </td>
                                 <td>
-                                    <a href="{{url('/admin/renlakgiat/laporan/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
+                                    <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
                                 </td>
                                 <td>
                                     <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
@@ -97,6 +96,6 @@
                 </div>
             </div>
         
-    </div>
+    
 </div>
 @endsection
