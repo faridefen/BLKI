@@ -6,9 +6,9 @@
                 <div class="panel-heading">Dashboard Dokumen Khusus
                     <a class="pull-right" align="right" href="{{route('dokumen.add')}}"><button class="btn btn-link">Tambah Dokumen Khusus</button></a>
                 </div>
-                  
-                     
-                   
+
+
+
                 <div class="panel-body">
                     <table class="responsive-table">
                         <tr>
@@ -25,15 +25,15 @@
                                 <td>{{ $data->judul }}</td>
                                 <td>{{ $data->isi }}</td>
                                 <td>{{ $data->file }}</td>
-                                
+
                                 <td>
-                                   <a href="{{url('admin/dokumen/hapus/'.$data->id)}}"><button class="btn btn-danger">Hapus</button></a>
+                                   <a href="{{url('admin/dokumen/hapus/'.$data->id)}}" onclick="return confirm('Yakin ingin menghapus data?');"><button class="btn btn-danger">Hapus</button></a>
                                 </td>
                         @endforeach
                     </table>
                 </div>
             </div>
-        
+
     </div>
 </div>
 @endsection

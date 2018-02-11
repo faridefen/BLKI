@@ -11,7 +11,11 @@ use Hash;
 use Session;
 use App\User;
 use App\Dokumen;
+use App\Admin;
 use PDF;
+use Mail;
+use App\Mail\LaporanMail;
+
 class UptdController extends Controller
 {
 	public function __construct()
@@ -25,7 +29,7 @@ class UptdController extends Controller
     }
 
     public function detailRenlakgiat($id){
-        
+
     	$renlakgiat = Renlakgiat::where('id','=',$id)->get();
     	return view('user.detailRenlakgiat', compact('renlakgiat'));
     }
@@ -44,6 +48,7 @@ class UptdController extends Controller
         $renlakgiat->tgl_selesai = $request->tgl_selesai;
         $renlakgiat->status = $request->status;
         $renlakgiat->save();
+
         return redirect()->route('uptd.renlakgiat');
     }
 
@@ -78,15 +83,15 @@ class UptdController extends Controller
              $user->password = bcrypt($new);
             $user->save();
 
-            Session::flash('message', 'Berhasil Ubah Password'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Ubah Password');
+            Session::flash('alert-class', 'alert-success');
             return redirect('profile');
-           
+
         }
         else
         {
-            Session::flash('message', 'Password lama salah!'); 
-            Session::flash('alert-class', 'alert-danger'); 
+            Session::flash('message', 'Password lama salah!');
+            Session::flash('alert-class', 'alert-danger');
 
             return redirect()->back();
         }
@@ -110,7 +115,7 @@ class UptdController extends Controller
             if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Cover" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Cover" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->cover = $fileName;
@@ -118,11 +123,11 @@ class UptdController extends Controller
                 $renlakgiat->catatan_cover = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Cover'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Cover');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
-    
+
     public function formPendahuluan($id){
         $renlakgiat = Renlakgiat::where('id',$id)->get();
         return view('user.formPendahuluan', compact('renlakgiat'));
@@ -131,12 +136,12 @@ class UptdController extends Controller
 
     public function uploadPendahuluan($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "pendahuluan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "pendahuluan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->pendahuluan = $fileName;
@@ -144,8 +149,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_pendahuluan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload pendahuluan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload pendahuluan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
     public function formSK($id){
@@ -156,12 +161,12 @@ class UptdController extends Controller
 
     public function uploadSK($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "SK" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "SK" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->surat_keputusan = $fileName;
@@ -169,8 +174,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_surat_keputusan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload surat keputusan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload surat keputusan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -182,13 +187,13 @@ class UptdController extends Controller
 
     public function uploadNPP($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Nominatif Peserta Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Nominatif Peserta Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->nominatif_peserta_pelatihan = $fileName;
@@ -196,8 +201,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_nominatif_peserta_pelatihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Nominatif Peserta Pelatihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Nominatif Peserta Pelatihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -209,13 +214,13 @@ class UptdController extends Controller
 
     public function uploadNI($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Nominatif Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Nominatif Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->nominatif_instruktur = $fileName;
@@ -223,8 +228,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_nominatif_instruktur = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Nominatif Instruktur'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Nominatif Instruktur');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -236,13 +241,13 @@ class UptdController extends Controller
 
     public function uploadKurikulum($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Kurikulum" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Kurikulum" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->kurikulum = $fileName;
@@ -250,8 +255,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_kurikulum = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Kurikulum'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Kurikulum');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -263,13 +268,13 @@ class UptdController extends Controller
 
     public function uploadJpm($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Jadwal Pelatihan Mingguan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Jadwal Pelatihan Mingguan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->jadwal_pelatihan_mingguan = $fileName;
@@ -277,8 +282,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_jadwal_pelatihan_mingguan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Jadwal Pelatihan Mingguan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Jadwal Pelatihan Mingguan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -290,13 +295,13 @@ class UptdController extends Controller
 
     public function uploadDhi($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Hadir Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Hadir Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_hadir_instruktur = $fileName;
@@ -304,8 +309,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_hadir_instruktur = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Daftar Hadir Instruktur'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Daftar Hadir Instruktur');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -317,13 +322,13 @@ class UptdController extends Controller
 
     public function uploadDjmi($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Jam Mengajar Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Jam Mengajar Instruktur" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_jam_mengajar_instruktur = $fileName;
@@ -331,8 +336,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_jam_mengajar_instruktur = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Jam Mengajar Instruktur'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Jam Mengajar Instruktur');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -344,13 +349,13 @@ class UptdController extends Controller
 
     public function uploadDhpp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Hadir Peserta Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Hadir Peserta Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_hadir_peserta_pelatihan = $fileName;
@@ -358,8 +363,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_hadir_peserta_pelatihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Daftar Hadir Peserta Pelatihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Daftar Hadir Peserta Pelatihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -371,13 +376,13 @@ class UptdController extends Controller
 
     public function uploadDpbl($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Permintaan Bahan latihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Permintaan Bahan latihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_permintaan_bahan_latihan = $fileName;
@@ -385,8 +390,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_permintaan_bahan_latihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Daftar Permintaan Bahan Latihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Daftar Permintaan Bahan Latihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -398,13 +403,13 @@ class UptdController extends Controller
 
     public function uploadBpbl($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Bukti Penerimaan Bahan Latihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Bukti Penerimaan Bahan Latihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->bukti_penerimaan_bahan_pelatihan = $fileName;
@@ -412,8 +417,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_bukti_penerimaan_bahan_pelatihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Bukti Penerimaan Bahan Pelatihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Bukti Penerimaan Bahan Pelatihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -425,13 +430,13 @@ class UptdController extends Controller
 
     public function uploadLmpbl($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Laporan Mingguan Penggunaan Bahan Latihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Laporan Mingguan Penggunaan Bahan Latihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->laporan_mingguan_penggunaan_bahan_latihan = $fileName;
@@ -439,8 +444,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_laporan_mingguan_penggunaan_bahan_latihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Laporan Mingguan Penggunaan Bahan Latihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Laporan Mingguan Penggunaan Bahan Latihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -452,13 +457,13 @@ class UptdController extends Controller
 
     public function uploadUsk($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Undangan Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Undangan Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->undangan_sidang_kelulusan = $fileName;
@@ -466,8 +471,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_undangan_sidang_kelulusan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Undangan Sidang Kelulusan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Undangan Sidang Kelulusan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -479,13 +484,13 @@ class UptdController extends Controller
 
     public function uploadBask($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Berita Acara Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Berita Acara Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->berita_acara_sidang_kelulusan = $fileName;
@@ -493,8 +498,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_berita_acara_sidang_kelulusan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Berita Acara Sidang Kelulusan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Berita Acara Sidang Kelulusan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -506,13 +511,13 @@ class UptdController extends Controller
 
     public function uploadDhpsk($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Hadis Pertemuan Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Hadis Pertemuan Sidang Kelulusan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_hadir_pertemuan_sidang_kelulusan = $fileName;
@@ -520,8 +525,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_hadir_pertemuan_sidang_kelulusan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Daftar Hadir Pertemuan Sidang Kelulusan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Daftar Hadir Pertemuan Sidang Kelulusan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -533,13 +538,13 @@ class UptdController extends Controller
 
     public function uploadDna($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Daftar Nilai Akhir" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Daftar Nilai Akhir" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->daftar_nilai_akhir = $fileName;
@@ -547,8 +552,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_daftar_nilai_akhir = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Daftar Nilai Akhir'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Daftar Nilai Akhir');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -560,13 +565,13 @@ class UptdController extends Controller
 
     public function uploadRppbk($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Rekap Penilaian Pelatihan Berbasis Kompetensi" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Rekap Penilaian Pelatihan Berbasis Kompetensi" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->rekap_penilaian_pelatihan_berbasis_kompetensi = $fileName;
@@ -574,8 +579,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_rekap_penilaian_pelatihan_berbasis_kompetensi = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Rekap Penilaian Pelatihan Berbasis Kompetensi'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Rekap Penilaian Pelatihan Berbasis Kompetensi');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -587,13 +592,13 @@ class UptdController extends Controller
 
     public function uploadRahp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Rekapitulasi Akhir hasil Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Rekapitulasi Akhir hasil Pelatihan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->rekapitulasi_akhir_hasil_pelatihan = $fileName;
@@ -601,8 +606,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_rekapitulasi_akhir_hasil_pelatihan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Rekapitulasi Akhir hasil Pelatihan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Rekapitulasi Akhir hasil Pelatihan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -614,13 +619,13 @@ class UptdController extends Controller
 
     public function uploadTttp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
+            'file' => 'required|mimetypes:application/pdf|max:500',
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima Transport Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima Transport Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_transport_peserta = $fileName;
@@ -628,8 +633,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_transport_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima Transport Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima Transport Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -641,14 +646,14 @@ class UptdController extends Controller
 
     public function uploadTtap($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima kartu Asuransi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima kartu Asuransi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_asuransi_peserta = $fileName;
@@ -656,8 +661,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_asuransi_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima kartu Asuransi Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima kartu Asuransi Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -669,14 +674,14 @@ class UptdController extends Controller
 
     public function uploadTtpkp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima Pakaian Kerja Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima Pakaian Kerja Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_pakaian_kerja_peserta = $fileName;
@@ -684,8 +689,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_pakaian_kerja_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima Pakaian Kerja Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima Pakaian Kerja Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -697,14 +702,14 @@ class UptdController extends Controller
 
     public function uploadTtatkp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima ATK Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima ATK Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_atk_peserta = $fileName;
@@ -712,8 +717,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_atk_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima ATK Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima ATK Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -725,14 +730,14 @@ class UptdController extends Controller
 
     public function uploadTtm($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima Modul" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima Modul" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_modul = $fileName;
@@ -740,8 +745,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_modul = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima Modul'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima Modul');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -753,14 +758,14 @@ class UptdController extends Controller
 
     public function uploadTtkp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Tanda Terima Konsumsi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Tanda Terima Konsumsi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->tanda_terima_konsumsi_peserta = $fileName;
@@ -768,8 +773,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_tanda_terima_konsumsi_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Tanda Terima Konsumsi Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Tanda Terima Konsumsi Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -781,14 +786,14 @@ class UptdController extends Controller
 
     public function uploadFdk($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Foto Dokumentasi Kegiatan" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Foto Dokumentasi Kegiatan" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->foto_dokumentasi_kegiatan = $fileName;
@@ -796,8 +801,8 @@ class UptdController extends Controller
                 $renlakgiat->catatan_foto_dokumentasi_kegiatan = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Foto Dokumentasi Kegiatan'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Foto Dokumentasi Kegiatan');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
     }
 
@@ -809,14 +814,14 @@ class UptdController extends Controller
 
     public function uploadFsp($id, Request $request ){
         $this->validate($request,[
-            'file' => 'mimetypes:application/pdf|max:500',
-            
+            'file' => 'required|mimetypes:application/pdf|max:500',
+
         ]);
 
         if ($request->hasFile('file')) {
                 $file = $request->file;
                 $extension = $file->getClientOriginalExtension();
-                $fileName = "Fotocopy Sertifikasi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension; 
+                $fileName = "Fotocopy Sertifikasi Peserta" . ' ' . $request->renlakgiat_id . '.' . $extension;
                 $request->file('file')->move('upload', $fileName);
                 $renlakgiat = Renlakgiat::find($id);
                 $renlakgiat->fotocopy_sertifikasi_peserta = $fileName;
@@ -824,8 +829,24 @@ class UptdController extends Controller
                 $renlakgiat->catatan_fotocopy_sertifikasi_peserta = "-";
             }
             $renlakgiat->save();
-            Session::flash('message', 'Berhasil Upload Fotocopy Sertifikasi Peserta'); 
-            Session::flash('alert-class', 'alert-success'); 
+            Session::flash('message', 'Berhasil Upload Fotocopy Sertifikasi Peserta');
+            Session::flash('alert-class', 'alert-success');
             return redirect('uptd/laporan/detail/'.$request->renlakgiat_id);
+    }
+
+    public function sendEmail($id){
+        $rr = Renlakgiat::find($id);
+        $admin = Admin::all();
+        foreach ($admin as $key) {
+            $email = $key->email;
+        }
+
+
+
+        Mail::to($email)->send(new LaporanMail($rr));
+        Session::flash('message', 'Berhasil Mengirimkan email ke admin');
+        Session::flash('alert-class', 'alert-success');
+        return redirect()->back();
+
     }
 }

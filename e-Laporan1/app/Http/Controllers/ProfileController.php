@@ -47,9 +47,9 @@ class ProfileController extends Controller
                 $request->file('foto_pimpinan')->move('upload', $request->foto_pimpinan->getClientOriginalName());
                 $request->file('foto_gedung')->move('upload', $request->foto_gedung->getClientOriginalName());
 
-                
+
             }
-                
+
                 $profile = new Profile;
                 $profile->users_id = Auth::user()->id;
                 $profile->nama_lembaga = $request->nama_lembaga;
@@ -66,6 +66,8 @@ class ProfileController extends Controller
                 $profile->foto_pimpinan = $request->foto_pimpinan->getClientOriginalName();
                 $profile->foto_gedung = $request->foto_gedung->getClientOriginalName();
                 $profile->save();
+                Session::flash('message', 'Berhasil Tambah Data Profile');
+                Session::flash('alert-class', 'alert-success');
                 return redirect()->route('profile');
     }
 
@@ -119,8 +121,8 @@ class ProfileController extends Controller
                 $profile->no_hp_pimpinan = $request->no_hp_pimpinan;
                 $profile->foto_pimpinan = $request->foto_pimpinan->getClientOriginalName();
                 $profile->foto_gedung = $request->foto_gedung->getClientOriginalName();
-                
-                
+
+
         }elseif ($request->hasFile('foto_pimpinan')) {
              $request->file('foto_pimpinan')->move('upload', $request->foto_pimpinan->getClientOriginalName());
              $profile->users_id = Auth::user()->id;
@@ -165,7 +167,9 @@ class ProfileController extends Controller
                 $profile->nama_pimpinan = $request->nama_pimpinan;
                 $profile->no_hp_pimpinan = $request->no_hp_pimpinan;
         }
-         $profile->save();        
+        Session::flash('message', 'Berhasil Ubah Data Profile');
+        Session::flash('alert-class', 'alert-success');
+         $profile->save();
          return redirect()->route('profile');
     }
 

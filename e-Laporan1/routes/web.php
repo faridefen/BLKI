@@ -185,6 +185,8 @@ Route::post('uptd/renlakgiat/laporan/fdk/simpan/{id}','UptdController@uploadFdk'
 Route::get('uptd/renlakgiat/laporan/fsp/tambah/{id}','UptdController@formFsp');
 Route::post('uptd/renlakgiat/laporan/fsp/simpan/{id}','UptdController@uploadFsp');
 
+Route::get('/uptd/sendEmail/{id}','UptdController@sendEmail');
+
 //uptd ubah password
 Route::get('/uptd/editpass/{id}','UptdController@editpass');
 Route::post('/uptd/editpass/update/{id}', 'UptdController@verif');
@@ -199,9 +201,6 @@ Route::post('uptd/pktp/simpan','PktpController@store');
 Route::get('uptd/pktp/hapus/{id}','PktpController@destroy');
 Route::get('/uptd/dokumen','UptdController@indexDokumen')->name('uptd.dokumen');
 
-
-Route::get('/laporan/index','LaporanController@index');
-Route::get('/laporan/detaillaporan','LaporanController@detail');
 
 Route::get('/markAsRead', function() {
 	\Auth::user()->unreadNotifications->markAsRead();

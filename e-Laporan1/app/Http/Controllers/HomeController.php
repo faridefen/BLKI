@@ -8,6 +8,8 @@ use App\User;
 use App\Renlakgiat;
 use Lava;
 use Charts;
+use DB;
+use Carbon\Carbon;
 class HomeController extends Controller
 {
     /**
@@ -29,6 +31,7 @@ class HomeController extends Controller
     {
         $user = Profile::all();
         if (count($user) > 0) {
+        
             foreach ($user as $data) {
                 $userid = $data->users_id;
                  $belum = Renlakgiat::where('users_id',$userid)->where('status', 'Belum Berjalan')->get();
@@ -44,6 +47,7 @@ class HomeController extends Controller
                         ->credits(false);
                         return view('admin', compact('user'), ['chart' => $data->nama_lembaga]);
             }
+
         }else{
             return view('admin', compact('user'));
         }

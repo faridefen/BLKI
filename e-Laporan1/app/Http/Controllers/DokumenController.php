@@ -27,7 +27,7 @@ class DokumenController extends Controller
 
     public function index()
     {
-        $dokumen = Dokumen::all();
+        $dokumen = Dokumen::all()->orderBy('created_at','desc');
         return view('dokumen.index', compact('dokumen'));
     }
 
@@ -56,14 +56,14 @@ class DokumenController extends Controller
         ]);
 
         if($request->hasFile('file')){
-                $request->file('file')->move('dokumen', $request->file->getClientOriginalName());     
+                $request->file('file')->move('dokumen', $request->file->getClientOriginalName());
         }
 
         $dokumen = new Dokumen;
         $dokumen->judul = $request->judul;
         $dokumen->isi = $request->isi;
         $dokumen->file = $request->file->getClientOriginalName();
-        
+
         $dokumen->save();
 
         $isi = $request->isi;
@@ -122,7 +122,7 @@ class DokumenController extends Controller
     {
         $dokumen = Dokumen::find($id);
         $dokumen->delete();
-        Session::flash('message','Berhasil Menghapus Dokumen Khusus untuk diberikan ke seluruh UPTD/BLK');    
+        Session::flash('message','Berhasil Menghapus Dokumen Khusus untuk diberikan ke seluruh UPTD/BLK');
         return redirect()->route('dokumen');
     }
 }

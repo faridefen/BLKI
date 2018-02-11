@@ -7,7 +7,7 @@
                         <a class="pull-right" href="{{url('admin/renlakgiat/tambah/'.$datap->id)}}"><i class="material-icons">add</i>Renlakgiat</a>
                     @endforeach
                 </div>
-                
+
                 <div class="panel-body">
                     <table class="table">
                         <tr>
@@ -42,26 +42,26 @@
                                 <td>{{ $data->orang }}</td>
                                 <td>@if($data->tgl_mulai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_mulai))}} @endif</td>
                                 <td>@if($data->tgl_selesai == "") UPTD/BLK terkait belum Mengisi data tanggal @else {{date('d M Y', strtotime($data->tgl_selesai))}} @endif</td>
-                                    
+
                                 @if($data->tgl_mulai == "")
                                 <td>Belum Direncanakan</td>
                                 @else
                                     @if(Carbon\Carbon::now() < $data->tgl_mulai)
-                                    
+
                                         <?php DB::table('renlakgiats')
                                             ->where('id', $data->id)
                                             ->update(['status' => 'Belum Berjalan']); ?>
                                            <td> Belum Berjalan</td>
-                                    
+
                                     @elseif(Carbon\Carbon::now() > $data->tgl_selesai)
-                                    
+
                                         <?php DB::table('renlakgiats')
                                                 ->where('id', $data->id)
                                                 ->update(['status' => 'Sudah Selesai']) ?>
                                         <td> Sudah Selesai</td>
-                                    
+
                                     @else
-                                    
+
                                         <?php DB::table('renlakgiats')
                                                 ->where('id', $data->id)
                                                 ->update(['status' => 'Sedang Berjalan']) ?>
@@ -70,14 +70,14 @@
 
                                     @endif
                                 @endif
-                               
-                                    
+
+
                                     <td>
-                                   
-                                    <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
+
+                                    <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}" onclick="return confirm('Yakin ingin mengubah data?');"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                 </td>
                                 <td>
-                                    <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}"><button class="btn btn-danger"><i class="large material-icons">delete</i></button></a>
+                                    <a href="{{url('/admin/renlakgiat/hapus/'.$data->id)}}" onclick="return confirm('Yakin ingin menghapus data?');"><button class="btn btn-danger" ><i class="large material-icons">delete</i></button></a>
                                 </td>
                                 <td>
                                     <a href="{{url('/admin/renlakgiat/detail/'.$data->id)}}"><button class="btn btn-warning"><i class="large material-icons">list</i></button></a>
@@ -87,7 +87,7 @@
                                 </td>
                                 <td>
                                     <a href="{{url('admin/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
-                                
+
                                 </td>
                             </tr>
                         @endforeach
@@ -95,7 +95,7 @@
                     {{ $renlakgiat->links() }}
                 </div>
             </div>
-        
-    
+
+
 </div>
 @endsection

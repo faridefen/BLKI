@@ -8,7 +8,7 @@
                      <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-link">Tambah PKTP</button></a>
                     @endforeach
                 </div>
-                    
+
                 <div class="panel-body">
                     <table class="table">
                         <tr>
@@ -34,15 +34,15 @@
                                 <td>{{ $data->nohp }}</td>
                                 <td><img src="{{asset('upload/'.$data->foto)}}" width="120" height="120"></td>
                                 <td>
-                                    <a href="{{url('uptd/pktp/edit/'.$data->id)}}"><i class="material-icons">edit</i></a>
-                                    <a href="{{url('uptd/pktp/hapus/'.$data->id)}}"><i style="color: red" class="material-icons">delete</i></a>
+                                    <a href="{{url('uptd/pktp/edit/'.$data->id)}}" onclick="return confirm('Yakin ingin mengubah data?');"><i class="material-icons">edit</i></a>
+                                    <a href="{{url('uptd/pktp/hapus/'.$data->id)}}" onclick="return confirm('Yakin ingin menghapus data?');"><i style="color: red" class="material-icons">delete</i></a>
                                 </td>
                         @endforeach
                     </table>
                     {{ $pktp->links()}}
                 </div>
             </div>
-        
+
     </div>
 
 @endsection
