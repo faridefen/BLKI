@@ -13,6 +13,7 @@
                             <th>No</th>
                             <th>Nama</th>
                             <th>Email</th>
+                            
                             <th>Aksi</th>
                         </tr>
                         <?php $x=1; ?>
@@ -21,6 +22,7 @@
                                 <td>{{ $x++ }}</td>
                                 <td><a href=" {{ url('/admin/profile/detail/'.$datauser->id)}}">{{ $datauser->name }}</a></td>
                                 <td>{{ $datauser->email }}</td>
+                                
                                 <td>
 
                                     <a href="{{url('admin/user/edit/'.$datauser->id)}}" onclick="return confirm('Yakin ingin mengubah data?');"><button class="btn btn-primary" title="Edit"><i class="large material-icons">edit</i></button></a>

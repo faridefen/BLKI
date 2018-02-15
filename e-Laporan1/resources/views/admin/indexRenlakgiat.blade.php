@@ -22,7 +22,6 @@
                             <th>Hapus</th>
                             <th>Detail & Laporan</th>
                             <th>Edit tanggal</th>
-                            <th>PKTP</th>
                         </tr>
                     </thead>
                     <?php $x=1; ?>
@@ -43,32 +42,24 @@
                             <td>Belum Direncanakan</td>
                                 @else
                                     @if(Carbon\Carbon::now() < $data->tgl_mulai)
-
                                         <?php DB::table('renlakgiats')
                                             ->where('id', $data->id)
                                             ->update(['status' => 'Belum Berjalan']); ?>
                                            <td> Belum Berjalan</td>
-
                                     @elseif(Carbon\Carbon::now() > $data->tgl_selesai)
-
                                         <?php DB::table('renlakgiats')
                                                 ->where('id', $data->id)
                                                 ->update(['status' => 'Sudah Selesai']) ?>
                                         <td> Sudah Selesai</td>
-
                                     @else
-
                                         <?php DB::table('renlakgiats')
                                                 ->where('id', $data->id)
                                                 ->update(['status' => 'Sedang Berjalan']) ?>
 
                                         <td> Sedang Berjalan</td>
-
                                     @endif
                                 @endif
-
                                 <td>
-
                                     <a href="{{url('/admin/renlakgiat/edit/'.$data->id)}}" onclick="return confirm('Yakin ingin mengubah data?');"><button class="btn btn-primary"><i class="large material-icons">edit</i></button></a>
                                 </td>
                                 <td>
@@ -80,12 +71,9 @@
                                 <td>
                                     <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
                                 </td>
-                                <td>
-                                    <a href="{{url('admin/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
-                                </td>
                             </tr>
-                            </tbody>
-                        @endforeach
+                        </tbody>
+                    @endforeach
             </table>
             <div class="justify" align="center">
                 {{ $renlakgiat->links() }}

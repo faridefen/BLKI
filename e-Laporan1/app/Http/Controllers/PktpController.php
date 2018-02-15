@@ -7,6 +7,7 @@ use App\Renlakgiat;
 use App\Pktp;
 use Auth;
 use Storage;
+use Session;
 
 class PktpController extends Controller
 {
@@ -16,8 +17,7 @@ class PktpController extends Controller
     }
 
     public function indexpktp($id){
-        $renlakgiat = Renlakgiat::where('id',$id)->get();
-	    $pktp = Pktp::where('renlakgiat_id',$id)->orderBy('nama','asc')->paginate(5);
+	    $pktp = Pktp::where('users_id',Auth::user()->id)->orderBy('nama','asc')->paginate(5);
 	    return view('user.indexpktp', compact('pktp'), compact('renlakgiat'));
     }
 
@@ -42,7 +42,7 @@ class PktpController extends Controller
         $pktp->alamat = $request->alamat;
         $pktp->nohp = $request->nohp;
         $pktp->foto = $request->foto->getClientOriginalName();
-        $pktp->renlakgiat_id = $request->renlakgiat_id;
+        $pktp->users_id = Auth::user()->id;
         $pktp->save();
         Session::flash('message', 'Berhasil simpan data PKTP'); 
         Session::flash('alert-class', 'alert-success');

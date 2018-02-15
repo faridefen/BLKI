@@ -9,11 +9,6 @@
                 <div class="panel-body">
                     <form class="form-horizontal" action="{{url('uptd/pktp/simpan/')}}" method="POST"  enctype="multipart/form-data">
                     	{{ csrf_field() }}
-                                <div>
-                                        @foreach($renlakgiat as $data)
-                                            <input type="hidden" name="renlakgiat_id" id="renlakgiat_id" class="form-control" value="{{ $data->id }}" readonly required>
-                                        @endforeach
-                                        </div>
                     		    <div class="form-group{{ $errors->has('nama') ? 'has-error': ''}}">
                                     <label for="nama" class="col-md-4 control-label">Nama</label>
                                         <div class="col-md-6">

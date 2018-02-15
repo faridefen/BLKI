@@ -245,6 +245,7 @@ class RenlakgiatController extends Controller
             $renlakgiat = Renlakgiat::find($id);
             $renlakgiat->tgl_mulai  = $request->newtgl_mulai;
             $renlakgiat->tgl_selesai  = $request->newtgl_selesai;
+            $renlakgiat->tgl_kumpul_laporan = date('Y-m-d', strtotime($request->newtgl_selesai. "+7 day"));
             $renlakgiat->save();
             Session::flash('message', 'Berhasil merubah tanggal rencana pelaksanaan kegiatan'); 
             Session::flash('alert-class', 'alert-success');

@@ -64,6 +64,9 @@
                             <td>Laporan</td>
                             <td>:</td>
                             <td align="center">
+                                @if(Carbon\Carbon::now() > $data->tgl_kumpul_laporan)
+                                   <strong>Maaf, Pengumpulan laporan untuk kegiatan ini sudah ditutup karena telah melewati batas pengumpulan laporan yang sudah ditetapkan, silahkan menghubungi admin untuk melakukan permintaan pembukaan sistem untuk melakukan/melengkapi laporan yang masih ingin dikumpulkan</strong>
+                                @else
 
                                 @if($data->status_cover == "Terverifikasi")
                                     <div class="well" style="background-color: #27ae60;">
@@ -492,6 +495,7 @@
                                 <br>
                                 </div>
                                 @endif
+                            @endif
                                 @endforeach
                             </td>
                         </tr>
@@ -510,6 +514,19 @@
                                 </div>
                             </div>
                            
+                        @endif
+                        @if($data->status_cover == "Terverifikasi" and $data->status_pendahuluan == "Terverifikasi" and $data->status_surat_keputusan == "Terverifikasi" and $data->status_nominatif_peserta_pelatihan == "Terverifikasi"and $data->status_nominatif_instruktur == "Terverifikasi" and $data->status_kurikulum == "Terverifikasi" and $data->status_jadwal_pelatihan_mingguan == "Terverifikasi" and $data->status_daftar_hadir_instruktur == "Terverifikasi" and $data->status_daftar_jam_mengajar_instruktur == "Terverifikasi" and $data->status_daftar_hadir_peserta_pelatihan == "Terverifikasi" and $data->status_daftar_permintaan_bahan_latihan == "Terverifikasi" and $data->status_bukti_penerimaan_bahan_pelatihan == "Terverifikasi" and $data->status_lapandan_mingguan_penggunaan_bahan_latihan == "Terverifikasi" and $data->status_undangan_sidang_kelulusan == "Terverifikasi" and $data->status_berita_acara_sidang_kelulusan == "Terverifikasi" and $data->status_daftar_hadir_pertemuan_sidang_kelulusan == "Terverifikasi" and $data->status_daftar_nilai_akhir == "Terverifikasi"and $data->status_rekap_penilaian_pelatihan_berbasis_kompetensi == "Terverifikasi" and $data->status_rekapitulasi_akhir_hasil_pelatihan == "Terverifikasi" and $data->status_tanda_terima_transpandt_peserta == "Terverifikasi" and $data->status_tanda_terima_asuransi_peserta == "Terverifikasi" and $data->status_tanda_terima_pakaian_kerja_peserta == "Terverifikasi" and $data->status_tanda_terima_atk_peserta == "Terverifikasi" and $data->status_tanda_terima_modul == "Terverifikasi"and $data->status_tanda_terima_konsumsi_peserta == "Terverifikasi" and $data->status_foto_dokumentasi_kegiatan == "Terverifikasi" and $data->status_fotocopy_sertifikasi_peserta == "Terverifikasi")
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <a href="{{url('uptd/cetak/'.$data->id)}}"><button class="btn btn-success">Cetak</button></a>
+                                </div>
+                            </div>
+                        @else
+                            <div class="form-group">
+                                <div class="col-md-8 col-md-offset-4">
+                                    <button class="btn btn-danger" disabled>Cetak</button>
+                                </div>
+                            </div>
                         @endif
                     @endforeach
                 </div>

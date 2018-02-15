@@ -10,8 +10,8 @@ class Pktp extends Model
     protected $table = 'pktps';
     protected $guarded = ['id'];
 
-    public function renlakgiat(){
-    	return $this->belongsTo('App\renlakgiat','renlakgiat_id');
+    public function User(){
+    	return $this->belongsTo('App\User','users_id');
     }
 }
 

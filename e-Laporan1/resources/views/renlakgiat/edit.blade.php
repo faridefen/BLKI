@@ -83,30 +83,6 @@
                                             </span>
                                         @endif
                                 </div>
-                                <div class="form-group{{ $errors->has('tgl_mulai') ? 'has-error': ''}}">
-                                    <label for="tgl_mulai" class="col-md-4 control-label">Tanggal Mulai</label>
-                                        <div class="col-md-6">
-                                            <input type="date" name="tgl_mulai" id="tgl_mulai" class="form-control" required value="{{$data->tgl_mulai}}">
-                                        </div>
-
-                                         @if ($errors->has('tgl_mulai'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('tgl_mulai') }}</strong>
-                                            </span>
-                                        @endif
-                                </div>
-                                <div class="form-group{{ $errors->has('tgl_selesai') ? 'has-error': ''}}">
-                                    <label for="tgl_selesai" class="col-md-4 control-label">Tanggal Selesai</label>
-                                        <div class="col-md-6">
-                                            <input type="date" name="tgl_selesai" id="tgl_selesai" class="form-control" required value="{{$data->tgl_selesai}}">
-                                        </div>
-
-                                         @if ($errors->has('tgl_selesai'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('tgl_selesai') }}</strong>
-                                            </span>
-                                        @endif
-                                </div>
                                 
                                 
                     	<div class="form-group">

@@ -26,7 +26,7 @@
                             <th>Hapus</th>
                             <th>Detail & Laporan</th>
                             <th>Edit tanggal</th>
-                            <th>PKTP</th>
+                            
                         </tr>
                         <?php $x=1; ?>
                         @foreach($renlakgiat as $data)
@@ -85,10 +85,7 @@
                                 <td>
                                     <a href="{{url('/admin/renlakgiat/editTanggal/'.$data->id)}}"><button class="btn btn-success"><i class="large material-icons">date_range</i></button></a>
                                 </td>
-                                <td>
-                                    <a href="{{url('admin/pktp/'.$data->id)}}"><button class="btn btn-primary"><span class="material-icons">list</span></button></a>
-
-                                </td>
+                                
                             </tr>
                         @endforeach
                     </table>

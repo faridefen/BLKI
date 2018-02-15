@@ -181,6 +181,9 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
+        // Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class,
+        // LynX39\LaraPdfMerger\PdfMergerServiceProvider::class,
     ],
 
     /*
@@ -235,6 +238,9 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Zipper' => Chumper\Zipper\Zipper::class,
+        // 'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class,
+        // 'PdfMerger' => LynX39\LaraPdfMerger\Facades\PdfMerger::class,
     ],
 
 ];

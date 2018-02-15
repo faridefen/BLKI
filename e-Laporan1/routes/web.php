@@ -123,11 +123,14 @@ Route::post('admin/renlakgiat/laporan/fdk/simpan/{id}','AdminController@uploadFd
 Route::get('admin/renlakgiat/laporan/fsp/tambah/{id}','AdminController@formFsp');
 Route::post('admin/renlakgiat/laporan/fsp/simpan/{id}','AdminController@uploadFsp');
 
+Route::get('/admin/cetak/{id}','AdminController@mergePdf');
+
 //uptd renlakgiat
 Route::get('/uptd/renlakgiat','UptdController@indexRenlakgiat')->name('uptd.renlakgiat');
 Route::get('/uptd/laporan/detail/{id}','UptdController@detailRenlakgiat');
 Route::get('/uptd/renlakgiat/edit/{id}','UptdController@editRenlakgiat');
 Route::post('/uptd/renlakgiat/update/{id}','UptdController@updateRenlakgiat');
+Route::get('/uptd/cetak/{id}','UptdController@mergePdf');
 
 //Route Laporan
 Route::get('uptd/renlakgiat/laporan/cover/tambah/{id}','UptdController@formCover');

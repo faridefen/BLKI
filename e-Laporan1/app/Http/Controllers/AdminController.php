@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Profile;
 use App\User;
 use App\Renlakgiat;
@@ -11,6 +12,14 @@ use Lava;
 use Charts;
 use Notification;
 use Session;
+use PDFMerger;
+
+use iio\libmergepdf\Merger;
+use iio\libmergepdf\Pages;
+use Symfony\Component\Finder\Finder;
+use setasign\Fpdi;
+use Storage;
+use Zipper;
 
 class AdminController extends Controller
 {
@@ -118,8 +127,7 @@ class AdminController extends Controller
     }
 
     public function indexPktp($id){
-        $renlakgiat = Renlakgiat::where('id',$id)->get();
-        $pktp = Pktp::where('renlakgiat_id',$id)->orderBy('nama','asc')->paginate(5);
+        $pktp = Pktp::where('users_id',$id)->orderBy('nama','asc')->paginate(5);
         return view('admin.indexpktp', compact('pktp'), compact('renlakgiat'));
     }
 
@@ -701,4 +709,76 @@ class AdminController extends Controller
             Session::flash('alert-class', 'alert-success');
             return redirect('admin/renlakgiat/laporan/'.$request->id);
     }
+    public function mergePdf($id){
+			$renlakgiat = Renlakgiat::where('id',$id)->get();
+			foreach ($renlakgiat as $key) {
+                $id = $key->id;
+  				$cover = $key->cover;
+  				$pendahuluan = $key->pendahuluan;
+  				$surat_keputusan = $key->surat_keputusan;
+                $nominatif_peserta_pelatihan = $key->nominatif_peserta_pelatihan;
+                $nominatif_instruktur = $key->nominatif_instruktur;
+                $kurikulum = $key->kurikulum;
+                $jadwal_pelatihan_mingguan = $key->jadwal_pelatihan_mingguan;
+                $daftar_hadir_instruktur = $key->daftar_hadir_instruktur;
+                $daftar_jam_mengajar_instruktur = $key->daftar_jam_mengajar_instruktur;
+                $daftar_hadir_peserta_pelatihan = $key->daftar_hadir_peserta_pelatihan;
+                $daftar_permintaan_bahan_latihan = $key->daftar_permintaan_bahan_latihan;
+                $bukti_penerimaan_bahan_pelatihan = $key->bukti_penerimaan_bahan_pelatihan;
+                $laporan_mingguan_penggunaan_bahan_latihan = $key->laporan_mingguan_penggunaan_bahan_latihan;
+                $undangan_sidang_kelulusan = $key->undangan_sidang_kelulusan;
+                $berita_acara_sidang_kelulusan = $key->berita_acara_sidang_kelulusan;
+                $daftar_hadir_pertemuan_sidang_kelulusan = $key->daftar_hadir_pertemuan_sidang_kelulusan;
+                $daftar_nilai_akhir = $key->daftar_nilai_akhir;
+                $rekap_penilaian_pelatihan_berbasis_kompetensi = $key->rekap_penilaian_pelatihan_berbasis_kompetensi;
+                $rekapitulasi_akhir_hasil_pelatihan = $key->rekapitulasi_akhir_hasil_pelatihan;
+                $tanda_terima_transport_peserta = $key->tanda_terima_transport_peserta;
+                $tanda_terima_asuransi_peserta = $key->tanda_terima_asuransi_peserta;
+                $tanda_terima_pakaian_kerja_peserta = $key->tanda_terima_pakaian_kerja_peserta;
+                $tanda_terima_atk_peserta = $key->tanda_terima_atk_peserta;
+                $tanda_terima_modul = $key->tanda_terima_modul;
+                $tanda_terima_konsumsi_peserta = $key->tanda_terima_konsumsi_peserta;
+                $foto_dokumentasi_kegiatan = $key->foto_dokumentasi_kegiatan;
+                $fotocopy_sertifikasi_peserta = $key->fotocopy_sertifikasi_peserta;
+			}
+
+            $pdf = new \LynX39\LaraPdfMerger\PdfManage;
+
+            $pdf->addPDF('upload/'.$cover, 'all');
+            $pdf->addPDF('upload/'.$pendahuluan, 'all');
+            $pdf->addPDF('upload/'.$surat_keputusan, 'all');
+            $pdf->addPDF('upload/'.$nominatif_peserta_pelatihan, 'all');
+            $pdf->addPDF('upload/'.$nominatif_instruktur, 'all');
+            $pdf->addPDF('upload/'.$kurikulum, 'all');
+            $pdf->addPDF('upload/'.$jadwal_pelatihan_mingguan, 'all');
+            $pdf->addPDF('upload/'.$daftar_hadir_instruktur, 'all');
+            $pdf->addPDF('upload/'.$daftar_jam_mengajar_instruktur, 'all');
+            $pdf->addPDF('upload/'.$daftar_hadir_peserta_pelatihan, 'all');
+            $pdf->addPDF('upload/'.$daftar_permintaan_bahan_latihan, 'all');
+            $pdf->addPDF('upload/'.$bukti_penerimaan_bahan_pelatihan, 'all');
+            $pdf->addPDF('upload/'.$laporan_mingguan_penggunaan_bahan_latihan, 'all');
+            $pdf->addPDF('upload/'.$undangan_sidang_kelulusan, 'all');
+            $pdf->addPDF('upload/'.$berita_acara_sidang_kelulusan, 'all');
+            $pdf->addPDF('upload/'.$daftar_hadir_pertemuan_sidang_kelulusan, 'all');
+            $pdf->addPDF('upload/'.$daftar_nilai_akhir, 'all');
+            $pdf->addPDF('upload/'.$rekap_penilaian_pelatihan_berbasis_kompetensi, 'all');
+            $pdf->addPDF('upload/'.$rekapitulasi_akhir_hasil_pelatihan, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_transport_peserta, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_asuransi_peserta, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_pakaian_kerja_peserta, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_atk_peserta, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_modul, 'all');
+            $pdf->addPDF('upload/'.$tanda_terima_konsumsi_peserta, 'all');
+            $pdf->addPDF('upload/'.$foto_dokumentasi_kegiatan, 'all');
+            $pdf->addPDF('upload/'.$fotocopy_sertifikasi_peserta, 'all');
+
+            //You can optionally specify a different orientation for each PDF
+            
+
+            $pdf->merge('browser','Laporan Renlakgiat Id-'.$id.'.pdf');
+
+
+            // Zipper::make('upload/Laporan'.$id.'.zip')->add(['upload/'.$cover,'upload/'.$pendahuluan,'upload/'.$surat_keputusan,'upload/'.$nominatif_peserta_pelatihan,'upload/'.$nominatif_instruktur]);
+            // return response()->download('upload/Laporan'.$id.'.zip');      
+		}
 }

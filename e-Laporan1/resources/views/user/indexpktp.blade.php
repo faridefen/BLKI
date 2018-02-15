@@ -1,12 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard pktp
-                    @foreach($renlakgiat as $data)
-                     <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.$data->id)}}"><button class="btn btn-link">Tambah PKTP</button></a>
-                    @endforeach
+                    
+                     <a class="pull-right" align="right" href="{{url('uptd/pktp/tambah/'.Auth::user()->id)}}"><button class="btn btn-link">Tambah PKTP</button></a>
+                    
                 </div>
 
                 <div class="panel-body">

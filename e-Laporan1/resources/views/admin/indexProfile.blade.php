@@ -14,6 +14,7 @@
                             <th>Eselonisasi</th>
                             <th>Kab/Kota - Provinsi</th>
                             <th>Nama Pimpinan</th>
+                            <th>PKTP</th>
                             <th>Aksi</th>
                         </tr>
                         <?php $x=1;
@@ -26,6 +27,9 @@
                                 <td>{{ $data->eselonisasi }}</td>
                                 <td>{{ $data->kab_kota }} - {{$data->provinsi}}</td>
                                 <td>{{ $data->nama_pimpinan }}</td>
+                                <td>
+                                    <a href="{{url('admin/pktp/'.$data->users_id)}}"><i class="material-icons">assignment_ind</i> PKTP</a>
+                                </td>
                                 <td>
                                     <a href="{{url('admin/profile/detail/'.$data->id)}}"><i class="material-icons">details</i>Details</a>|
                                     <a href="{{url('admin/renlakgiat/'.$data->id)}}"><i class="material-icons">pageview</i>Renlakgiat</a>
